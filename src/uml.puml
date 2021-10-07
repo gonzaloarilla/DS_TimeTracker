@@ -1,79 +1,82 @@
 @startuml
-
 class Main {
 }
 
 class User {
-+void setName(String name)
-+String getName()
--String : name
+- name : String
+- description : String
++ getName() : String
++ getDescription() : String
 }
 
 interface Node {
-+void setName(String name)
-+String getName()
-+void startTask()
-+void stopTask()
-+Duration getDuration()
-+LocalDateTime getDate()
-+boolean isActive()
--String : name
--Duration : duration
--LocalDateTime : date
--boolean : active
+- name : String
+- duration : Duration
+- localDate : LocalDateTime
+- active : boolean
++ setName(n : String)
++ getName() : String
++ startTask()
++ stopTask()
++ getDuration() : Duration
++ getDate() : LocalDateTime
++ isActive(t : Task) : boolean
 }
 
 class Project {
-+void setName(String name)
-+String getName()
-+Duration getDuration()
-+LocalDateTime getDate()
--String : name
--Duration : duration
--LocalDateTime : date
+- name : String
+- duration : Duration
+- dateTime : LocalDateTime
++ setName(str : String)
++ getName() : String
++ getDuration() : Duration
++ getDate() : LocalDateTime
 }
 
 class Task {
-+void setName(String name)
-+String getName()
-+void startTask()
-+void stopTask()
-+Duration getDuration()
-+LocalDateTime getDate()
-+boolean isActive()
--String : name
--Duration : duration
--LocalDateTime : date
--boolean : active
+- name : String
+- duration : Duration
+- dateTime: LocalDateTime
+- active : boolean
++ setName(name : String)
++ getName() : String
++ startTask()
++ stopTask()
++ getDuration() : Duration
++ getDate() : LocalDateTime
++ isActive(t : Task) : boolean
 }
 
 class Interval {
--LocalDateTime : initalDate
--LocalDateTime : finalDate
-+LocalDateTime getInitialDate()
-+LocalDateTime getFinalDate()
+- initialTime : LocalDateTime
+- finalTime : LocalDateTime
++ getInitialTime() : LocalDateTime
++ getFinalTime() : LocalDateTime
 
 }
 
-
 class Clock {
--Timer : timer
--LocalDateTime : date
-+void startTimer()
--void tick()
+- timer : Timer
+- dateTime : LocalDateTime
++ startTimer()
+- tick()
 }
 
 class Data {
-- Json : json
-- Json getJSON()
+- projectName : String
+- taskName : String
 + saveData(d : Data)
 + loadData(d : Data)
 }
 
 class DataSaver {
+- projectName : String
+- taskName : String
 }
 
 class DataLoader {
+- projectName : String
+- taskName : String
 }
 
 
@@ -88,6 +91,4 @@ DataSaver -|> Data
 DataLoader -|> Data
 Task "*" *-- "1" User
 Project "*" *-- "1" User
-
-
 @enduml
