@@ -1,0 +1,93 @@
+@startuml
+
+class Main {
+}
+
+class User {
++void setName(String name)
++String getName()
+-String : name
+}
+
+interface Node {
++void setName(String name)
++String getName()
++void startTask()
++void stopTask()
++Duration getDuration()
++LocalDateTime getDate()
++boolean isActive()
+-String : name
+-Duration : duration
+-LocalDateTime : date
+-boolean : active
+}
+
+class Project {
++void setName(String name)
++String getName()
++Duration getDuration()
++LocalDateTime getDate()
+-String : name
+-Duration : duration
+-LocalDateTime : date
+}
+
+class Task {
++void setName(String name)
++String getName()
++void startTask()
++void stopTask()
++Duration getDuration()
++LocalDateTime getDate()
++boolean isActive()
+-String : name
+-Duration : duration
+-LocalDateTime : date
+-boolean : active
+}
+
+class Interval {
+-LocalDateTime : initalDate
+-LocalDateTime : finalDate
++LocalDateTime getInitialDate()
++LocalDateTime getFinalDate()
+
+}
+
+
+class Clock {
+-Timer : timer
+-LocalDateTime : date
++void startTimer()
+-void tick()
+}
+
+class Data {
+- Json : json
+- Json getJSON()
++ saveData(d : Data)
++ loadData(d : Data)
+}
+
+class DataSaver {
+}
+
+class DataLoader {
+}
+
+
+Project -.|> Node
+Task -.|> Node
+Clock -down-|> java.util.Observable
+Interval -.down.-|> java.util.Observer
+Project "1" o-- "*" Project
+Task "*" o-- "1" Project
+Interval "*" *-- "1" Task
+DataSaver -|> Data
+DataLoader -|> Data
+Task "*" *-- "1" User
+Project "*" *-- "1" User
+
+
+@enduml
