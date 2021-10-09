@@ -1,41 +1,6 @@
-import java.time.Duration;
-import java.time.LocalDateTime;
-
-public class Project implements Node {
 
 
-  @Override
-  public void setName(String name) {
+public class Project extends Node {
 
-  }
 
-  @Override
-  public String getName() {
-    return null;
-  }
-
-  @Override
-  public void startTask() {
-
-  }
-
-  @Override
-  public void stopTask() {
-
-  }
-
-  @Override
-  public Duration getDuration() {
-    return null;
-  }
-
-  @Override
-  public LocalDateTime getDate() {
-    return null;
-  }
-
-  @Override
-  public boolean isActive() {
-    return false;
-  }
 }

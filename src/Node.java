@@ -1,14 +1,39 @@
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public interface Node {
+public abstract class Node {
 
-  void setName(String name);
-  String getName();
-  void startTask();
-  void stopTask();
-  Duration getDuration();
-  LocalDateTime getDate();
-  boolean isActive();
+  private String name;
+  private LocalDateTime date;
+  private Duration duration;
+  private boolean isActive;
+
+
+  void setName(String name) {
+    this.name = name;
+  }
+
+  String getName() {
+    return name;
+  }
+
+  void startTask() {
+  }
+
+  void stopTask() {
+
+  }
+
+  Duration getDuration() {
+    return duration;
+  }
+
+  LocalDateTime getDate() {
+    return date;
+  }
+
+  boolean isActive() {
+    return isActive;
+  }
 
 }
