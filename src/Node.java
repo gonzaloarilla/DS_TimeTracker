@@ -1,5 +1,6 @@
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public abstract class Node {
 
@@ -7,6 +8,7 @@ public abstract class Node {
   private LocalDateTime date;
   private Duration duration;
   private boolean isActive;
+  private ArrayList tags;
 
 
   void setName(String name) {

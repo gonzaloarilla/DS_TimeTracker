@@ -5,7 +5,7 @@ import java.util.Observer;
 
 public class Interval implements Observer {
 
-  private Node parent;
+  private static Node parent;
   private boolean isActive;
   private LocalDateTime initialDate;
   private LocalDateTime currentDate;
