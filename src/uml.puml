@@ -1,5 +1,7 @@
 @startuml
-class Main {
+class Client {
++ main() : Integer
++ tests() : booleans
 }
 
 abstract Node {
