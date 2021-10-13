@@ -1,4 +1,6 @@
-
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class Project extends Node {
 
@@ -10,7 +12,7 @@ public class Project extends Node {
 	private Project parent;
 	
 	// List of tasks/subprojects
-	private List<Node> nodeList;
+	protected List<Node> nodeList;
 	
 	// Root Project Constructor
 	public Project(String name) {
@@ -33,6 +35,7 @@ public class Project extends Node {
 	
 	// Add a new node to list(task/project)
 	public void addNode(Node node) {
+		//nodeList.add(node);
 		nodeList.add(node);
 	}
 	
@@ -66,16 +69,16 @@ public class Project extends Node {
 	
 	// Updates Project duration data and calls its parent update method
 	public void update() {
-		if (this.isActive) {
+		if (isActive()) {
 			updateDuration();
-			
+
 			if (parent != null) {
 				parent.update();
 			}
 		}
 	}
 	
-	// Updates the Project duration value adding each's child duration
+	// Updates the Project duration value adding each child duration
 	private void updateDuration() {
 
 		this.duration = Duration.ZERO;
