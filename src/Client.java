@@ -21,14 +21,12 @@ public class Client {
     task1.startTask();
     Thread.sleep(5000);
     task1.stopTask();
-
     Clock.getRunningClock().stopClock();
 
   }
 
 
   public static void main(String[] args) throws InterruptedException {
-
     testProjectWithTaskAndInterval();
   }
 
