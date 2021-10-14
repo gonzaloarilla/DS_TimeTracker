@@ -9,9 +9,11 @@ public class Task extends Node {
   private boolean active;
   private boolean canInterval;
   private boolean stopped, started;
-  protected List<Node> nodeList;
+  protected List<Node> nodeList; // millor intervals crec, ja que nomes podra tenir intervals
+  protected List<Interval> intervals;
 
   // No del tot segur
+  // Gonzalo: crec que no, task no té altres tasks, només intervals
   protected List<Task> taskList;
 
 
@@ -78,7 +80,13 @@ public class Task extends Node {
       }
     }
     return this.started;
+  }
 
+  public boolean startTask() {
+    Interval newInterval = new Interval(this);
+    intervals.add(newInterval);
+    this.started = true;
+    return this.started;
   }
 
   public boolean stopTask(String name) {
