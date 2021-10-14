@@ -10,7 +10,7 @@ public class Interval implements Observer {
   private static Node parent;
   private boolean isActive;
   private LocalDateTime initialDate;
-  private LocalDateTime currentDate;
+  private LocalDateTime lastDate;
   private Duration duration;
 
   private String timeConversion;
@@ -46,24 +46,25 @@ public class Interval implements Observer {
 
   @Override
   public void update(Observable o, Object arg) {
-    duration = Duration.between(initialDate, (LocalDateTime) arg);
+    lastDate = (LocalDateTime) arg;
+    duration = Duration.between(initialDate, lastDate);
     setTimeConversion(duration);
-    //date = (LocalDateTime) arg;
+
     System.out.println("Interval updated");
     System.out.println("Total duration: " + getTimeConversion());
 
-
-    //TODO: update Parent info
+    parent.update(lastDate, initialDate);
   }
 
   public void finish() {
-    isActive = false;
-    duration = Duration.between(initialDate, LocalDateTime.now());
-    setTimeConversion(duration);
-    Clock.getRunningClock().deleteObserver(this);
-    System.out.println("Interval finished");
-    System.out.println("Total duration: " + getTimeConversion());
-
+    if (this.isActive) {
+      isActive = false;
+      duration = Duration.between(initialDate, LocalDateTime.now());
+      setTimeConversion(duration);
+      Clock.getRunningClock().deleteObserver(this);
+      System.out.println("Interval finished");
+      System.out.println("Total duration: " + getTimeConversion());
+}
   }
 
 }

@@ -10,7 +10,7 @@ public class Project extends Node {
 	
 	// Parent project, null if root
 	private Project parent;
-	
+
 	// List of tasks/subprojects
 	protected List<Node> nodeList;
 	
@@ -18,7 +18,6 @@ public class Project extends Node {
 	public Project(String name) {
 		
 		this.name = name;
-		
 		this.nodeList = new ArrayList<Node>();
 		this.duration = Duration.ZERO;
 		this.parent = null;
@@ -33,9 +32,8 @@ public class Project extends Node {
 		this.parent = parent;
 	}
 	
-	// Add a new node to list(task/project)
+	// Add a new node to list
 	public void addNode(Node node) {
-		//nodeList.add(node);
 		nodeList.add(node);
 	}
 	
@@ -71,19 +69,11 @@ public class Project extends Node {
 	public void update() {
 		if (isActive()) {
 			updateDuration();
-
 			if (parent != null) {
 				parent.update();
 			}
 		}
 	}
 	
-	// Updates the Project duration value adding each child duration
-	private void updateDuration() {
 
-		this.duration = Duration.ZERO;
-		for (Node node : nodeList) {
-		  this.duration = this.duration.plus(node.getDuration());
-		}
-	}
 }

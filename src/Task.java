@@ -6,7 +6,7 @@ public class Task extends Node {
   private String name;
   private Duration duration;
   private LocalDateTime localDateTime;
-  private boolean active;
+  private boolean isActive;
   private boolean canInterval;
   private boolean stopped, started;
   protected List<Node> nodeList; // millor intervals crec, ja que nomes podra tenir intervals
@@ -20,12 +20,13 @@ public class Task extends Node {
   public Task(String name) {
     // Inicialitzem els atributs
     this.name = name;
-    this.active = false;
+    this.isActive = false;
     this.localDateTime = getLocalDateTime();
     this.duration = getDuration();
     this.canInterval = false;
 
     this.nodeList = new ArrayList<Node>();
+    this.intervals = new ArrayList<>();
     // PARÀMETRE TASK (name) CAL?
 
   }
@@ -47,6 +48,7 @@ public class Task extends Node {
     //assert canInterval;
     return canInterval;
   }
+
   public void setName(String name) {
     this.name = name;
   }
@@ -64,9 +66,11 @@ public class Task extends Node {
   }
 
   public boolean isActive() {
-    return active;
+    return isActive;
   }
 
+  //Gonzalo: no caldria. Com la task no tindra mes tasks,
+  //quan fa start ja es d'ella mateixa (no cal l'String name)
   public boolean startTask(String name)
   {
     this.started = false;
@@ -83,10 +87,21 @@ public class Task extends Node {
   }
 
   public void startTask() {
-    if (!this.started) {
+    if (!this.isActive) {
       Interval newInterval = new Interval(this);
       intervals.add(newInterval);
-      this.started = true;
+      this.isActive = true;
+      System.out.println("Task " + this.name + " started");
+    }
+  }
+
+  public void stopTask() {
+    if (this.isActive) {
+      for (Interval interval : intervals){
+        interval.finish();
+      }
+      this.isActive = false;
+      System.out.println("Task " + this.name + " stopped");
     }
   }
 
@@ -105,17 +120,8 @@ public class Task extends Node {
     return this.stopped;
   }
 
-  private Duration updateDuration()
-  {
-    // retornem la suma de la duració de les tasques
-    this.duration = Duration.ZERO;
-    for (Node node : nodeList) {
-      this.duration = this.duration.plus(node.getDuration());
-    }
 
-    return this.duration;
-  }
-
+  // Gonzalo: Task no pot contenir mes tasks
   // Guardem totes les tasques en una llista (Maybe nodeList works?)
   public void addTask(String name)
   {
@@ -123,6 +129,7 @@ public class Task extends Node {
     taskList.add(this);
   }
 
+  // Gonzalo: Task no pot contenir mes tasks o projects
   // Afegim un node nou (en aquest cas una tasca doncs n = task)
   public void addNode(Node n)
   {
