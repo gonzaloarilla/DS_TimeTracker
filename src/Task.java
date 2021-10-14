@@ -82,13 +82,12 @@ public class Task extends Node {
     return this.started;
   }
 
-  public boolean startTask() {
+  public void startTask() {
     if (!this.started) {
       Interval newInterval = new Interval(this);
       intervals.add(newInterval);
       this.started = true;
     }
-    return this.started;
   }
 
   public boolean stopTask(String name) {
