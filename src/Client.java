@@ -7,7 +7,7 @@ public class Client {
 
   private static void testIntervalAndClock() throws InterruptedException {
     //Gonzalo
-    Task task = new Task();
+    Task task = new Task("Projecte DS");
     Interval interval = new Interval(task);
     Thread.sleep(7000);
     interval.finish();
@@ -16,7 +16,6 @@ public class Client {
   public static void main(String[] args) throws InterruptedException {
 
     testIntervalAndClock();
-
-
   }
+
 }

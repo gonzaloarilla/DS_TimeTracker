@@ -70,5 +70,5 @@ Node "*" *-- "1" Project
 Task -.|> Node
 Clock -down-|> java.util.Observable
 Interval -.down.-|> java.util.Observer
-Interval "*" *-- "1" Task
+Interval "*" --* "0" Task
 @enduml
