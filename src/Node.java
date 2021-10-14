@@ -19,11 +19,12 @@ public abstract class Node {
     return name;
   }
 
-  void startTask() {
+  public boolean startTask(String name) {
+    return true;
   }
 
-  void stopTask() {
-
+  public boolean stopTask(String name) {
+    return true;
   }
 
   Duration getDuration() {
