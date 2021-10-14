@@ -36,8 +36,9 @@ public class Task extends Node {
   }
 
   public boolean isCanInterval() {
-    if (!this.isStarted() || this.isStopped())
+    if (!this.isStarted() || this.isStopped()) {
       this.canInterval = false;
+    }
     this.canInterval = true;
 
     // Assegurar que sigui poguem començar la tasca
