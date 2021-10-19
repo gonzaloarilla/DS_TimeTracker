@@ -5,38 +5,36 @@ import java.util.*;
 public class Project extends Node {
 
 	private String name;
+	private static String id;
 	private Duration duration;
-	private LocalDateTime dateTime;
+	private LocalDateTime initialDate;
+	private LocalDateTime lastDate;
 	
 	// Parent project, null if root
-	private Project parent;
+	private Node parent;
 
 	// List of tasks/subprojects
 	protected List<Node> nodeList;
-	
+
 	// Root Project Constructor
-	public Project(String name) {
-		
+	public Project(String id, String name, Node parent) {
 		this.name = name;
-		this.nodeList = new ArrayList<Node>();
-		this.duration = Duration.ZERO;
-		this.parent = null;
-	}
-	
-	// Default Project Constructor
-	public Project(String name, Project parent) {
-		this.name = name;
-		
+		this.id = id;
 		this.nodeList = new ArrayList<Node>();
 		this.duration = Duration.ZERO;
 		this.parent = parent;
 	}
-	
+
+
 	// Add a new node to list
 	public void addNode(Node node) {
 		nodeList.add(node);
 	}
-	
+
+	public String getId() {
+		return id;
+	}
+
 	// Start task with name, if node is project code gets back here until task instance reached
 	public boolean startTask(String name) {
 
@@ -70,7 +68,7 @@ public class Project extends Node {
 		if (isActive()) {
 			updateDuration();
 			if (parent != null) {
-				parent.update();
+				parent.update(this.lastDate, this.initialDate);
 			}
 		}
 	}

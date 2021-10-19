@@ -6,6 +6,7 @@ import java.util.List;
 public abstract class Node {
 
   private String name;
+  private String id;
   private LocalDateTime initialDate;
   private LocalDateTime lastDate;
   private Duration duration;
@@ -19,8 +20,12 @@ public abstract class Node {
     this.name = name;
   }
 
-  String getName() {
+  public String getName() {
     return name;
+  }
+
+  public String getId() {
+    return id;
   }
 
   public boolean startTask(String name) {
@@ -69,7 +74,6 @@ public abstract class Node {
 
 
   }
-
 
 
 }

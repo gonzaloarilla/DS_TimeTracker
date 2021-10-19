@@ -3,7 +3,10 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class Task extends Node {
+
   private String name;
+  private static String id;
+  private Node parent;
   private Duration duration;
   private LocalDateTime localDateTime;
   private boolean isActive;
@@ -17,9 +20,11 @@ public class Task extends Node {
   protected List<Task> taskList;
 
 
-  public Task(String name) {
+  public Task(String id, String name, Node parent) {
     // Inicialitzem els atributs
     this.name = name;
+    this.id = id;
+    this.parent = parent;
     this.isActive = false;
     this.localDateTime = getLocalDateTime();
     this.duration = getDuration();
@@ -30,6 +35,11 @@ public class Task extends Node {
     // PARÀMETRE TASK (name) CAL?
 
   }
+
+  public String getId() {
+    return id;
+  }
+
   public boolean isStopped() {
     return stopped;
   }
@@ -51,14 +61,6 @@ public class Task extends Node {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public Duration getDuration() {
-    return duration;
   }
 
   public LocalDateTime getLocalDateTime() {
