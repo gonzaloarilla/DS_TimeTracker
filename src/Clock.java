@@ -44,7 +44,7 @@ public class Clock extends Observable {
   //Updates Clock's date and notify to obervers
   private void update() {
     date = LocalDateTime.now();
-    System.out.println("Clock updated");
+    //System.out.println("Clock updated");
     setChanged();
     notifyObservers(date);
   }
