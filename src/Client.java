@@ -12,7 +12,6 @@ public class Client {
   private static String createId() {
     UUID uuid = UUID.randomUUID();
     String uuidAsString = uuid.toString();
-    System.out.println(uuidAsString);
     return uuidAsString;
   }
 
@@ -73,8 +72,12 @@ public class Client {
     projectTimeTracker.addNode(firstMilestone);
 
 
+    System.out.println("\nTest B starts:\n");
+
     transportation.startTask();
     Thread.sleep(4000);
+    transportation.stopTask();
+    Thread.sleep(2000);
     firstList.startTask();
     Thread.sleep(6000);
     secondList.startTask();
@@ -86,6 +89,11 @@ public class Client {
     transportation.startTask();
     Thread.sleep(4000);
     transportation.stopTask();
+
+    Clock.getRunningClock().stopClock();
+
+    System.out.println("Test B finished");
+
 
   }
 

@@ -20,6 +20,7 @@ public class Interval implements Observer {
     this.parent = parent;
     isActive = true;
     initialDate = LocalDateTime.now();
+    lastDate = initialDate;
     this.timeConversion = "";
 
     //currentDate = initialDate.minus(Duration.ofMillis(Clock.getRunningClock().getPeriod()));
@@ -46,14 +47,12 @@ public class Interval implements Observer {
 
   @Override
   public void update(Observable o, Object arg) {
+    Duration durationToSum = Duration.between(lastDate, (LocalDateTime) arg);
     lastDate = (LocalDateTime) arg;
     duration = Duration.between(initialDate, lastDate);
     setTimeConversion(duration);
-
-    System.out.println("Interval updated");
-    System.out.println("Total duration: " + getTimeConversion());
-
-    parent.update(lastDate, initialDate);
+    //System.out.println("Interval updated. Total duration: " + getTimeConversion());
+    parent.update(lastDate, initialDate, durationToSum);
   }
 
   public void finish() {
@@ -63,7 +62,7 @@ public class Interval implements Observer {
       setTimeConversion(duration);
       Clock.getRunningClock().deleteObserver(this);
       System.out.println("Interval finished");
-      System.out.println("Total duration: " + getTimeConversion());
+      System.out.println("Interval total duration: " + getTimeConversion());
 }
   }
 
