@@ -3,11 +3,6 @@ import java.util.UUID;
 
 public class Client {
 
-  private int lastId;
-
-  public Client() {
-    lastId = 0;
-  }
 
   private static String createId() {
     UUID uuid = UUID.randomUUID();
@@ -15,15 +10,6 @@ public class Client {
     return uuidAsString;
   }
 
-
-  private static void testIntervalAndClock() throws InterruptedException {
-    //Gonzalo
-    Project root = new Project(createId(), "root", null);
-    Task task = new Task(createId(),"Projecte DS", root);
-    Interval interval = new Interval(task);
-    Thread.sleep(7000);
-    interval.finish();
-  }
 
   private static void testProjectWithTaskAndInterval() throws InterruptedException {
     //Gonzalo
@@ -45,6 +31,7 @@ public class Client {
   }
 
   private static void testB() throws InterruptedException {
+
     Project root = new Project(createId(),"root", null);
 
     Project softwareDesign = new Project(createId(),"software design", root);
@@ -81,8 +68,11 @@ public class Client {
     firstList.startTask();
     Thread.sleep(6000);
     secondList.startTask();
+    System.out.println("Number of observers: " + Clock.getRunningClock().countObservers());
     Thread.sleep(4000);
+    System.out.println("Number of observers: " + Clock.getRunningClock().countObservers());
     firstList.stopTask();
+    System.out.println("Number of observers: " + Clock.getRunningClock().countObservers());
     Thread.sleep(2000);
     secondList.stopTask();
     Thread.sleep(2000);
@@ -90,7 +80,7 @@ public class Client {
     Thread.sleep(4000);
     transportation.stopTask();
 
-    Clock.getRunningClock().stopClock();
+    Clock.stopClock();
 
     System.out.println("Test B finished");
 

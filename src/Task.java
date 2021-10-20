@@ -71,7 +71,6 @@ public class Task extends Node {
 
 
 
-
   //Gonzalo: aquests dos metodes no han de ser aixi,
   //han de buscar una tasca pel seu ID
 
@@ -80,7 +79,7 @@ public class Task extends Node {
       Interval newInterval = new Interval(this);
       intervals.add(newInterval);
       this.isActive = true;
-      parent.setActive();
+      //parent.setActive();
       System.out.println("Task " + this.name + " started");
     }
   }
@@ -91,7 +90,7 @@ public class Task extends Node {
         interval.finish();
       }
       this.isActive = false;
-      parent.setNotActive();
+      //parent.setNotActive();
       System.out.println("Task " + this.name + " stopped");
     }
   }

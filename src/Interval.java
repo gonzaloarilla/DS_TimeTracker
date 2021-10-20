@@ -19,10 +19,10 @@ public class Interval implements Observer {
     this.parent = parent;
     isActive = true;
     initialDate = LocalDateTime.now();
+    //initialDate = initialDate.minus(Duration.ofMillis(Clock.getRunningClock().getPeriod()));
     lastDate = initialDate;
     this.timeConversion = "";
 
-    //currentDate = initialDate.minus(Duration.ofMillis(Clock.getRunningClock().getPeriod()));
     Clock.getRunningClock().addObserver(this);
     //System.out.println("Interval created and running");
   }
@@ -51,9 +51,12 @@ public class Interval implements Observer {
 
   @Override
   public void update(Observable o, Object arg) {
+    System.out.println("Updating interval of " + this.parent.getName());
+
+
     Duration durationToSum = Duration.between(lastDate, (LocalDateTime) arg);
-    lastDate = (LocalDateTime) arg;
-    duration = Duration.between(initialDate, lastDate);
+    this.lastDate = (LocalDateTime) arg;
+    this.duration = Duration.between(initialDate, lastDate);
     setTimeConversion(duration);
     System.out.println(this);
     parent.update(lastDate, initialDate, durationToSum);

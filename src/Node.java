@@ -95,15 +95,13 @@ public abstract class Node {
 
   // Updates its lastDate and startDate (this last if it wasn't initialized)
   void update(LocalDateTime lastDate, LocalDateTime initialDate, Duration durationToSum) {
-    if (this.isActive) {
-      this.lastDate = lastDate;
-      this.updateDuration(durationToSum);
-
-      System.out.println(this);
-      if (parent != null) {
-        parent.update(lastDate, this.initialDate, durationToSum);
-      }
+    this.lastDate = lastDate;
+    this.updateDuration(durationToSum);
+    System.out.println(this);
+    if (parent != null) {
+      parent.update(lastDate, this.initialDate, durationToSum);
     }
+
   }
 
 
