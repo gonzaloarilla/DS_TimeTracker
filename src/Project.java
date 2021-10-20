@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Project extends Node {
 
-	private List<Node> nodeList;
+	private List<Node> nodeList; // Might be Project or Task
 
 
 	// Project Constructor

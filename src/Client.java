@@ -11,7 +11,7 @@ public class Client {
   }
 
 
-  private static void testProjectWithTaskAndInterval() throws InterruptedException {
+/*  private static void testProjectWithTaskAndInterval() throws InterruptedException {
     //Gonzalo
     Project root = new Project(createId(),"root", null); //creem root
 
@@ -28,57 +28,78 @@ public class Client {
     System.out.println("Id project 1: " + project1.getId());
     System.out.println("Id task 1: " + task1.getId());
 
-  }
+  }*/
 
   private static void testB() throws InterruptedException {
 
-    Project root = new Project(createId(),"root", null);
+    // Root
+    String rootID = createId();
+    Project root = new Project(rootID,"root", null);
 
-    Project softwareDesign = new Project(createId(),"software design", root);
+    // Projects setup
+    String softwareDesignID = createId();
+    Project softwareDesign = new Project(softwareDesignID,"software design", root);
     root.addNode(softwareDesign);
-    Project softwareTesting = new Project(createId(),"software testing", root);
-    root.addNode(softwareTesting);
-    Project databases = new Project(createId(),"databases", root);
-    root.addNode(databases);
-    Task transportation = new Task(createId(),"transportation", root);
-    root.addNode(transportation);
 
-    Project problems = new Project(createId(),"problems", softwareDesign);
+    String softwareTestingID = createId();
+    Project softwareTesting = new Project(softwareTestingID,"software testing", root);
+    root.addNode(softwareTesting);
+
+    String databasesID = createId();
+    Project databases = new Project(databasesID,"databases", root);
+    root.addNode(databases);
+
+    String problemsID = createId();
+    Project problems = new Project(problemsID,"problems", softwareDesign);
     softwareDesign.addNode(problems);
-    Project projectTimeTracker = new Project(createId(),"project time tracker", softwareDesign);
+
+    String projectTimeTrackerID = createId();
+    Project projectTimeTracker = new Project(projectTimeTrackerID,"project time tracker", softwareDesign);
     softwareDesign.addNode(projectTimeTracker);
 
-    Task firstList = new Task(createId(),"first list", problems);
+    // Tasks Setup
+    String transportationID = createId();
+    Task transportation = new Task(transportationID,"transportation", root);
+    root.addNode(transportation);
+
+    String firstListID = createId();
+    Task firstList = new Task(firstListID,"first list", problems);
     problems.addNode(firstList);
-    Task secondList = new Task(createId(),"second list", problems);
+
+    String secondListID = createId();
+    Task secondList = new Task(secondListID,"second list", problems);
     problems.addNode(secondList);
 
-    Task readHandout = new Task(createId(),"read handout", projectTimeTracker);
+    String readHandoutID = createId();
+    Task readHandout = new Task(readHandoutID,"read handout", projectTimeTracker);
     projectTimeTracker.addNode(readHandout);
-    Task firstMilestone = new Task(createId(),"first milestone", projectTimeTracker);
+
+    String firstMilestoneID = createId();
+    Task firstMilestone = new Task(firstMilestoneID,"first milestone", projectTimeTracker);
     projectTimeTracker.addNode(firstMilestone);
 
 
+    // Test Execution
     System.out.println("\nTest B starts:\n");
 
-    transportation.startTask();
+    transportation.startTask(transportationID);
     Thread.sleep(4000);
-    transportation.stopTask();
+    transportation.stopTask(transportationID);
     Thread.sleep(2000);
-    firstList.startTask();
+    firstList.startTask(firstListID);
     Thread.sleep(6000);
-    secondList.startTask();
+    secondList.startTask(secondListID);
     System.out.println("Number of observers: " + Clock.getRunningClock().countObservers());
     Thread.sleep(4000);
     System.out.println("Number of observers: " + Clock.getRunningClock().countObservers());
-    firstList.stopTask();
+    firstList.stopTask(firstListID);
     System.out.println("Number of observers: " + Clock.getRunningClock().countObservers());
     Thread.sleep(2000);
-    secondList.stopTask();
+    secondList.stopTask(secondListID);
     Thread.sleep(2000);
-    transportation.startTask();
+    transportation.startTask(transportationID);
     Thread.sleep(4000);
-    transportation.stopTask();
+    transportation.stopTask(transportationID);
 
     Clock.stopClock();
 

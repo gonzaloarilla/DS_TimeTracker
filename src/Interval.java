@@ -59,7 +59,7 @@ public class Interval implements Observer {
     this.duration = Duration.between(initialDate, lastDate);
     setTimeConversion(duration);
     System.out.println(this);
-    parent.update(lastDate, initialDate, durationToSum);
+    parent.update(lastDate, durationToSum);
   }
 
   public void finish() {

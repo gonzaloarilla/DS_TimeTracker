@@ -6,7 +6,7 @@ import java.util.List;
 
 public abstract class Node {
 
-  private String id;
+  protected String id;
   protected String name;
   protected final LocalDateTime initialDate;
   protected LocalDateTime lastDate;
@@ -14,7 +14,7 @@ public abstract class Node {
   protected boolean isActive;
   protected ArrayList tags;
   protected Node parent;
-  protected List<Node> nodeList;
+  //protected List<Node> nodeList;
   protected DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 
@@ -42,11 +42,11 @@ public abstract class Node {
     return id;
   }
 
-  public boolean startTask(String name) {
+  public boolean startTask(String id) {
     return true;
   }
 
-  public boolean stopTask(String name) {
+  public boolean stopTask(String id) {
     return true;
   }
 
@@ -94,12 +94,12 @@ public abstract class Node {
   }
 
   // Updates its lastDate and startDate (this last if it wasn't initialized)
-  void update(LocalDateTime lastDate, LocalDateTime initialDate, Duration durationToSum) {
+  void update(LocalDateTime lastDate, Duration durationToSum) {
     this.lastDate = lastDate;
     this.updateDuration(durationToSum);
     System.out.println(this);
     if (parent != null) {
-      parent.update(lastDate, this.initialDate, durationToSum);
+      parent.update(lastDate, durationToSum);
     }
 
   }
