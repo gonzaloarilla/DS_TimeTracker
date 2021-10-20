@@ -8,7 +8,7 @@ public class Project extends Node {
 	// Project Constructor
 	public Project(String id, String name, Node parent) {
 		super(id, name, parent);
-		this.nodeList = new ArrayList<Node>();
+    this.nodeList = new ArrayList<>();
 	}
 
 	// Add a new node to its list
@@ -16,10 +16,9 @@ public class Project extends Node {
 		nodeList.add(node);
 	}
 
-
-
-	// Start task with name, if node is project code gets back here until task instance reached
-	public boolean startTask(String name) {
+  // Start task with name, if node is project code gets back here until task instance reached
+  @Override
+  public boolean startTask(String name) {
 
 		// Search for the task with matching name
 		boolean started = false;
@@ -32,8 +31,9 @@ public class Project extends Node {
 		return started;
 	}
 
-	// Stop task with name, if node is project code gets back here until task instance reached
-	public boolean stopTask(String name) {
+  // Stop task with name, if node is project code gets back here until task instance reached
+  @Override
+  public boolean stopTask(String name) {
 
 		// Search for the task with matching name
 		boolean stopped = false;

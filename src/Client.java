@@ -3,32 +3,11 @@ import java.util.UUID;
 
 public class Client {
 
-
-  private static String createId() {
+  private static synchronized String createId() {
     UUID uuid = UUID.randomUUID();
-    String uuidAsString = uuid.toString();
-    return uuidAsString;
+    return uuid.toString();
   }
 
-
-/*  private static void testProjectWithTaskAndInterval() throws InterruptedException {
-    //Gonzalo
-    Project root = new Project(createId(),"root", null); //creem root
-
-    Project project1 = new Project(createId(),"DS", root); //creem projecte1
-    Task task1 = new Task(createId(), "Projecte DS", project1); //creem task1
-
-    project1.addNode(task1); //diem que projecte1 que conte la task1
-
-    task1.startTask();
-    Thread.sleep(3000);
-    task1.stopTask();
-    Clock.getRunningClock().stopClock();
-
-    System.out.println("Id project 1: " + project1.getId());
-    System.out.println("Id task 1: " + task1.getId());
-
-  }*/
 
   private static void testB() throws InterruptedException {
 
@@ -104,7 +83,6 @@ public class Client {
     Clock.stopClock();
 
     System.out.println("Test B finished");
-
 
   }
 

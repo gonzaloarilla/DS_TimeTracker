@@ -7,27 +7,24 @@ public class Task extends Node {
 
   public Task(String id, String name, Node parent) {
     super(id, name, parent);
-    this.intervals = new ArrayList<Interval>();
+    this.intervals = new ArrayList<>();
   }
 
   @Override
   public boolean startTask(String id) {
-    if (!this.isActive) {
-      if (id.equals(this.id)) {
+    if (!this.isActive && id.equals(this.id)) {
         Interval newInterval = new Interval(this);
         intervals.add(newInterval);
         this.isActive = true;
         System.out.println("Task " + this.name + " started");
         return true;
-      }
     }
     return false;
   }
 
   @Override
   public boolean stopTask(String id) {
-    if (this.isActive) {
-      if (id.equals(this.id)) {
+    if (this.isActive && id.equals(this.id)) {
         for (Interval interval : intervals){
           interval.finish();
         }
@@ -36,7 +33,6 @@ public class Task extends Node {
         System.out.println("Task " + this.name + " stopped");
         return true;
       }
-    }
     return false;
   }
 }

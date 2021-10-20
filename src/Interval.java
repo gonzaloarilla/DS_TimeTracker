@@ -6,9 +6,9 @@ import java.util.Observer;
 
 public class Interval implements Observer {
 
-  private Node parent;
+  private final Node parent;
   private boolean isActive;
-  private LocalDateTime initialDate;
+  private final LocalDateTime initialDate;
   private LocalDateTime lastDate;
   private Duration duration;
   protected DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -17,10 +17,10 @@ public class Interval implements Observer {
 
   public Interval(Node parent) {
     this.parent = parent;
-    isActive = true;
-    initialDate = LocalDateTime.now();
-    //initialDate = initialDate.minus(Duration.ofMillis(Clock.getRunningClock().getPeriod()));
-    lastDate = initialDate;
+    this.isActive = true;
+    this.lastDate = LocalDateTime.now();
+    this.initialDate = lastDate.minus(Duration.ofMillis(Clock.getPeriod()));
+    this.duration = Duration.ZERO;
     this.timeConversion = "";
 
     Clock.getRunningClock().addObserver(this);
@@ -44,19 +44,21 @@ public class Interval implements Observer {
   }
 
   public String toString() {
-    String info = "Interval:    " + this.initialDate.format(dateTimeFormatter) + "   "
-        + this.lastDate.format(dateTimeFormatter) + "   " + this.duration.toSeconds();
-    return info;
+    return "Interval:    "
+        + this.initialDate.format(dateTimeFormatter)
+        + "   "
+        + this.lastDate.format(dateTimeFormatter)
+        + "   "
+        + this.duration.toSeconds();
   }
 
-  @Override
   public void update(Observable o, Object arg) {
     System.out.println("Updating interval of " + this.parent.getName());
 
-
-    Duration durationToSum = Duration.between(lastDate, (LocalDateTime) arg);
+    //Duration durationToSum = Duration.between(lastDate, (LocalDateTime) arg);
+    Duration durationToSum = Duration.ofMillis(Clock.getPeriod());
     this.lastDate = (LocalDateTime) arg;
-    this.duration = Duration.between(initialDate, lastDate);
+    this.duration = this.duration.plus(durationToSum);
     setTimeConversion(duration);
     System.out.println(this);
     parent.update(lastDate, durationToSum);
@@ -64,14 +66,15 @@ public class Interval implements Observer {
 
   public void finish() {
     if (this.isActive) {
-      isActive = false;
-      Duration durationToSum = Duration.between(lastDate, LocalDateTime.now());
-      duration = Duration.between(initialDate, LocalDateTime.now());
+      this.isActive = false;
+      this.lastDate = LocalDateTime.now();
+      Duration durationToSum = Duration.ofMillis(Clock.getPeriod());
+      this.duration = this.duration.plus(durationToSum);
       setTimeConversion(duration);
       Clock.getRunningClock().deleteObserver(this);
       System.out.println("Interval finished");
       //System.out.println(this);
-      //parent.update(lastDate, initialDate, durationToSum);
+      //parent.update(lastDate, durationToSum);
     }
   }
 

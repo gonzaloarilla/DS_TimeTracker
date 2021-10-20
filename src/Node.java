@@ -1,8 +1,8 @@
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
+
 
 public abstract class Node {
 
@@ -12,14 +12,14 @@ public abstract class Node {
   protected LocalDateTime lastDate;
   protected Duration duration;
   protected boolean isActive;
-  protected ArrayList tags;
+  protected List<String> tags;
   protected Node parent;
   //protected List<Node> nodeList;
   protected DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 
   // Constructor
-  public Node(String id, String name, Node parent) {
+  protected Node(String id, String name, Node parent) {
     this.name = name;
     this.id = id;
     this.parent = parent;
@@ -81,9 +81,13 @@ public abstract class Node {
   }
 
   public String toString() {
-    String info = this.name + ":    " + this.initialDate.format(dateTimeFormatter) + "   "
-        + this.lastDate.format(dateTimeFormatter) + "   " + this.duration.toSeconds();
-    return info;
+    return this.name
+        + ":    "
+        + this.initialDate.format(dateTimeFormatter)
+        + "   "
+        + this.lastDate.format(dateTimeFormatter)
+        + "   "
+        + this.duration.toSeconds();
   }
 
   // Updates its duration value

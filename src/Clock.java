@@ -4,14 +4,18 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Clock extends Observable {
-  private static int period = 2000;
-  private static int delay = 0;
+  private static final int period = 2000;
+  private static final int delay = 0;
   private static Clock runningClock = null;
-  private Timer timer;
-  private TimerTask timerTask;
-  private LocalDateTime date;
+  private final Timer timer;
+  private final TimerTask timerTask;
+  private LocalDateTime lastDate;
 
-  //Private constructor so we just have one instance of Clock
+  public static int getPeriod(){
+    return period;
+  }
+
+  // Private constructor so we just have one instance of Clock
   private Clock() {
     timer = new Timer();
     timerTask = new TimerTask() {
@@ -23,8 +27,8 @@ public class Clock extends Observable {
     timer.schedule(timerTask, delay, period);
   }
 
-  //This method implements Singleton
-  public static Clock getRunningClock() {
+  // This method implements Singleton
+  public static synchronized Clock getRunningClock() {
     if (runningClock == null) {
       runningClock = new Clock();
       System.out.println("Clock created");
@@ -32,6 +36,7 @@ public class Clock extends Observable {
     return runningClock;
   }
 
+  // Stops clock and delete all its oberservers
   public static void stopClock() {
     if (runningClock != null) {
       runningClock.deleteObservers();
@@ -41,16 +46,12 @@ public class Clock extends Observable {
     }
   }
 
-  //Updates Clock's date and notify to observers
+  // Updates Clock's date and notify to observers
   private void update() {
-    date = LocalDateTime.now();
+    lastDate = LocalDateTime.now();
     //System.out.println("Clock updated");
     setChanged();
-    notifyObservers(date);
-  }
-
-  public int getPeriod(){
-    return period;
+    notifyObservers(lastDate);
   }
 
 }
