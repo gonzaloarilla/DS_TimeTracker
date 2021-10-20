@@ -86,14 +86,15 @@ public class Client {
     Thread.sleep(4000);
     transportation.stopTask(transportationID);
     Thread.sleep(2000);
+
     firstList.startTask(firstListID);
     Thread.sleep(6000);
     secondList.startTask(secondListID);
-    System.out.println("Number of observers: " + Clock.getRunningClock().countObservers());
+//    System.out.println("Number of observers: " + Clock.getRunningClock().countObservers());
     Thread.sleep(4000);
-    System.out.println("Number of observers: " + Clock.getRunningClock().countObservers());
+//    System.out.println("Number of observers: " + Clock.getRunningClock().countObservers());
     firstList.stopTask(firstListID);
-    System.out.println("Number of observers: " + Clock.getRunningClock().countObservers());
+//    System.out.println("Number of observers: " + Clock.getRunningClock().countObservers());
     Thread.sleep(2000);
     secondList.stopTask(secondListID);
     Thread.sleep(2000);

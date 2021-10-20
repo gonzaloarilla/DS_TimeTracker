@@ -6,7 +6,7 @@ import java.util.TimerTask;
 public class Clock extends Observable {
   private static int period = 2000;
   private static int delay = 0;
-  private static Clock runningClock;
+  private static Clock runningClock = null;
   private Timer timer;
   private TimerTask timerTask;
   private LocalDateTime date;
@@ -41,7 +41,7 @@ public class Clock extends Observable {
     }
   }
 
-  //Updates Clock's date and notify to obervers
+  //Updates Clock's date and notify to observers
   private void update() {
     date = LocalDateTime.now();
     //System.out.println("Clock updated");
