@@ -68,7 +68,7 @@ public class Client {
 
     Task readHandout = new Task(createId(),"read handout", projectTimeTracker);
     projectTimeTracker.addNode(readHandout);
-    Task firstMilestone = new Task(createId(),"first milestone", problems);
+    Task firstMilestone = new Task(createId(),"first milestone", projectTimeTracker);
     projectTimeTracker.addNode(firstMilestone);
 
 
