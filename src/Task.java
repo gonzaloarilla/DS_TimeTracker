@@ -7,8 +7,6 @@ public class Task extends Node {
 
   public Task(String id, String name, Node parent) {
     super(id, name, parent);
-
-    //this.nodeList = new ArrayList<Node>();
     this.intervals = new ArrayList<Interval>();
   }
 
@@ -20,10 +18,8 @@ public class Task extends Node {
         intervals.add(newInterval);
         this.isActive = true;
         System.out.println("Task " + this.name + " started");
-
         return true;
       }
-
     }
     return false;
   }
@@ -38,7 +34,6 @@ public class Task extends Node {
         //intervals.get(intervals.size()-1).finish(); -> stop last interval
         this.isActive = false;
         System.out.println("Task " + this.name + " stopped");
-
         return true;
       }
     }
