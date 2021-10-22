@@ -18,14 +18,14 @@ public class Project extends Node {
 
   // Start task with name, if node is project code gets back here until task instance reached
   @Override
-  public boolean startTask(String name) {
+  public boolean startTask(String id) {
 
 		// Search for the task with matching name
 		boolean started = false;
 		int i = 0;
 		while (!started && i < nodeList.size()) {
-		  started = nodeList.get(i).startTask(name);
-		  i = i + 1;
+		  started = nodeList.get(i).startTask(id);
+		  i++;
 		}
 
 		return started;
@@ -33,14 +33,14 @@ public class Project extends Node {
 
   // Stop task with name, if node is project code gets back here until task instance reached
   @Override
-  public boolean stopTask(String name) {
+  public boolean stopTask(String id) {
 
 		// Search for the task with matching name
 		boolean stopped = false;
 		int i = 0;
 		while (!stopped && i < nodeList.size()) {
 		  stopped = nodeList.get(i).stopTask(name);
-		  i = i + 1;
+		  i++;
 		}
 
 		return stopped;
