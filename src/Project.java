@@ -46,5 +46,14 @@ public class Project extends Node {
 		return stopped;
 	}
 
+	public void acceptVisit(NodeVisitor visitor){
+
+		visitor.visit(this);
+		System.out.println("Project " + this.name + " visited");
+
+		for (Node node : nodeList) {
+			node.acceptVisit(visitor);
+		}
+	}
 
 }

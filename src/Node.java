@@ -50,6 +50,8 @@ public abstract class Node {
     return true;
   }
 
+  public void acceptVisit(NodeVisitor op){};
+
   public Duration getDuration() {
     return duration;
   }

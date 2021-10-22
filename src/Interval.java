@@ -78,4 +78,10 @@ public class Interval implements Observer {
     }
   }
 
+  public void acceptVisit(NodeVisitor visitor){
+
+    visitor.visit(this);
+    System.out.println("Interval of " + parent.name + " visited");
+  }
+
 }

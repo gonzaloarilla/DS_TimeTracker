@@ -35,4 +35,14 @@ public class Task extends Node {
       }
     return false;
   }
+
+  public void acceptVisit(NodeVisitor visitor){
+
+    visitor.visit(this);
+    System.out.println("Task " + this.name + " visited");
+
+    for (Interval interval : intervals) {
+      interval.acceptVisit(visitor);
+    }
+  }
 }

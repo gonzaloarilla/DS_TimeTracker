@@ -1,4 +1,4 @@
-public class NodePrintVisitor implements NodeVisitor {
+public class NodePersistenceVisitor implements NodeVisitor{
 
   @Override
   public void visit(Project project) {
