@@ -57,6 +57,10 @@ public class Client {
     Task firstMilestone = new Task(firstMilestoneID,"first milestone", projectTimeTracker);
     projectTimeTracker.addNode(firstMilestone);
 
+    // Visitor Test
+    NodeVisitor nodePersistence = new NodePersistenceVisitor();
+    root.acceptVisit(nodePersistence);
+    Thread.sleep(10000);
 
     // Test Execution
     System.out.println("\nTest B starts:\n");
