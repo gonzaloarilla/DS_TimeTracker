@@ -1,3 +1,5 @@
+import org.json.JSONObject;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,6 +18,7 @@ public abstract class Node {
   protected Node parent;
   //protected List<Node> nodeList;
   protected DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+  protected JSONObject nodeJSONObject;
 
 
   // Constructor
@@ -29,6 +32,9 @@ public abstract class Node {
     this.lastDate = this.initialDate;
   }
 
+  public JSONObject getJSONObject() {
+    return nodeJSONObject;
+  }
 
   void setName(String name) {
     this.name = name;

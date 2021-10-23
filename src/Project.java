@@ -1,3 +1,5 @@
+import org.json.JSONObject;
+
 import java.util.*;
 
 public class Project extends Node {
@@ -9,6 +11,11 @@ public class Project extends Node {
 	public Project(String id, String name, Node parent) {
 		super(id, name, parent);
     this.nodeList = new ArrayList<>();
+		this.nodeJSONObject = new JSONObject();
+	}
+
+	public JSONObject getJSONObject() {
+		return nodeJSONObject;
 	}
 
 	// Add a new node to its list

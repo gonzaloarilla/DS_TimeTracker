@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.UUID;
 
 
@@ -9,7 +10,7 @@ public class Client {
   }
 
 
-  private static void testB() throws InterruptedException {
+  private static void testB() throws InterruptedException, IOException {
 
     // Root
     String rootID = createId();
@@ -57,9 +58,8 @@ public class Client {
     Task firstMilestone = new Task(firstMilestoneID,"first milestone", projectTimeTracker);
     projectTimeTracker.addNode(firstMilestone);
 
-    // Visitor Test
-    NodeVisitor nodePersistence = new NodePersistenceVisitor();
-    root.acceptVisit(nodePersistence);
+    PersistenceManager.saveData(root, "test.json");
+    System.out.println("\nData Saved:\n");
     Thread.sleep(10000);
 
     // Test Execution
@@ -86,12 +86,13 @@ public class Client {
 
     Clock.stopClock();
 
+
     System.out.println("Test B finished");
 
   }
 
 
-  public static void main(String[] args) throws InterruptedException {
+  public static void main(String[] args) throws InterruptedException, IOException {
     testB();
   }
 
