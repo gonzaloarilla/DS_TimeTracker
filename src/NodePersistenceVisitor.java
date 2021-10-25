@@ -15,9 +15,8 @@ public class NodePersistenceVisitor implements NodeVisitor{
       System.out.println(jsonException);
     }
 
-
+    // if has root / pare
     if (node.parent != null) {
-
       JSONArray array = node.parent.getJSONObject().optJSONArray("nodes");
       if (array == null) {
         array = new JSONArray();
@@ -31,30 +30,11 @@ public class NodePersistenceVisitor implements NodeVisitor{
   @Override
   public void visit(Project project) {
     JSONvisit(project);
-    /*project.getJSONObject().put("id: ", project.getId());
-    project.getJSONObject().put("name: ", project.getName());
-    project.getJSONObject().put("initial Date: ", project.getStartDate());
-    project.getJSONObject().put("final Date: ", project.getLastDate());
-    project.getJSONObject().put("duration: ", project.getExactTime());
-    project.getJSONObject().put("type: ", project.getType());
-
-    if (project.parent != null) {
-
-      JSONArray array = project.parent.getJSONObject().optJSONArray("nodes");
-      if (array == null) {
-        array = new JSONArray();
-        project.parent.getJSONObject().put("nodes", array);
-      }
-      array.put(project.getJSONObject());
-
-
-    }*/
   }
 
   @Override
   public void visit(Task task) {
     JSONvisit(task);
-
   }
 
   @Override

@@ -15,7 +15,7 @@ public class Interval extends Node implements Observer {
   private Duration duration;
   protected DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   private String timeConversion; // s'ha d'utilitzar la classe DateTimeFormatter
-  private JSONObject jsonObject;
+  private JSONObject nodeJSONObject;
 
   public Interval(Node parent) {
     super(parent.id, parent.name, parent.parent);
@@ -25,13 +25,14 @@ public class Interval extends Node implements Observer {
     this.initialDate = lastDate.minus(Duration.ofMillis(Clock.getPeriod()));
     this.duration = Duration.ZERO;
     this.timeConversion = "";
+    this.nodeJSONObject = new JSONObject();
 
     Clock.getRunningClock().addObserver(this);
     //System.out.println("Interval created and running");
   }
 
-  public JSONObject getJsonObject() {
-    return jsonObject;
+  public JSONObject getJSONObject() {
+    return nodeJSONObject;
   }
 
   public Node getParent() {

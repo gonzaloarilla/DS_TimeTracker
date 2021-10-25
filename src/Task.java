@@ -1,13 +1,21 @@
+import org.json.JSONObject;
+
 import java.util.*;
 
 public class Task extends Node {
 
   private List<Interval> intervals;
+  private JSONObject nodeJSONObject;
 
 
   public Task(String id, String name, Node parent) {
     super(id, name, parent);
     this.intervals = new ArrayList<>();
+    this.nodeJSONObject = new JSONObject();
+  }
+
+  public JSONObject getJSONObject() {
+    return nodeJSONObject;
   }
 
   @Override

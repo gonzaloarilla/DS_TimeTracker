@@ -30,6 +30,7 @@ public abstract class Node {
     this.duration = Duration.ZERO;
     this.initialDate = LocalDateTime.now();
     this.lastDate = this.initialDate;
+    this.nodeJSONObject = new JSONObject();
   }
 
   public JSONObject getJSONObject() {
