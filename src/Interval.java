@@ -1,10 +1,12 @@
+import org.json.JSONObject;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Interval implements Observer {
+public class Interval extends Node implements Observer {
 
   private final Node parent;
   private boolean isActive;
@@ -13,9 +15,10 @@ public class Interval implements Observer {
   private Duration duration;
   protected DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   private String timeConversion; // s'ha d'utilitzar la classe DateTimeFormatter
-
+  private JSONObject jsonObject;
 
   public Interval(Node parent) {
+    super(parent.id, parent.name, parent.parent);
     this.parent = parent;
     this.isActive = true;
     this.lastDate = LocalDateTime.now();
@@ -25,6 +28,10 @@ public class Interval implements Observer {
 
     Clock.getRunningClock().addObserver(this);
     //System.out.println("Interval created and running");
+  }
+
+  public JSONObject getJsonObject() {
+    return jsonObject;
   }
 
   public Node getParent() {

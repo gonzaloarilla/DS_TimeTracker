@@ -62,6 +62,10 @@ public abstract class Node {
     return duration;
   }
 
+  public Duration getExactTime() {
+    return Duration.between(getStartDate(), getLastDate());
+  }
+
   public LocalDateTime getLastDate() {
     return lastDate;
   }
@@ -114,6 +118,10 @@ public abstract class Node {
       parent.update(lastDate, durationToSum);
     }
 
+  }
+
+  public String getType() {
+    return this.getClass().getSimpleName();
   }
 
 

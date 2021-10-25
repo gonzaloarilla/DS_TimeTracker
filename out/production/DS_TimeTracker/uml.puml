@@ -1,0 +1,74 @@
+@startuml
+class Client {
++ main() : Integer
++ tests() : booleans
+}
+
+abstract Node {
+- name : String
+- duration : Duration
+- localDate : LocalDateTime
+- active : boolean
++ setName(n : String)
++ getName() : String
++ startTask()
++ stopTask()
++ getDuration() : Duration
++ getDate() : LocalDateTime
++ isActive(t : Task) : boolean
+}
+
+class Project {
+- name : String
+- duration : Duration
+- dateTime : LocalDateTime
++ setName(str : String)
++ getName() : String
++ getDuration() : Duration
++ getDate() : LocalDateTime
+}
+
+class Task {
+- name : String
+- duration : Duration
+- dateTime: LocalDateTime
+- active : boolean
++ setName(name : String)
++ getName() : String
++ startTask()
++ stopTask()
++ getDuration() : Duration
++ getDate() : LocalDateTime
++ isActive(t : Task) : boolean
+}
+
+class Interval {
+- initialTime : LocalDateTime
+- finalTime : LocalDateTime
++ getInitialTime() : LocalDateTime
++ getFinalTime() : LocalDateTime
+
+}
+
+class Clock {
+- timer : Timer
+- dateTime : LocalDateTime
++ startTimer()
+- tick()
+}
+
+class Data {
+- projectName : String
+- taskName : String
++ saveData(d : Data)
++ loadData(d : Data)
+}
+
+
+Project -|> Node
+Node "*" *-- "1" Project
+Task -.|> Node
+Clock -down-|> java.util.Observable
+Interval -.down.-|> java.util.Observer
+Interval "*" --* "0" Task
+@enduml

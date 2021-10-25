@@ -58,9 +58,7 @@ public class Client {
     Task firstMilestone = new Task(firstMilestoneID,"first milestone", projectTimeTracker);
     projectTimeTracker.addNode(firstMilestone);
 
-    PersistenceManager.saveData(root, "test.json");
-    System.out.println("\nData Saved:\n");
-    Thread.sleep(10000);
+
 
     // Test Execution
     System.out.println("\nTest B starts:\n");
@@ -86,8 +84,14 @@ public class Client {
 
     Clock.stopClock();
 
+    PersistenceManager.saveData(root, "NodeData.json");
+    System.out.println("\nData Saved:\n");
+    Thread.sleep(5000);
 
     System.out.println("Test B finished");
+
+    PersistenceManager.loadData(root, "NodeData.json");
+    System.out.println("\nData Loaded:\n");
 
   }
 
