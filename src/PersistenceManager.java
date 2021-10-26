@@ -2,6 +2,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import javax.swing.plaf.ToolBarUI;
 import java.io.*;
 
 
@@ -40,10 +41,35 @@ public class PersistenceManager {
     JSONTokener tokener = new JSONTokener(fileReader);
     JSONObject object = new JSONObject(tokener);
 
+    var type=  object.opt("type").toString();
+    var id = object.opt("id").toString();
+    var name = object.opt("name").toString();
+
+    switch (type) {
+      case "Task":
+        // no està bé crec
+        Task task = new Task(id, name, root.parent);
+        break;
+      case "Project":
+        Project project = new Project(id, name, root.parent);
+        break;
+      case "Interval":
+        Interval interval = new Interval(root.parent);
+        break;
+      default:
+        break;
+
+    }
+
+
     JSONArray nodes = object.getJSONArray("nodes");
     for (int i = 0; i < nodes.length(); i++) {
       System.out.println("  - " + nodes.get(i));
     }
+
+
+
+
 
     /*System.out.println("name  : " + object.opt("name"));
     System.out.println("type: " + object.opt("type"));
