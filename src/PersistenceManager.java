@@ -4,6 +4,7 @@ import org.json.JSONTokener;
 
 import javax.swing.plaf.ToolBarUI;
 import java.io.*;
+import java.time.Duration;
 
 
 public class PersistenceManager {
@@ -19,65 +20,67 @@ public class PersistenceManager {
     FileWriter fileWriter = new FileWriter("./"+filename);
     fileWriter.write(root.getJSONObject().toString(2));
     fileWriter.close();
-
-
   }
 
   public static void loadData(Node root, String filename) throws IOException {
-    /*FileReader reader = new FileReader(filename);
-    JSONTokener tokener = new JSONTokener(reader);
-    JSONObject obj = new JSONObject(tokener);
-    System.out.println("nodes: " + obj.opt("nodes"));
-    System.out.println("Id: " + obj.opt("id"));
-    System.out.println("Name: " + obj.opt("Name"));
-*/
-    /*String fileParsed = "/NodeData.json";
-    InputStream is = PersistenceManager.class.getResourceAsStream(fileParsed);
-    if (is == null) {
-      throw new NullPointerException("Cannot find resource file " + fileParsed);
-    }*/
 
     FileReader fileReader = new FileReader(filename);
     JSONTokener tokener = new JSONTokener(fileReader);
     JSONObject object = new JSONObject(tokener);
 
-    var type=  object.opt("type").toString();
-    var id = object.opt("id").toString();
-    var name = object.opt("name").toString();
+    root = restoreNodeStructure(root, object);
+  }
+
+  private static Node restoreNodeStructure(Node parent, JSONObject jsonNodeObject) {
+
+    String id = jsonNodeObject.getString("id");
+    String name = jsonNodeObject.getString("name");
+    String initialDate = jsonNodeObject.getString("initialDate");
+    String lastDate = jsonNodeObject.getString("lastDate");
+    long duration = jsonNodeObject.getLong("duration"); // JSON no guarda objectes de tipus Duration -> long pels segons
+
+    String type = jsonNodeObject.getString("type");
+    JSONArray array;
 
     switch (type) {
-      case "Task":
-        // no està bé crec
-        Task task = new Task(id, name, root.parent);
-        break;
-      case "Project":
-        Project project = new Project(id, name, root.parent);
-        break;
-      case "Interval":
-        Interval interval = new Interval(root.parent);
-        break;
+      case "project" :
+        Project project = new Project(id, name, parent);
+        // TODO: guardar dades que falten a project (initialDate, lastDate, Duration)
+        /*
+        Comprova els fills del jsonObject i els inclou com a fills del projecte creat
+        Es crida restoreNodeStructure() per recuperar les dades de cada node fill
+        */
+        array = jsonNodeObject.optJSONArray("nodes");
+        if (array != null) {
+          for (int i = 0; i < array.length(); i++) {
+            jsonNodeObject = array.getJSONObject(i);
+            Node node = restoreNodeStructure(project, jsonNodeObject);
+            project.addNode(node);
+          }
+        }
+
+        return project;
+      case "task" :
+        Task task = new Task(id, name, parent);
+        // TODO: guardar dades que falten a task (initialDate, lastDate, Duration)
+
+        array = jsonNodeObject.optJSONArray("nodes");
+        if (array != null) {
+          for (int i = 0; i < array.length(); i++) {
+            jsonNodeObject = array.getJSONObject(i);
+            Node node = (Interval) restoreNodeStructure(task, jsonNodeObject);
+            // TODO: task.addInterval(node);
+          }
+        }
+
+        return task;
+      case "interval" :
+        Interval interval = new Interval(parent);
+        // TODO:
+        return interval;
       default:
-        break;
-
+        return null;
     }
 
-
-    JSONArray nodes = object.getJSONArray("nodes");
-    for (int i = 0; i < nodes.length(); i++) {
-      System.out.println("  - " + nodes.get(i));
-    }
-
-
-
-
-
-    /*System.out.println("name  : " + object.opt("name"));
-    System.out.println("type: " + object.opt("type"));
-    System.out.println("id : " + object.opt("id"));*/
-
-
-
-//    JSONTokener tokener = new JSONTokener(reader);
-//    JSONObject object = new JSONObject(tokener);
   }
 }

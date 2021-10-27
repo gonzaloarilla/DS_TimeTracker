@@ -10,7 +10,7 @@ public abstract class Node {
 
   protected String id;
   protected String name;
-  protected final LocalDateTime initialDate;
+  protected LocalDateTime initialDate;
   protected LocalDateTime lastDate;
   protected Duration duration;
   protected boolean isActive;

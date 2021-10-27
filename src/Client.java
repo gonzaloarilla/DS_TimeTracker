@@ -90,7 +90,7 @@ public class Client {
 
     System.out.println("Test B finished");
 
-    PersistenceManager.loadData(root, "NodeData.json");
+    //PersistenceManager.loadData(root, "NodeData.json");
     System.out.println("\nData Loaded:\n");
 
   }

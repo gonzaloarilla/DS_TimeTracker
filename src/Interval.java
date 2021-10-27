@@ -8,22 +8,13 @@ import java.util.Observer;
 
 public class Interval extends Node implements Observer {
 
-  private final Node parent;
-  private boolean isActive;
-  private final LocalDateTime initialDate;
-  private LocalDateTime lastDate;
-  private Duration duration;
-  protected DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   private String timeConversion; // s'ha d'utilitzar la classe DateTimeFormatter
   private JSONObject nodeJSONObject;
 
   public Interval(Node parent) {
     super(parent.id, parent.name, parent.parent);
-    this.parent = parent;
     this.isActive = true;
-    this.lastDate = LocalDateTime.now();
     this.initialDate = lastDate.minus(Duration.ofMillis(Clock.getPeriod()));
-    this.duration = Duration.ZERO;
     this.timeConversion = "";
     this.nodeJSONObject = new JSONObject();
 
@@ -42,6 +33,7 @@ public class Interval extends Node implements Observer {
   public boolean isActive() {
     return isActive;
   }
+
   public String getTimeConversion() {
     return timeConversion;
   }

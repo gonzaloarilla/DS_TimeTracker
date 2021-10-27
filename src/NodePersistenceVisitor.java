@@ -3,14 +3,14 @@ import org.json.JSONException;
 
 public class NodePersistenceVisitor implements NodeVisitor{
 
-  public void JSONvisit(Node node) {
+  public void visit(Node node) {
     try {
-      node.getJSONObject().put("id: ", node.getId());
-      node.getJSONObject().put("name: ", node.getName());
-      node.getJSONObject().put("initial Date: ", node.getStartDate());
-      node.getJSONObject().put("final Date: ", node.getLastDate());
-      node.getJSONObject().put("duration: ", node.getExactTime());
-      node.getJSONObject().put("type: ", node.getType());
+      node.getJSONObject().put("id", node.getId());
+      node.getJSONObject().put("name", node.getName());
+      node.getJSONObject().put("initialDate", node.getStartDate());
+      node.getJSONObject().put("finalDate", node.getLastDate());
+      node.getJSONObject().put("duration", node.getExactTime().getSeconds()); // JSON no guarda objectes de tipus Duration -> getSeconds()
+      node.getJSONObject().put("type", node.getType());
     }catch (JSONException jsonException) {
       System.out.println(jsonException);
     }
@@ -24,22 +24,6 @@ public class NodePersistenceVisitor implements NodeVisitor{
       }
       array.put(node.getJSONObject());
     }
-
-  }
-
-  @Override
-  public void visit(Project project) {
-    JSONvisit(project);
-  }
-
-  @Override
-  public void visit(Task task) {
-    JSONvisit(task);
-  }
-
-  @Override
-  public void visit(Interval interval){
-    JSONvisit(interval);
 
   }
 }
