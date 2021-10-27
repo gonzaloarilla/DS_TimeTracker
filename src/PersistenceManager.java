@@ -2,9 +2,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import javax.swing.plaf.ToolBarUI;
 import java.io.*;
-import java.time.Duration;
 
 
 public class PersistenceManager {
@@ -28,7 +26,7 @@ public class PersistenceManager {
     JSONTokener tokener = new JSONTokener(fileReader);
     JSONObject object = new JSONObject(tokener);
 
-    root = restoreNodeStructure(root, object);
+    root = restoreNodeStructure(null, object);
   }
 
   private static Node restoreNodeStructure(Node parent, JSONObject jsonNodeObject) {
@@ -68,15 +66,15 @@ public class PersistenceManager {
         if (array != null) {
           for (int i = 0; i < array.length(); i++) {
             jsonNodeObject = array.getJSONObject(i);
-            Node node = (Interval) restoreNodeStructure(task, jsonNodeObject);
-            // TODO: task.addInterval(node);
+            Interval interval = (Interval) restoreNodeStructure(task, jsonNodeObject);
+            task.addInterval(interval);
           }
         }
 
         return task;
       case "interval" :
         Interval interval = new Interval(parent);
-        // TODO:
+        // // TODO: guardar dades que falten a interval (initialDate, lastDate, Duration)
         return interval;
       default:
         return null;
