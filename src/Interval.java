@@ -8,14 +8,12 @@ import java.util.Observer;
 
 public class Interval extends Node implements Observer {
 
-  private String timeConversion; // s'ha d'utilitzar la classe DateTimeFormatter
   private JSONObject nodeJSONObject;
 
   public Interval(Node parent) {
     super(parent.id, parent.name, parent);
     this.isActive = true;
     this.initialDate = lastDate.minus(Duration.ofMillis(Clock.getPeriod()));
-    this.timeConversion = "";
     this.nodeJSONObject = new JSONObject();
 
     Clock.getRunningClock().addObserver(this);
@@ -34,15 +32,6 @@ public class Interval extends Node implements Observer {
     return isActive;
   }
 
-  public String getTimeConversion() {
-    return timeConversion;
-  }
-
-  public void setTimeConversion(Duration dur) {
-    // 02d -> dos digits en enter
-    this.timeConversion = String.format("%02d:%02d:%02d", dur.toHours(), dur.toMinutesPart(), dur.toSecondsPart());
-  }
-
   public String toString() {
     return "Interval:    "
         + this.initialDate.format(dateTimeFormatter)
@@ -59,7 +48,6 @@ public class Interval extends Node implements Observer {
     Duration durationToSum = Duration.ofMillis(Clock.getPeriod());
     this.lastDate = (LocalDateTime) arg;
     this.duration = this.duration.plus(durationToSum);
-    setTimeConversion(duration);
     System.out.println(this);
     parent.update(lastDate, durationToSum);
   }
@@ -70,7 +58,6 @@ public class Interval extends Node implements Observer {
       this.lastDate = LocalDateTime.now();
       Duration durationToSum = Duration.ofMillis(Clock.getPeriod());
       this.duration = this.duration.plus(durationToSum);
-      setTimeConversion(duration);
       Clock.getRunningClock().deleteObserver(this);
       System.out.println("Interval finished");
       //System.out.println(this);
