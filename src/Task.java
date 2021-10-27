@@ -5,7 +5,6 @@ import java.util.*;
 public class Task extends Node {
 
   private List<Interval> intervalList;
-  private JSONObject nodeJSONObject;
 
 
   public Task(String id, String name, Node parent) {

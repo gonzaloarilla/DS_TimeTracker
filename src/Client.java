@@ -96,7 +96,7 @@ public class Client {
     //root = new Project(rootID,"root", null);
 
     System.out.println("\nLoading Data:\n");
-    //root = (Project) PersistenceManager.loadData(root, "NodeData.json");
+    root = (Project) PersistenceManager.loadData(root, "NodeData.json");
     System.out.println("\n");
 
     //PersistenceManager.saveData(root, "LoadedData.json");

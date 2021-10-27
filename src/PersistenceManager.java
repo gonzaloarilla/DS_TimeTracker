@@ -44,7 +44,6 @@ public class PersistenceManager {
 
     String type = jsonNodeObject.optString("type");
     JSONArray array;
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     LocalDateTime initialDate;
     LocalDateTime lastDate;
 
@@ -56,11 +55,12 @@ public class PersistenceManager {
         project.setDuration(Duration.ZERO.plusSeconds(duration));
 
         // Initial Date
-        initialDate = LocalDateTime.parse(initialDateString, dateTimeFormatter);
+
+        initialDate = LocalDateTime.parse(initialDateString);
         project.setInitialDate(initialDate);
 
         // Last Date
-        lastDate = LocalDateTime.parse(lastDateString, dateTimeFormatter);
+        lastDate = LocalDateTime.parse(lastDateString);
         project.setLastDate(lastDate);
 
         /*
@@ -84,11 +84,11 @@ public class PersistenceManager {
         task.setDuration(Duration.ZERO.plusSeconds(duration));
 
         // Initial Date
-        initialDate = LocalDateTime.parse(initialDateString, dateTimeFormatter);
+        initialDate = LocalDateTime.parse(initialDateString);
         task.setInitialDate(initialDate);
 
         // Last Date
-        lastDate = LocalDateTime.parse(lastDateString, dateTimeFormatter);
+        lastDate = LocalDateTime.parse(lastDateString);
         task.setLastDate(lastDate);
 
         // NO GUARDEM INTERVALS AL JSON

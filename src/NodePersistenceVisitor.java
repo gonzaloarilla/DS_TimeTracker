@@ -9,13 +9,12 @@ public class NodePersistenceVisitor implements NodeVisitor{
       node.getJSONObject().put("name", node.getName());
       node.getJSONObject().put("initialDate", node.getStartDate());
       node.getJSONObject().put("lastDate", node.getLastDate());
-      node.getJSONObject().put("duration", node.getDurationSeconds()); // JSON no guarda objectes de tipus Duration -> getSeconds()
+      node.getJSONObject().put("duration", node.getDurationSeconds());
       node.getJSONObject().put("type", node.getType());
     }catch (JSONException jsonException) {
       System.out.println(jsonException);
     }
 
-    // if has root / pare
     if (node.parent != null) {
       JSONArray array = node.parent.getJSONObject().optJSONArray("nodes");
       if (array == null) {
