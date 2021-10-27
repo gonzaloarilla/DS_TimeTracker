@@ -46,7 +46,7 @@ public class Project extends Node {
 		boolean stopped = false;
 		int i = 0;
 		while (!stopped && i < nodeList.size()) {
-		  stopped = nodeList.get(i).stopTask(name);
+		  stopped = nodeList.get(i).stopTask(id);
 		  i++;
 		}
 
