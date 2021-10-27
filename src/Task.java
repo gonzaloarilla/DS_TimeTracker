@@ -49,9 +49,9 @@ public class Task extends Node {
     visitor.visit(this);
     System.out.println("Task " + this.name + " visited");
 
-    for (Interval interval : intervalList) {
-      interval.acceptVisit(visitor);
-    }
+//    for (Interval interval : intervalList) {
+//      interval.acceptVisit(visitor);
+//    }
   }
 
   public void addInterval(Interval interval) {

@@ -67,6 +67,11 @@ public abstract class Node {
     return Duration.between(getStartDate(), getLastDate());
   }
 
+  public long getDurationSeconds() {
+
+    return this.duration.getSeconds();
+  }
+
   public LocalDateTime getLastDate() {
     return lastDate;
   }
@@ -91,6 +96,18 @@ public abstract class Node {
     if (this.parent != null) {
       this.parent.setNotActive();
     }
+  }
+
+  public void setInitialDate(LocalDateTime initialDate) {
+    this.initialDate = initialDate;
+  }
+
+  public void setLastDate(LocalDateTime lastDate) {
+    this.lastDate = lastDate;
+  }
+
+  public void setDuration(Duration duration) {
+    this.duration = duration;
   }
 
   public String toString() {
@@ -122,7 +139,7 @@ public abstract class Node {
   }
 
   public String getType() {
-    return this.getClass().getSimpleName();
+    return this.getClass().getSimpleName().toLowerCase();
   }
 
 

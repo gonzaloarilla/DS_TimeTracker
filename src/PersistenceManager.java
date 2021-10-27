@@ -3,6 +3,9 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.*;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class PersistenceManager {
@@ -15,35 +18,51 @@ public class PersistenceManager {
     root.acceptVisit(nodePersistence);
 
     // Indent = 2 --> pretty print
-    FileWriter fileWriter = new FileWriter("./"+filename);
+    FileWriter fileWriter = new FileWriter("./"+filename, false);
     fileWriter.write(root.getJSONObject().toString(2));
     fileWriter.close();
   }
 
-  public static void loadData(Node root, String filename) throws IOException {
+  public static Node loadData(Node root, String filename) throws IOException {
 
     FileReader fileReader = new FileReader(filename);
     JSONTokener tokener = new JSONTokener(fileReader);
     JSONObject object = new JSONObject(tokener);
+    fileReader.close();
 
-    root = restoreNodeStructure(null, object);
+    return root = restoreNodeStructure(null, object);
+
   }
 
   private static Node restoreNodeStructure(Node parent, JSONObject jsonNodeObject) {
 
-    String id = jsonNodeObject.getString("id");
-    String name = jsonNodeObject.getString("name");
-    String initialDate = jsonNodeObject.getString("initialDate");
-    String lastDate = jsonNodeObject.getString("lastDate");
-    long duration = jsonNodeObject.getLong("duration"); // JSON no guarda objectes de tipus Duration -> long pels segons
+    String id = jsonNodeObject.optString("id");
+    String name = jsonNodeObject.optString("name");
+    String initialDateString = jsonNodeObject.optString("initialDate");
+    String lastDateString = jsonNodeObject.optString("lastDate");
+    long duration = jsonNodeObject.optLong("duration"); // JSON no guarda objectes de tipus Duration -> long pels segons
 
-    String type = jsonNodeObject.getString("type");
+    String type = jsonNodeObject.optString("type");
     JSONArray array;
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    LocalDateTime initialDate;
+    LocalDateTime lastDate;
 
     switch (type) {
       case "project" :
         Project project = new Project(id, name, parent);
-        // TODO: guardar dades que falten a project (initialDate, lastDate, Duration)
+
+        // Duration
+        project.setDuration(Duration.ZERO.plusSeconds(duration));
+
+        // Initial Date
+        initialDate = LocalDateTime.parse(initialDateString, dateTimeFormatter);
+        project.setInitialDate(initialDate);
+
+        // Last Date
+        lastDate = LocalDateTime.parse(lastDateString, dateTimeFormatter);
+        project.setLastDate(lastDate);
+
         /*
         Comprova els fills del jsonObject i els inclou com a fills del projecte creat
         Es crida restoreNodeStructure() per recuperar les dades de cada node fill
@@ -60,22 +79,29 @@ public class PersistenceManager {
         return project;
       case "task" :
         Task task = new Task(id, name, parent);
-        // TODO: guardar dades que falten a task (initialDate, lastDate, Duration)
 
-        array = jsonNodeObject.optJSONArray("nodes");
-        if (array != null) {
-          for (int i = 0; i < array.length(); i++) {
-            jsonNodeObject = array.getJSONObject(i);
-            Interval interval = (Interval) restoreNodeStructure(task, jsonNodeObject);
-            task.addInterval(interval);
-          }
-        }
+        // Duration
+        task.setDuration(Duration.ZERO.plusSeconds(duration));
+
+        // Initial Date
+        initialDate = LocalDateTime.parse(initialDateString, dateTimeFormatter);
+        task.setInitialDate(initialDate);
+
+        // Last Date
+        lastDate = LocalDateTime.parse(lastDateString, dateTimeFormatter);
+        task.setLastDate(lastDate);
+
+        // NO GUARDEM INTERVALS AL JSON
+//        array = jsonNodeObject.optJSONArray("nodes");
+//        if (array != null) {
+//          for (int i = 0; i < array.length(); i++) {
+//            jsonNodeObject = array.getJSONObject(i);
+//            Interval interval = (Interval) restoreNodeStructure(task, jsonNodeObject);
+//            task.addInterval(interval);
+//          }
+//        }
 
         return task;
-      case "interval" :
-        Interval interval = new Interval(parent);
-        // // TODO: guardar dades que falten a interval (initialDate, lastDate, Duration)
-        return interval;
       default:
         return null;
     }

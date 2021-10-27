@@ -12,7 +12,7 @@ public class Interval extends Node implements Observer {
   private JSONObject nodeJSONObject;
 
   public Interval(Node parent) {
-    super(parent.id, parent.name, parent.parent);
+    super(parent.id, parent.name, parent);
     this.isActive = true;
     this.initialDate = lastDate.minus(Duration.ofMillis(Clock.getPeriod()));
     this.timeConversion = "";

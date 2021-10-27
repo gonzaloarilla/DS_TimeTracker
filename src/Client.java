@@ -84,14 +84,22 @@ public class Client {
 
     Clock.stopClock();
 
-    PersistenceManager.saveData(root, "NodeData.json");
-    System.out.println("\nData Saved:\n");
-    Thread.sleep(5000);
-
     System.out.println("Test B finished");
 
-    //PersistenceManager.loadData(root, "NodeData.json");
-    System.out.println("\nData Loaded:\n");
+    System.out.println("\n");
+    System.out.println("\nSaving Data:\n");
+    PersistenceManager.saveData(root, "NodeData.json");
+    System.out.println("\n");
+
+    //Thread.sleep(5000);
+
+    //root = new Project(rootID,"root", null);
+
+    System.out.println("\nLoading Data:\n");
+    //root = (Project) PersistenceManager.loadData(root, "NodeData.json");
+    System.out.println("\n");
+
+    //PersistenceManager.saveData(root, "LoadedData.json");
 
   }
 
