@@ -1,11 +1,10 @@
 import org.json.JSONObject;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-
+// A Node object might be any activity that may be created (like Project or Task)
 public abstract class Node {
 
   protected String id;
@@ -16,12 +15,10 @@ public abstract class Node {
   protected boolean isActive;
   protected List<String> tags;
   protected Node parent;
-  //protected List<Node> nodeList;
   protected DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   protected JSONObject nodeJSONObject;
 
 
-  // Constructor
   protected Node(String id, String name, Node parent) {
     this.name = name;
     this.id = id;
@@ -84,6 +81,7 @@ public abstract class Node {
     return isActive;
   }
 
+  // Set itself and its parent active
   public void setActive() {
     this.isActive = true;
     if (this.parent != null) {
@@ -91,6 +89,7 @@ public abstract class Node {
     }
   }
 
+  // Set itself and its parent not active
   public void setNotActive() {
     this.isActive = false;
     if (this.parent != null) {
@@ -127,7 +126,7 @@ public abstract class Node {
     }
   }
 
-  // Updates its lastDate and startDate (this last if it wasn't initialized)
+  // Updates its lastDate and duration and call its parent for updating its values too
   void update(LocalDateTime lastDate, Duration durationToSum) {
     this.lastDate = lastDate;
     this.updateDuration(durationToSum);
@@ -135,13 +134,11 @@ public abstract class Node {
     if (parent != null) {
       parent.update(lastDate, durationToSum);
     }
-
   }
 
   public String getType() {
     return this.getClass().getSimpleName().toLowerCase();
   }
-
 
 
 }

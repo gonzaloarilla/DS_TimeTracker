@@ -1,7 +1,6 @@
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-
 import java.io.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -9,7 +8,8 @@ import java.time.LocalDateTime;
 
 public class PersistenceManager {
 
-
+  // Given a root project, we visit all its children using Visitor design pattern
+  // Once they're visited, we save its JSON objects into a file
   public static void saveData(Node root, String filename) throws IOException {
 
     // Saving all attributes while visit
@@ -22,17 +22,17 @@ public class PersistenceManager {
     fileWriter.close();
   }
 
-  public static Node loadData(Node root, String filename) throws IOException {
-
+  // Given a json file, we read it and return a root Node
+  public static Node loadData(String filename) throws IOException {
     FileReader fileReader = new FileReader(filename);
     JSONTokener tokener = new JSONTokener(fileReader);
     JSONObject object = new JSONObject(tokener);
     fileReader.close();
-
-    return root = restoreNodeStructure(null, object);
+    return restoreNodeStructure(null, object);
 
   }
 
+  // TODO comment
   private static Node restoreNodeStructure(Node parent, JSONObject jsonNodeObject) {
 
     String id = jsonNodeObject.optString("id");
@@ -47,17 +47,14 @@ public class PersistenceManager {
     LocalDateTime lastDate;
 
     switch (type) {
-      case "project" :
+      case "project":
         Project project = new Project(id, name, parent);
 
         // Duration
         project.setDuration(Duration.ZERO.plusSeconds(duration));
-
         // Initial Date
-
         initialDate = LocalDateTime.parse(initialDateString);
         project.setInitialDate(initialDate);
-
         // Last Date
         lastDate = LocalDateTime.parse(lastDateString);
         project.setLastDate(lastDate);
@@ -76,16 +73,15 @@ public class PersistenceManager {
         }
 
         return project;
-      case "task" :
+
+      case "task":
         Task task = new Task(id, name, parent);
 
         // Duration
         task.setDuration(Duration.ZERO.plusSeconds(duration));
-
         // Initial Date
         initialDate = LocalDateTime.parse(initialDateString);
         task.setInitialDate(initialDate);
-
         // Last Date
         lastDate = LocalDateTime.parse(lastDateString);
         task.setLastDate(lastDate);
@@ -101,9 +97,9 @@ public class PersistenceManager {
 //        }
 
         return task;
+
       default:
         return null;
     }
-
   }
 }

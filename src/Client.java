@@ -1,5 +1,3 @@
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.UUID;
 import java.util.Scanner;
@@ -13,7 +11,8 @@ public class Client {
   }
 
 
-  private static void testB() throws InterruptedException, IOException {
+  // Test B from project document
+  private static void testB() throws InterruptedException {
 
     // Root
     String rootID = createId();
@@ -91,7 +90,7 @@ public class Client {
   }
 
 
-
+  // Test B from project document using persistence and adding some more seconds
   private static void testBWithPersistence() throws InterruptedException, IOException {
 
     // Root
@@ -170,30 +169,25 @@ public class Client {
 
 
     // PERSISTENCE:
-
-//    System.out.println("\n");
-//    System.out.println("\nSaving Data:\n");
-//    //PersistenceManager.saveData(root, "NodeData.json");
-//    System.out.println("\n");
+    System.out.println("\n");
+    System.out.println("\nSaving Data:\n");
+    PersistenceManager.saveData(root, "NodeData.json");
+    System.out.println("\n");
 
     Thread.sleep(1000);
 
-    //root = new Project(rootID,"root", null);
+    root = new Project(rootID,"root", null);
 
-//    System.out.println("\nLoading Data:\n");
-//    //root = (Project) PersistenceManager.loadData(root, "NodeData.json");
-//    System.out.println("\n");
+    System.out.println("\nLoading Data:\n");
+    root = (Project) PersistenceManager.loadData("NodeData.json");
+    System.out.println("\n");
 
     root.startTask(transportationID);
     Thread.sleep(4000);
     root.stopTask(transportationID);
     Clock.stopClock();
 
-
-
-
-
-    //PersistenceManager.saveData(root, "NodeData.json");
+    PersistenceManager.saveData(root, "NodeData.json");
 
     // Showing the menu to the user
     JSONMenu(root, "NodeData.json");
@@ -201,6 +195,7 @@ public class Client {
   }
 
 
+  // Menu that let the user save or load data using JSON
   public static void JSONMenu(Node root, String filename) throws IOException {
     Scanner scanner = new Scanner(System.in);
 
@@ -217,7 +212,7 @@ public class Client {
         System.out.println("Data has been saved correctly");
         break;
       case 2: // Load
-        PersistenceManager.loadData(root, filename);
+        PersistenceManager.loadData(filename);
         System.out.println("Data has been loaded correctly");
         break;
       default:
