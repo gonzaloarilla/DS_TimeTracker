@@ -87,32 +87,39 @@ public class PersistenceManager {
         task.setLastDate(lastDate);
 
         // TODO: comment
-        array = jsonNodeObject.optJSONArray("nodes");
-//        if (array != null) {
-//          for (int i = 0; i < array.length(); i++) {
-//            jsonNodeObject = array.getJSONObject(i);
-//            Interval interval = (Interval) restoreNodeStructure(task, jsonNodeObject);
-//            task.addInterval(interval);
-//          }
-//        }
+        array = jsonNodeObject.optJSONArray("intervals");
+        if (array != null) {
+          for (int i = 0; i < array.length(); i++) {
+            jsonNodeObject = array.getJSONObject(i);
+            Interval interval = new Interval(task, false);
+            interval = setupNewInterval(interval, jsonNodeObject);
+            task.addInterval(interval);
+          }
+        }
 
         return task;
-
-      case "interval" :
-//        Interval interval = new Interval((Task) parent);
-//
-//        // Duration
-//        interval.setDuration(Duration.ZERO.plusSeconds(duration));
-//        // Initial Date
-//        initialDate = LocalDateTime.parse(initialDateString);
-//        interval.setInitialDate(initialDate);
-//        // Last Date
-//        lastDate = LocalDateTime.parse(lastDateString);
-//        interval.setLastDate(lastDate);
-//
-//        return interval;
       default:
         return null;
     }
+  }
+
+  private static Interval setupNewInterval(Interval interval, JSONObject jsonObject) {
+
+    LocalDateTime initialDate;
+    LocalDateTime lastDate;
+    String initialDateString = jsonObject.optString("initialDate");
+    String lastDateString = jsonObject.optString("lastDate");
+    long duration = jsonObject.optLong("duration");
+
+    // Duration
+    interval.setDuration(Duration.ZERO.plusSeconds(duration));
+    // Initial Date
+    initialDate = LocalDateTime.parse(initialDateString);
+    interval.setInitialDate(initialDate);
+    // Last Date
+    lastDate = LocalDateTime.parse(lastDateString);
+    interval.setLastDate(lastDate);
+
+    return interval;
   }
 }

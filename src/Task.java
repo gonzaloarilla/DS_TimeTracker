@@ -21,7 +21,7 @@ public class Task extends Node {
   @Override
   public boolean startTask(String id) {
     if (!this.isActive && id.equals(this.id)) {
-        Interval newInterval = new Interval(this);
+        Interval newInterval = new Interval(this, true);
         intervalList.add(newInterval);
         this.isActive = true;
         System.out.println("Task " + this.name + " started");

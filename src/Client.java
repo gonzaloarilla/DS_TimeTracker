@@ -228,8 +228,16 @@ public class Client {
   }
 
   public static void main(String[] args) throws InterruptedException, IOException {
-    testB();
-    //testBWithPersistence();
+    //testLoad();
+
+    //testB();
+    testBWithPersistence();
   }
 
+
+  public static void testLoad() throws IOException {
+
+    Project root = (Project) PersistenceManager.loadData("NodeData.json");
+    PersistenceManager.saveData(root, "LoadedData.json");
+  }
 }

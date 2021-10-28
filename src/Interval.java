@@ -7,7 +7,7 @@ import java.util.Observer;
 
 public class Interval implements Observer {
 
-  private Node parent;
+  protected Node parent;
   private boolean isActive;
   private LocalDateTime initialDate;
   private LocalDateTime lastDate;
@@ -15,16 +15,31 @@ public class Interval implements Observer {
   private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   private JSONObject nodeJSONObject;
 
-  public Interval(Node parent) {
+  public Interval(Node parent, boolean isActive) {
     this.parent = parent;
-    this.isActive = true;
-    this.duration = Duration.ZERO;
-    this.lastDate = LocalDateTime.now();
-    this.initialDate = lastDate.minus(Duration.ofMillis(Clock.getPeriod()));
     this.nodeJSONObject = new JSONObject();
+    this.isActive = isActive;
+    this.duration = Duration.ZERO;
 
-    Clock.getRunningClock().addObserver(this);
+    if (isActive) {
+      this.lastDate = LocalDateTime.now();
+      this.initialDate = lastDate.minus(Duration.ofMillis(Clock.getPeriod()));
+      Clock.getRunningClock().addObserver(this);
+    }
+
     //System.out.println("Interval created and running");
+  }
+
+  public void setInitialDate(LocalDateTime initialDate) {
+    this.initialDate = initialDate;
+  }
+
+  public void setLastDate(LocalDateTime lastDate) {
+    this.lastDate = lastDate;
+  }
+
+  public void setDuration(Duration duration) {
+    this.duration = duration;
   }
 
   public long getDurationSeconds() {
