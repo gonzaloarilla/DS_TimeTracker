@@ -1,5 +1,8 @@
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.UUID;
+import java.util.Scanner;
 
 
 public class Client {
@@ -168,18 +171,18 @@ public class Client {
 
     // PERSISTENCE:
 
-    System.out.println("\n");
-    System.out.println("\nSaving Data:\n");
-    PersistenceManager.saveData(root, "NodeData.json");
-    System.out.println("\n");
+//    System.out.println("\n");
+//    System.out.println("\nSaving Data:\n");
+//    //PersistenceManager.saveData(root, "NodeData.json");
+//    System.out.println("\n");
 
     Thread.sleep(1000);
 
     //root = new Project(rootID,"root", null);
 
-    System.out.println("\nLoading Data:\n");
-    root = (Project) PersistenceManager.loadData(root, "NodeData.json");
-    System.out.println("\n");
+//    System.out.println("\nLoading Data:\n");
+//    //root = (Project) PersistenceManager.loadData(root, "NodeData.json");
+//    System.out.println("\n");
 
     root.startTask(transportationID);
     Thread.sleep(4000);
@@ -190,10 +193,39 @@ public class Client {
 
 
 
-    PersistenceManager.saveData(root, "NodeData.json");
+    //PersistenceManager.saveData(root, "NodeData.json");
+
+    // Showing the menu to the user
+    JSONMenu(root, "NodeData.json");
 
   }
 
+
+  public static void JSONMenu(Node root, String filename) throws IOException {
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("\nWhat do you want to do?\n");
+    System.out.println("1. Save JSON");
+    System.out.println("2. Load JSON\n");
+
+    System.out.print("Option (1 or 2): ");
+    int option = scanner.nextInt();
+
+    switch (option) {
+      case 1: // Save
+        PersistenceManager.saveData(root, filename);
+        System.out.println("Data has been saved correctly");
+        break;
+      case 2: // Load
+        PersistenceManager.loadData(root, filename);
+        System.out.println("Data has been loaded correctly");
+        break;
+      default:
+        System.out.println("Error, invalid input!\n");
+        break;
+    }
+    scanner.close();
+  }
 
   public static void main(String[] args) throws InterruptedException, IOException {
     testBWithPersistence();
