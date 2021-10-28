@@ -1,6 +1,7 @@
 import org.json.JSONArray;
 import org.json.JSONException;
 
+// TODO comments
 public class NodePersistenceVisitor implements NodeVisitor{
 
   public void visit(Node node) {
@@ -23,6 +24,5 @@ public class NodePersistenceVisitor implements NodeVisitor{
       }
       array.put(node.getJSONObject());
     }
-
   }
 }

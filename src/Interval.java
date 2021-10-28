@@ -2,7 +2,6 @@ import org.json.JSONObject;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -41,6 +40,9 @@ public class Interval extends Node implements Observer {
         + this.duration.toSeconds();
   }
 
+  // Using Observer pattern design, this method receives an object
+  // every time the Observable has a notification to its observer.
+  // It will updated intervals values and its parents (task and then project)
   public void update(Observable o, Object arg) {
     System.out.println("Updating interval of " + this.parent.getName());
 
@@ -52,6 +54,8 @@ public class Interval extends Node implements Observer {
     parent.update(lastDate, durationToSum);
   }
 
+  // When a task is stopped, we need to finish its intervals
+  // We set this interval as not active and updates its values
   public void finish() {
     if (this.isActive) {
       this.isActive = false;
@@ -65,8 +69,8 @@ public class Interval extends Node implements Observer {
     }
   }
 
+  // Method to use Visitor pattern design
   public void acceptVisit(NodeVisitor visitor){
-
     visitor.visit(this);
     System.out.println("Interval of " + parent.name + " visited");
   }

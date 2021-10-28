@@ -1,11 +1,10 @@
 import org.json.JSONObject;
-
 import java.util.*;
 
+// Project is a type of Node, it uses Composite pattern design
 public class Task extends Node {
 
   private List<Interval> intervalList;
-
 
   public Task(String id, String name, Node parent) {
     super(id, name, parent);
@@ -17,6 +16,8 @@ public class Task extends Node {
     return nodeJSONObject;
   }
 
+  // A task will start if it hasn't started yet and has the ID we're looking for
+  // It will create and start a new interval and added it its list of intervals
   @Override
   public boolean startTask(String id) {
     if (!this.isActive && id.equals(this.id)) {
@@ -29,6 +30,8 @@ public class Task extends Node {
     return false;
   }
 
+  // A task will be stopped if it's active and and has the ID we're looking for
+  // It will also finish all its intervals and set the task to not active
   @Override
   public boolean stopTask(String id) {
     if (this.isActive && id.equals(this.id)) {
@@ -43,6 +46,7 @@ public class Task extends Node {
     return false;
   }
 
+  // Method to use Visitor pattern design
   public void acceptVisit(NodeVisitor visitor){
 
     visitor.visit(this);
@@ -53,6 +57,7 @@ public class Task extends Node {
 //    }
   }
 
+  // Gonzalo: Si no s'utilitza, s'ha de borrar això:
   public void addInterval(Interval interval) {
     intervalList.add(interval);
   }

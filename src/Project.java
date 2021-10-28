@@ -1,13 +1,11 @@
 import org.json.JSONObject;
-
 import java.util.*;
 
+// Project is a type of Node, it uses Composite pattern design
 public class Project extends Node {
 
 	private List<Node> nodeList; // Might be Project or Task
 
-
-	// Project Constructor
 	public Project(String id, String name, Node parent) {
 		super(id, name, parent);
     this.nodeList = new ArrayList<>();
@@ -23,7 +21,8 @@ public class Project extends Node {
 		nodeList.add(node);
 	}
 
-  // Start task with name, if node is project code gets back here until task instance reached
+  // Start task looking for its ID
+	// If node is a project, code gets back here until task instance reached
   @Override
   public boolean startTask(String id) {
 
@@ -38,7 +37,8 @@ public class Project extends Node {
 		return started;
 	}
 
-  // Stop task with name, if node is project code gets back here until task instance reached
+  // Stop task looking for its ID
+	// If node is a project, code gets back here until task instance reached
   @Override
   public boolean stopTask(String id) {
 
@@ -53,6 +53,7 @@ public class Project extends Node {
 		return stopped;
 	}
 
+	// Method to use Visitor pattern design
 	public void acceptVisit(NodeVisitor visitor){
 
 		visitor.visit(this);
