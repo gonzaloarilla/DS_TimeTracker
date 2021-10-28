@@ -60,10 +60,6 @@ public abstract class Node {
     return duration;
   }
 
-  public Duration getExactTime() {
-    return Duration.between(getStartDate(), getLastDate());
-  }
-
   public long getDurationSeconds() {
 
     return this.duration.getSeconds();

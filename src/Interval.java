@@ -7,12 +7,12 @@ import java.util.Observer;
 
 public class Interval implements Observer {
 
-  private final Node parent;
+  private Node parent;
   private boolean isActive;
-  private final LocalDateTime initialDate;
+  private LocalDateTime initialDate;
   private LocalDateTime lastDate;
   private Duration duration;
-  protected DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+  private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   private JSONObject nodeJSONObject;
 
   public Interval(Node parent) {
@@ -27,6 +27,19 @@ public class Interval implements Observer {
     //System.out.println("Interval created and running");
   }
 
+  public long getDurationSeconds() {
+
+    return this.duration.getSeconds();
+  }
+
+  public LocalDateTime getLastDate() {
+    return lastDate;
+  }
+
+  public LocalDateTime getStartDate() {
+    return initialDate;
+  }
+
   public JSONObject getJSONObject() {
     return nodeJSONObject;
   }
@@ -37,6 +50,10 @@ public class Interval implements Observer {
 
   public boolean isActive() {
     return isActive;
+  }
+
+  public String getType() {
+    return this.getClass().getSimpleName().toLowerCase();
   }
 
   public String toString() {

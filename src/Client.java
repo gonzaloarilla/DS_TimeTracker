@@ -12,7 +12,7 @@ public class Client {
 
 
   // Test B from project document
-  private static void testB() throws InterruptedException {
+  private static void testB() throws InterruptedException, IOException {
 
     // Root
     String rootID = createId();
@@ -86,6 +86,10 @@ public class Client {
     Clock.stopClock();
 
     System.out.println("Test B finished");
+
+    PersistenceManager.saveData(root, "NodeData.json");
+
+    System.out.println("Data saved");
 
   }
 
@@ -224,8 +228,8 @@ public class Client {
   }
 
   public static void main(String[] args) throws InterruptedException, IOException {
-    //testB();
-    testBWithPersistence();
+    testB();
+    //testBWithPersistence();
   }
 
 }
