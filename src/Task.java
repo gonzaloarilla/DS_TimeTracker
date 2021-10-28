@@ -57,7 +57,7 @@ public class Task extends Node {
     }
   }
 
-  // Gonzalo: Si no s'utilitza, s'ha de borrar això:
+  // Add interval to its list (useful when loading from json)
   public void addInterval(Interval interval) {
     intervalList.add(interval);
   }

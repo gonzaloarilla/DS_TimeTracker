@@ -235,7 +235,7 @@ public class Client {
   }
 
 
-  public static void testLoad() throws IOException {
+  private static void testLoad() throws IOException {
 
     Project root = (Project) PersistenceManager.loadData("NodeData.json");
     PersistenceManager.saveData(root, "LoadedData.json");

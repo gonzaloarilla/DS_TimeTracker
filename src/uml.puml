@@ -3,6 +3,7 @@ class Client {
 - createId() : String
 - testB()
 - testBWithPersistence()
+- testLoad()
 + JSONMenu()
 + main()
 }
@@ -17,8 +18,9 @@ abstract Node {
 - parent : Node
 - dateTimeFormatter : DateTimeFormatter
 - nodeJSONObject : JSONObject
+- tags : List<String>
 + getJSONObject : JSONObject
-+ setName(n : String)
++ setName()
 + getName() : String
 + getId() : string
 + startTask() : boolean
@@ -65,6 +67,9 @@ class Interval {
 - parent : Node
 - dateTimeFormatter : DateTimeFormatter
 - nodeJSONObject : JSONObject
++ setInitialDate()
++ setLastDate()
++ setDuration()
 + getJSONObject() : JSONObject
 + getDurationSeconds() : long
 + getLastDate() : LocalDateTime
@@ -103,6 +108,7 @@ class PersistenceManager {
 + saveData()
 + loadData() : Node
 - restoreNodeStructure() : Node
+- setupNewInterval() : Interval
 }
 
 Project -|> Node
