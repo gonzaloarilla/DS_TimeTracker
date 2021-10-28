@@ -58,10 +58,21 @@ class Task {
 }
 
 class Interval {
+- initialDate : LocalDateTime
+- lastDate : LocalDateTime
+- duration : Duration
+- isActive : boolean
+- parent : Node
+- dateTimeFormatter : DateTimeFormatter
+- nodeJSONObject : JSONObject
 + getJSONObject() : JSONObject
++ getDurationSeconds() : long
++ getLastDate() : LocalDateTime
++ getStartDate() : LocalDateTime
 + getParent() : Node
 + isActive() : boolean
-+ toString() : string
++ getType() : String
++ toString() : String
 + update()
 + finish()
 + acceptVisit()
