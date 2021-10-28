@@ -195,6 +195,7 @@ public class Client {
   }
 
 
+
   // Menu that let the user save or load data using JSON
   public static void JSONMenu(Node root, String filename) throws IOException {
     Scanner scanner = new Scanner(System.in);
@@ -223,6 +224,7 @@ public class Client {
   }
 
   public static void main(String[] args) throws InterruptedException, IOException {
+    //testB();
     testBWithPersistence();
   }
 

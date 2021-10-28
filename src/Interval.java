@@ -1,17 +1,25 @@
 import org.json.JSONObject;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Interval extends Node implements Observer {
+public class Interval implements Observer {
 
+  private final Node parent;
+  private boolean isActive;
+  private final LocalDateTime initialDate;
+  private LocalDateTime lastDate;
+  private Duration duration;
+  protected DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   private JSONObject nodeJSONObject;
 
   public Interval(Node parent) {
-    super(parent.id, parent.name, parent);
+    this.parent = parent;
     this.isActive = true;
+    this.duration = Duration.ZERO;
+    this.lastDate = LocalDateTime.now();
     this.initialDate = lastDate.minus(Duration.ofMillis(Clock.getPeriod()));
     this.nodeJSONObject = new JSONObject();
 
