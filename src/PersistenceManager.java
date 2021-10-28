@@ -86,8 +86,8 @@ public class PersistenceManager {
         lastDate = LocalDateTime.parse(lastDateString);
         task.setLastDate(lastDate);
 
-        // NO GUARDEM INTERVALS AL JSON
-//        array = jsonNodeObject.optJSONArray("nodes");
+        // TODO: comment
+        array = jsonNodeObject.optJSONArray("nodes");
 //        if (array != null) {
 //          for (int i = 0; i < array.length(); i++) {
 //            jsonNodeObject = array.getJSONObject(i);
@@ -98,6 +98,19 @@ public class PersistenceManager {
 
         return task;
 
+      case "interval" :
+//        Interval interval = new Interval((Task) parent);
+//
+//        // Duration
+//        interval.setDuration(Duration.ZERO.plusSeconds(duration));
+//        // Initial Date
+//        initialDate = LocalDateTime.parse(initialDateString);
+//        interval.setInitialDate(initialDate);
+//        // Last Date
+//        lastDate = LocalDateTime.parse(lastDateString);
+//        interval.setLastDate(lastDate);
+//
+//        return interval;
       default:
         return null;
     }

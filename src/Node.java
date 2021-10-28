@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-// A Node object might be any activity that may be created (like Project or Task)
+// A Node object might be any activity that may be created (Project, Task, Interval)
 public abstract class Node {
 
   protected String id;
@@ -109,6 +109,7 @@ public abstract class Node {
     this.duration = duration;
   }
 
+  // Converts dates and duration data to a formatted string
   public String toString() {
     return this.name
         + ":    "
@@ -136,6 +137,7 @@ public abstract class Node {
     }
   }
 
+  // Returns Class name as String
   public String getType() {
     return this.getClass().getSimpleName().toLowerCase();
   }

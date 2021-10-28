@@ -25,4 +25,18 @@ public class NodePersistenceVisitor implements NodeVisitor{
       array.put(node.getJSONObject());
     }
   }
+
+  public void visit (Interval interval) {
+
+//    try {
+//
+//      interval.getJSONObject().put("initialDate", interval.getStartDate());
+//      interval.getJSONObject().put("lastDate", interval.getLastDate());
+//      interval.getJSONObject().put("duration", interval.getDurationSeconds());
+//      interval.getJSONObject().put("type", interval.getType());
+//    }catch (JSONException jsonException) {
+//      System.out.println(jsonException);
+//    }
+
+  }
 }
