@@ -11,9 +11,6 @@ public class Clock extends Observable {
   private final TimerTask timerTask;
   private LocalDateTime lastDate;
 
-  public static int getPeriod(){
-    return period;
-  }
 
   // Private constructor so we just have one instance of Clock
   private Clock() {
@@ -52,6 +49,10 @@ public class Clock extends Observable {
     //System.out.println("Clock updated");
     setChanged();
     notifyObservers(lastDate);
+  }
+
+  public static int getPeriod(){
+    return period;
   }
 
 }
