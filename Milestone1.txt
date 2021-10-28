@@ -1,0 +1,4 @@
+Gonzalo:
+- Clases Clock e Interval (con patrones Observer y Singleton)
+- Corrección general para actualizar y almacenar correctamente las duraciones
+- Save/Load Intervals
