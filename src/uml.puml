@@ -1,69 +1,98 @@
 @startuml
 class Client {
-+ main() : Integer
-+ tests() : booleans
+- createId() : String
+- testB()
+- testBWithPersistence()
++ JSONMenu()
++ main()
 }
 
 abstract Node {
 - name : String
+- id : string
+- initialDate : LocalDateTime
+- lastDate : LocalDateTime
 - duration : Duration
-- localDate : LocalDateTime
-- active : boolean
+- isActive : boolean
+- parent : Node
+- dateTimeFormatter : DateTimeFormatter
+- nodeJSONObject : JSONObject
++ getJSONObject : JSONObject
 + setName(n : String)
 + getName() : String
-+ startTask()
-+ stopTask()
++ getId() : string
++ startTask() : boolean
++ stopTask() : boolean
++ acceptVisit()
 + getDuration() : Duration
-+ getDate() : LocalDateTime
++ getExactTime() : Duration
++ getDurationSeconds() : long
++ getLastDate() : LocalDateTime
++ getStartDate() : LocalDateTime
 + isActive(t : Task) : boolean
++ setActive()
++ setNotActive()
++ setInitialDate()
++ setLastDate()
++ setDuration()
++ toString() : String
++ updateDuration()
++ update()
++ getType() : String
 }
 
 class Project {
-- name : String
-- duration : Duration
-- dateTime : LocalDateTime
-+ setName(str : String)
-+ getName() : String
-+ getDuration() : Duration
-+ getDate() : LocalDateTime
++ getJSONObject() : JSONObject
++ addNode()
++ startTask() : boolean
++ stopTask() : boolean
++ acceptVisit()
 }
 
 class Task {
-- name : String
-- duration : Duration
-- dateTime: LocalDateTime
-- active : boolean
-+ setName(name : String)
-+ getName() : String
-+ startTask()
-+ stopTask()
-+ getDuration() : Duration
-+ getDate() : LocalDateTime
-+ isActive(t : Task) : boolean
++ startTask() : boolean
++ stopTask() : boolean
++ acceptVisit()
++ getJSONObject() : JSONObject
++ addInterval()
 }
 
 class Interval {
-- initialTime : LocalDateTime
-- finalTime : LocalDateTime
-+ getInitialTime() : LocalDateTime
-+ getFinalTime() : LocalDateTime
-
++ getJSONObject() : JSONObject
++ getParent() : Node
++ isActive() : boolean
++ toString() : string
++ update()
++ finish()
++ acceptVisit()
 }
 
 class Clock {
 - timer : Timer
-- dateTime : LocalDateTime
-+ startTimer()
-- tick()
+- timerTask : TimerTask
+- lastDate : LocalDateTime
+- runningClock : Clock
+- delay : int
+- period : int
++ getRunningClock()
++ stopClock()
+- update()
++ getPeriod()
 }
 
-class Data {
-- projectName : String
-- taskName : String
-+ saveData(d : Data)
-+ loadData(d : Data)
+class NodePersistenceVisitor {
++ visit()
 }
 
+interface NodeVisitor {
++ visit()
+}
+
+class PersistenceManager {
++ saveData()
++ loadData() : Node
+- restoreNodeStructure() : Node
+}
 
 Project -|> Node
 Node "*" *-- "1" Project
@@ -71,4 +100,6 @@ Task -.|> Node
 Clock -down-|> java.util.Observable
 Interval -.down.-|> java.util.Observer
 Interval "*" --* "0" Task
+NodePersistenceVisitor -.down-|> NodeVisitor
+
 @enduml
