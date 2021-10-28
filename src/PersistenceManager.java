@@ -32,7 +32,10 @@ public class PersistenceManager {
 
   }
 
-  // TODO comment
+  // Recursive function which restores all the node structure from a JSONObject
+  // Depending on the node type retrieved (Project or Task) it will create the
+  // corresponding object type with the data retrieved. Task objects also
+  // create its intervals.
   private static Node restoreNodeStructure(Node parent, JSONObject jsonNodeObject) {
 
     String id = jsonNodeObject.optString("id");
@@ -86,7 +89,7 @@ public class PersistenceManager {
         lastDate = LocalDateTime.parse(lastDateString);
         task.setLastDate(lastDate);
 
-        // TODO: comment
+        // A new interval is created for each interval object inside Task's JSONArray
         array = jsonNodeObject.optJSONArray("intervals");
         if (array != null) {
           for (int i = 0; i < array.length(); i++) {
@@ -103,6 +106,7 @@ public class PersistenceManager {
     }
   }
 
+  // Retrieves and sets the interval data from a JSONObject
   private static Interval setupNewInterval(Interval interval, JSONObject jsonObject) {
 
     LocalDateTime initialDate;
