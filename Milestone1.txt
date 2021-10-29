@@ -2,7 +2,15 @@ Gonzalo:
 - Clases Clock e Interval (con patrones Observer y Singleton)
 - Corrección general para actualizar y almacenar correctamente las duraciones
 - Save/Load Intervals
+
 Arnau:
 - save/load data de PersistenceManager
 - NodePersistenceVisitor
 - Actualización final UML
+
+Marc:
+- Classe Task
+- Menú per LOAD/SAVE dades JSON
+- PersistenceManager (load and save methods) amb Oriol
+
+Oriol:

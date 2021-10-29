@@ -198,8 +198,6 @@ public class Client {
 
   }
 
-
-
   // Menu that let the user save or load data using JSON
   public static void JSONMenu(Node root, String filename) throws IOException {
     Scanner scanner = new Scanner(System.in);

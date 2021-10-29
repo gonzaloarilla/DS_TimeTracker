@@ -16,9 +16,9 @@ public class PersistenceManager {
     NodeVisitor nodePersistence = new NodePersistenceVisitor();
     root.acceptVisit(nodePersistence);
 
-    // Indent = 2 --> pretty print
+    // Creating and writing the file
     FileWriter fileWriter = new FileWriter("./"+filename, false);
-    fileWriter.write(root.getJSONObject().toString(2));
+    fileWriter.write(root.getJSONObject().toString(2));   // indentFactor = tabulates the JSON correctly
     fileWriter.close();
   }
 

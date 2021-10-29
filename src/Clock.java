@@ -33,7 +33,7 @@ public class Clock extends Observable {
     return runningClock;
   }
 
-  // Stops clock and delete all its oberservers
+  // Stops clock and delete all its observers
   public static void stopClock() {
     if (runningClock != null) {
       runningClock.deleteObservers();

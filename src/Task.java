@@ -30,7 +30,7 @@ public class Task extends Node {
     return false;
   }
 
-  // A task will be stopped if it's active and and has the ID we're looking for
+  // A task will be stopped if it's active and has the ID we're looking for
   // It will also finish all its intervals and set the task to not active
   @Override
   public boolean stopTask(String id) {
