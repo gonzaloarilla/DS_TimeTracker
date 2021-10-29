@@ -1,12 +1,15 @@
 import org.json.JSONArray;
 import org.json.JSONException;
 
-
+/*
+Class which implements the visit() methods from NodeVisitor
+ */
 public class NodePersistenceVisitor implements NodeVisitor{
 
   // Visit method for Projects and Tasks. It puts the node data into its own JSONObject attribute
   public void visit(Node node) {
     try {
+      // Set Node data into JSONObject
       node.getJSONObject().put("id", node.getId());
       node.getJSONObject().put("name", node.getName());
       node.getJSONObject().put("initialDate", node.getStartDate());
@@ -35,7 +38,7 @@ public class NodePersistenceVisitor implements NodeVisitor{
   public void visit (Interval interval) {
 
     try {
-
+      // Set Interval data into JSONObject
       interval.getJSONObject().put("initialDate", interval.getStartDate());
       interval.getJSONObject().put("lastDate", interval.getLastDate());
       interval.getJSONObject().put("duration", interval.getDurationSeconds());

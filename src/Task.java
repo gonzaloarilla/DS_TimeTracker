@@ -1,7 +1,10 @@
 import org.json.JSONObject;
 import java.util.*;
 
-// Project is a type of Node, it uses Composite pattern design
+/*
+ Task is a type of Node, it uses Composite pattern design.
+ It has an Interval list instead of a node List like Project class
+ */
 public class Task extends Node {
 
   private List<Interval> intervalList;

@@ -172,7 +172,7 @@ public class Client {
     System.out.println("Test B finished");
 
 
-    // PERSISTENCE:
+    // SAVE DATA
     System.out.println("\n");
     System.out.println("\nSaving Data:\n");
     PersistenceManager.saveData(root, "NodeData.json");
@@ -182,10 +182,13 @@ public class Client {
 
     root = new Project(rootID,"root", null);
 
+    // LOAD DATA
     System.out.println("\nLoading Data:\n");
     root = (Project) PersistenceManager.loadData("NodeData.json");
     System.out.println("\n");
 
+
+    // START AND STOP ONE TASK AGAIN
     root.startTask(transportationID);
     Thread.sleep(4000);
     root.stopTask(transportationID);

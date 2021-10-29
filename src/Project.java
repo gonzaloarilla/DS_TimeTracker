@@ -1,7 +1,9 @@
 import org.json.JSONObject;
 import java.util.*;
 
-// Project is a type of Node, it uses Composite pattern design
+/*
+Project is a type of Node, it uses Composite pattern design
+ */
 public class Project extends Node {
 
 	private List<Node> nodeList; // Might be Project or Task

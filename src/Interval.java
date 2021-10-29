@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 import java.util.Observer;
 
+/*Interval class which controls the information of a single interval.
+It implements Observer to receive timer data from Clock class.
+ */
 public class Interval implements Observer {
 
   protected Node parent;
@@ -67,10 +70,12 @@ public class Interval implements Observer {
     return isActive;
   }
 
+  // Gets its own class name as String
   public String getType() {
     return this.getClass().getSimpleName().toLowerCase();
   }
 
+  // Method to convert date and duration data into a String
   public String toString() {
     return "Interval:    "
         + this.initialDate.format(dateTimeFormatter)

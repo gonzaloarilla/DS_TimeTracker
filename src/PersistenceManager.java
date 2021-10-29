@@ -5,7 +5,10 @@ import java.io.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-
+/*
+Persistence management class which has methods for saving and loading
+the Node structure data within a JSON file
+ */
 public class PersistenceManager {
 
   // Given a root project, we visit all its children using Visitor design pattern
@@ -38,6 +41,7 @@ public class PersistenceManager {
   // create its intervals.
   private static Node restoreNodeStructure(Node parent, JSONObject jsonNodeObject) {
 
+    // Retrieve data from JSONObject
     String id = jsonNodeObject.optString("id");
     String name = jsonNodeObject.optString("name");
     String initialDateString = jsonNodeObject.optString("initialDate");
@@ -62,10 +66,8 @@ public class PersistenceManager {
         lastDate = LocalDateTime.parse(lastDateString);
         project.setLastDate(lastDate);
 
-        /*
-        Comprova els fills del jsonObject i els inclou com a fills del projecte creat
-        Es crida restoreNodeStructure() per recuperar les dades de cada node fill
-        */
+        // Search for child JSONObject nodes in the project JSONArray
+        // and then restoreNodeStructure() is called for each child
         array = jsonNodeObject.optJSONArray("nodes");
         if (array != null) {
           for (int i = 0; i < array.length(); i++) {

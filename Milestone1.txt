@@ -11,6 +11,10 @@ Arnau:
 Marc:
 - Classe Task
 - Menú per LOAD/SAVE dades JSON
-- PersistenceManager (load and save methods) amb Oriol
+- PersistenceManager (load and save methods)
 
 Oriol:
+- Classes Node, Project, Task
+- Funció restoreNodeStructure() de PersistenceManager
+- Ajustos i correccions del visitor pattern a les classes Visitor i NodePersistence Visitor
+- Correccions generals dels tests

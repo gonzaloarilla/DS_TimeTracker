@@ -4,7 +4,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-// A Node object might be any activity that may be created (Project, Task, Interval)
+/*
+Node class represents the Component class in the Composite pattern.
+It has the common attributes and methods in Project and Task
+ */
 public abstract class Node {
 
   protected String id;

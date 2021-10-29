@@ -3,6 +3,9 @@ import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/* Clock class is a singleton which keeps track of a timer and uses the observer pattern.
+It extends Observable to communicate the time information to its obververs.
+ */
 public class Clock extends Observable {
   private static final int period = 2000;
   private static final int delay = 0;
