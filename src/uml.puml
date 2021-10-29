@@ -20,12 +20,12 @@ abstract Node {
 - nodeJSONObject : JSONObject
 - tags : List<String>
 + getJSONObject : JSONObject
-+ setName()
++ setName(String)
 + getName() : String
 + getId() : string
-+ startTask() : boolean
-+ stopTask() : boolean
-+ acceptVisit()
++ startTask(String) : boolean
++ stopTask(String) : boolean
++ acceptVisit(NodeVisitor)
 + getDuration() : Duration
 + getExactTime() : Duration
 + getDurationSeconds() : long
@@ -34,29 +34,29 @@ abstract Node {
 + isActive(t : Task) : boolean
 + setActive()
 + setNotActive()
-+ setInitialDate()
-+ setLastDate()
-+ setDuration()
++ setInitialDate(LocalDateTime)
++ setLastDate(LocalDateTime)
++ setDuration(Duration)
 + toString() : String
-+ updateDuration()
-+ update()
++ updateDuration(Duration)
++ update(LocalDateTime, Duration)
 + getType() : String
 }
 
 class Project {
 + getJSONObject() : JSONObject
-+ addNode()
-+ startTask() : boolean
-+ stopTask() : boolean
-+ acceptVisit()
++ addNode(Node)
++ startTask(String) : boolean
++ stopTask(String) : boolean
++ acceptVisit(NodeVisitor)
 }
 
 class Task {
-+ startTask() : boolean
-+ stopTask() : boolean
-+ acceptVisit()
++ startTask(String) : boolean
++ stopTask(String) : boolean
++ acceptVisit(NodeVisitor)
 + getJSONObject() : JSONObject
-+ addInterval()
++ addInterval(Interval)
 }
 
 class Interval {
@@ -67,9 +67,9 @@ class Interval {
 - parent : Node
 - dateTimeFormatter : DateTimeFormatter
 - nodeJSONObject : JSONObject
-+ setInitialDate()
-+ setLastDate()
-+ setDuration()
++ setInitialDate(LocalDateTime)
++ setLastDate(LocalDateTime)
++ setDuration(Duration)
 + getJSONObject() : JSONObject
 + getDurationSeconds() : long
 + getLastDate() : LocalDateTime
@@ -78,9 +78,9 @@ class Interval {
 + isActive() : boolean
 + getType() : String
 + toString() : String
-+ update()
++ update(Observable, Object)
 + finish()
-+ acceptVisit()
++ acceptVisit(NodeVisitor)
 }
 
 class Clock {
@@ -97,18 +97,20 @@ class Clock {
 }
 
 class NodePersistenceVisitor {
-+ visit()
++ visit(Node)
++ visit(Interval)
 }
 
 interface NodeVisitor {
-+ visit()
++ visit(Node)
++ visit(Interval)
 }
 
 class PersistenceManager {
-+ saveData()
-+ loadData() : Node
-- restoreNodeStructure() : Node
-- setupNewInterval() : Interval
++ saveData(Node, String)
++ loadData(String) : Node
+- restoreNodeStructure(Node, JSONObject) : Node
+- setupNewInterval(Interval, JSONObject) : Interval
 }
 
 Project -|> Node
