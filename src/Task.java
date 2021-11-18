@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.ToDoubleBiFunction;
+
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +18,21 @@ public class Task extends Node {
 
   public Task(String id, String name, Node parent) {
     super(id, name, parent);
+
+    // preconditions (not sure)
+    assert !id.isEmpty();
+    assert !name.isEmpty();
+    assert parent != null;
+
+
     this.intervalList = new ArrayList<>();
     this.nodeJsonObject = new JSONObject();
+
+  }
+
+  @Override
+  protected boolean invariant() { // same as project, intervallist cannot be empty
+    return (logger != null) && (this.intervalList != null);
   }
 
   public JSONObject getJsonObject() {
@@ -59,7 +74,7 @@ public class Task extends Node {
 
     visitor.visit(this);
     System.out.println("Task " + this.name + " visited");
-
+    assert invariant(); // intervalList cannot be null
     for (Interval interval : intervalList) {
       interval.acceptVisit(visitor);
     }

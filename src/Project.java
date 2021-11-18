@@ -13,8 +13,21 @@ public class Project extends Node {
 
   public Project(String id, String name, Node parent) {
     super(id, name, parent);
+
+    // preconditions (not sure)
+    assert !id.isEmpty();
+    assert name.isEmpty();
+    assert parent != null;
+
     this.nodeList = new ArrayList<>();
     this.nodeJsonObject = new JSONObject();
+
+  }
+
+  @Override
+  protected boolean invariant() {
+    // nodelist cannot be null
+    return (this.nodeList != null) && (logger != null);
   }
 
   public JSONObject getJsonObject() {
@@ -23,6 +36,7 @@ public class Project extends Node {
 
   // Add a new node to its list
   public void addNode(Node node) {
+    assert invariant();   // nodelist must be initialised
     nodeList.add(node);
   }
 
@@ -63,6 +77,7 @@ public class Project extends Node {
     visitor.visit(this);
     System.out.println("Project " + this.name + " visited");
 
+    assert invariant();   // nodeList cannot be null
     for (Node node : nodeList) {
       node.acceptVisit(visitor);
     }
