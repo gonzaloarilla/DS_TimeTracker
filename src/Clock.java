@@ -2,6 +2,8 @@ import java.time.LocalDateTime;
 import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /* Clock class is a singleton which keeps track of a timer and uses the observer pattern.
 It extends Observable to communicate the time information to its obververs.
@@ -13,7 +15,7 @@ public class Clock extends Observable {
   private final Timer timer;
   private final TimerTask timerTask;
   private LocalDateTime lastDate;
-
+  static private Logger logger = LoggerFactory.getLogger("Clock.class");
 
   // Private constructor so we just have one instance of Clock
   private Clock() {

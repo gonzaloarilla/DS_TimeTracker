@@ -1,10 +1,14 @@
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /*
 Class which implements the visit() methods from NodeVisitor
  */
 public class NodePersistenceVisitor implements NodeVisitor {
+
+  static private Logger logger = LoggerFactory.getLogger("NodePersistenceVisitor.class");
 
   // Visit method for Projects and Tasks. It puts the node data into its own JSONObject attribute
   public void visit(Node node) {

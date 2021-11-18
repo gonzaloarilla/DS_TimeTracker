@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /*
@@ -13,6 +15,8 @@ Persistence management class which has methods for saving and loading
 the Node structure data within a JSON file
  */
 public class PersistenceManager {
+
+  static private Logger logger = LoggerFactory.getLogger("PersistenceManager.class");
 
   // Given a root project, we visit all its children using Visitor design pattern
   // Once they're visited, we save its JSON objects into a file

@@ -3,6 +3,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /*
 Node class represents the Component class in the Composite pattern.
@@ -21,6 +23,7 @@ public abstract class Node {
   protected DateTimeFormatter dateTimeFormatter =
       DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   protected JSONObject nodeJsonObject;
+  static private Logger logger = LoggerFactory.getLogger("Node.class");
 
 
   protected Node(String id, String name, Node parent) {

@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /*
@@ -10,6 +12,7 @@ import org.json.JSONObject;
 public class Task extends Node {
 
   private List<Interval> intervalList;
+  static private Logger logger = LoggerFactory.getLogger("Task.class");
 
   public Task(String id, String name, Node parent) {
     super(id, name, parent);
