@@ -4,6 +4,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 import java.util.Observer;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /*Interval class which controls the information of a single interval.
 It implements Observer to receive timer data from Clock class.
@@ -17,6 +19,7 @@ public class Interval implements Observer {
   private Duration duration;
   private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   private JSONObject nodeJsonObject;
+  static private Logger logger = LoggerFactory.getLogger("Interval.class");
 
   public Interval(Node parent, boolean isActive) {
     this.parent = parent;
