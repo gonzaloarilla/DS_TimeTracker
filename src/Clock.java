@@ -54,7 +54,7 @@ public class Clock extends Observable {
     notifyObservers(lastDate);
   }
 
-  public static int getPeriod(){
+  public static int getPeriod() {
     return period;
   }
 

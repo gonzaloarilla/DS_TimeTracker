@@ -1,6 +1,6 @@
 import java.io.IOException;
-import java.util.UUID;
 import java.util.Scanner;
+import java.util.UUID;
 
 
 public class Client {
@@ -15,73 +15,74 @@ public class Client {
   private static void testB() throws InterruptedException, IOException {
 
     // Root
-    String rootID = createId();
-    Project root = new Project(rootID,"root", null);
+    String rootId = createId();
+    Project root = new Project(rootId, "root", null);
 
     // Projects setup
-    String softwareDesignID = createId();
-    Project softwareDesign = new Project(softwareDesignID,"software design", root);
+    String softwareDesignId = createId();
+    Project softwareDesign = new Project(softwareDesignId, "software design", root);
     root.addNode(softwareDesign);
 
-    String softwareTestingID = createId();
-    Project softwareTesting = new Project(softwareTestingID,"software testing", root);
+    String softwareTestingId = createId();
+    Project softwareTesting = new Project(softwareTestingId, "software testing", root);
     root.addNode(softwareTesting);
 
-    String databasesID = createId();
-    Project databases = new Project(databasesID,"databases", root);
+    String databasesId = createId();
+    Project databases = new Project(databasesId, "databases", root);
     root.addNode(databases);
 
-    String problemsID = createId();
-    Project problems = new Project(problemsID,"problems", softwareDesign);
+    String problemsId = createId();
+    Project problems = new Project(problemsId, "problems", softwareDesign);
     softwareDesign.addNode(problems);
 
-    String projectTimeTrackerID = createId();
-    Project projectTimeTracker = new Project(projectTimeTrackerID,"project time tracker", softwareDesign);
+    String projectTimeTrackerId = createId();
+    Project projectTimeTracker = new Project(projectTimeTrackerId,
+        "project time tracker", softwareDesign);
     softwareDesign.addNode(projectTimeTracker);
 
     // Tasks Setup
-    String transportationID = createId();
-    Task transportation = new Task(transportationID,"transportation", root);
+    String transportationId = createId();
+    Task transportation = new Task(transportationId, "transportation", root);
     root.addNode(transportation);
 
-    String firstListID = createId();
-    Task firstList = new Task(firstListID,"first list", problems);
+    String firstListId = createId();
+    Task firstList = new Task(firstListId, "first list", problems);
     problems.addNode(firstList);
 
-    String secondListID = createId();
-    Task secondList = new Task(secondListID,"second list", problems);
+    String secondListId = createId();
+    Task secondList = new Task(secondListId, "second list", problems);
     problems.addNode(secondList);
 
-    String readHandoutID = createId();
-    Task readHandout = new Task(readHandoutID,"read handout", projectTimeTracker);
+    String readHandoutId = createId();
+    Task readHandout = new Task(readHandoutId, "read handout", projectTimeTracker);
     projectTimeTracker.addNode(readHandout);
 
-    String firstMilestoneID = createId();
-    Task firstMilestone = new Task(firstMilestoneID,"first milestone", projectTimeTracker);
+    String firstMilestoneId = createId();
+    Task firstMilestone = new Task(firstMilestoneId, "first milestone", projectTimeTracker);
     projectTimeTracker.addNode(firstMilestone);
 
 
     // Test Execution
     System.out.println("\nTest B starts:\n");
 
-    transportation.startTask(transportationID);
+    transportation.startTask(transportationId);
     Thread.sleep(4000);
-    transportation.stopTask(transportationID);
+    transportation.stopTask(transportationId);
     Thread.sleep(2000);
 
-    firstList.startTask(firstListID);
+    firstList.startTask(firstListId);
     Thread.sleep(6000);
-    secondList.startTask(secondListID);
+    secondList.startTask(secondListId);
     Thread.sleep(4000);
 
-    firstList.stopTask(firstListID);
+    firstList.stopTask(firstListId);
     Thread.sleep(2000);
-    secondList.stopTask(secondListID);
+    secondList.stopTask(secondListId);
     Thread.sleep(2000);
 
-    transportation.startTask(transportationID);
+    transportation.startTask(transportationId);
     Thread.sleep(4000);
-    transportation.stopTask(transportationID);
+    transportation.stopTask(transportationId);
 
     Clock.stopClock();
 
@@ -98,49 +99,50 @@ public class Client {
   private static void testBWithPersistence() throws InterruptedException, IOException {
 
     // Root
-    String rootID = createId();
-    Project root = new Project(rootID,"root", null);
+    String rootId = createId();
+    Project root = new Project(rootId, "root", null);
 
     // Projects setup
-    String softwareDesignID = createId();
-    Project softwareDesign = new Project(softwareDesignID,"software design", root);
+    String softwareDesignId = createId();
+    Project softwareDesign = new Project(softwareDesignId, "software design", root);
     root.addNode(softwareDesign);
 
-    String softwareTestingID = createId();
-    Project softwareTesting = new Project(softwareTestingID,"software testing", root);
+    String softwareTestingId = createId();
+    Project softwareTesting = new Project(softwareTestingId, "software testing", root);
     root.addNode(softwareTesting);
 
-    String databasesID = createId();
-    Project databases = new Project(databasesID,"databases", root);
+    String databasesId = createId();
+    Project databases = new Project(databasesId, "databases", root);
     root.addNode(databases);
 
-    String problemsID = createId();
-    Project problems = new Project(problemsID,"problems", softwareDesign);
+    String problemsId = createId();
+    Project problems = new Project(problemsId, "problems", softwareDesign);
     softwareDesign.addNode(problems);
 
-    String projectTimeTrackerID = createId();
-    Project projectTimeTracker = new Project(projectTimeTrackerID,"project time tracker", softwareDesign);
+    String projectTimeTrackerId = createId();
+    Project projectTimeTracker = new Project(projectTimeTrackerId,
+        "project time tracker", softwareDesign);
     softwareDesign.addNode(projectTimeTracker);
 
     // Tasks Setup
-    String transportationID = createId();
-    Task transportation = new Task(transportationID,"transportation", root);
+    String transportationId = createId();
+    Task transportation = new Task(transportationId, "transportation", root);
     root.addNode(transportation);
 
-    String firstListID = createId();
-    Task firstList = new Task(firstListID,"first list", problems);
+    String firstListId = createId();
+    Task firstList = new Task(firstListId, "first list", problems);
     problems.addNode(firstList);
 
-    String secondListID = createId();
-    Task secondList = new Task(secondListID,"second list", problems);
+    String secondListId = createId();
+    Task secondList = new Task(secondListId, "second list", problems);
     problems.addNode(secondList);
 
-    String readHandoutID = createId();
-    Task readHandout = new Task(readHandoutID,"read handout", projectTimeTracker);
+    String readHandoutId = createId();
+    Task readHandout = new Task(readHandoutId, "read handout", projectTimeTracker);
     projectTimeTracker.addNode(readHandout);
 
-    String firstMilestoneID = createId();
-    Task firstMilestone = new Task(firstMilestoneID,"first milestone", projectTimeTracker);
+    String firstMilestoneId = createId();
+    Task firstMilestone = new Task(firstMilestoneId, "first milestone", projectTimeTracker);
     projectTimeTracker.addNode(firstMilestone);
 
 
@@ -148,24 +150,24 @@ public class Client {
     // Test Execution
     System.out.println("\nTest B starts:\n");
 
-    transportation.startTask(transportationID);
+    transportation.startTask(transportationId);
     Thread.sleep(4000);
-    transportation.stopTask(transportationID);
+    transportation.stopTask(transportationId);
     Thread.sleep(2000);
 
-    firstList.startTask(firstListID);
+    firstList.startTask(firstListId);
     Thread.sleep(6000);
-    secondList.startTask(secondListID);
+    secondList.startTask(secondListId);
     Thread.sleep(4000);
 
-    firstList.stopTask(firstListID);
+    firstList.stopTask(firstListId);
     Thread.sleep(2000);
-    secondList.stopTask(secondListID);
+    secondList.stopTask(secondListId);
     Thread.sleep(2000);
 
-    transportation.startTask(transportationID);
+    transportation.startTask(transportationId);
     Thread.sleep(4000);
-    transportation.stopTask(transportationID);
+    transportation.stopTask(transportationId);
 
     Clock.stopClock();
 
@@ -180,7 +182,7 @@ public class Client {
 
     Thread.sleep(1000);
 
-    root = new Project(rootID,"root", null);
+    root = new Project(rootId, "root", null);
 
     // LOAD DATA
     System.out.println("\nLoading Data:\n");
@@ -189,20 +191,20 @@ public class Client {
 
 
     // START AND STOP ONE TASK AGAIN
-    root.startTask(transportationID);
+    root.startTask(transportationId);
     Thread.sleep(4000);
-    root.stopTask(transportationID);
+    root.stopTask(transportationId);
     Clock.stopClock();
 
     PersistenceManager.saveData(root, "NodeData.json");
 
     // Showing the menu to the user
-    JSONMenu(root, "NodeData.json");
+    jsonMenu(root, "NodeData.json");
 
   }
 
   // Menu that let the user save or load data using JSON
-  public static void JSONMenu(Node root, String filename) throws IOException {
+  public static void jsonMenu(Node root, String filename) throws IOException {
     Scanner scanner = new Scanner(System.in);
 
     System.out.println("\nWhat do you want to do?\n");

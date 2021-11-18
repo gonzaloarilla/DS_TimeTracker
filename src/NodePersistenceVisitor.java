@@ -4,61 +4,61 @@ import org.json.JSONException;
 /*
 Class which implements the visit() methods from NodeVisitor
  */
-public class NodePersistenceVisitor implements NodeVisitor{
+public class NodePersistenceVisitor implements NodeVisitor {
 
   // Visit method for Projects and Tasks. It puts the node data into its own JSONObject attribute
   public void visit(Node node) {
     try {
       // Set Node data into JSONObject
-      node.getJSONObject().put("id", node.getId());
-      node.getJSONObject().put("name", node.getName());
-      node.getJSONObject().put("initialDate", node.getStartDate());
-      node.getJSONObject().put("lastDate", node.getLastDate());
-      node.getJSONObject().put("duration", node.getDurationSeconds());
-      node.getJSONObject().put("type", node.getType());
-    }catch (JSONException jsonException) {
+      node.getJsonObject().put("id", node.getId());
+      node.getJsonObject().put("name", node.getName());
+      node.getJsonObject().put("initialDate", node.getStartDate());
+      node.getJsonObject().put("lastDate", node.getLastDate());
+      node.getJsonObject().put("duration", node.getDurationSeconds());
+      node.getJsonObject().put("type", node.getType());
+    } catch (JSONException jsonException) {
       System.out.println(jsonException);
     }
 
     // Checks if parent has a JSONArray object created inside its JSONObject
     // In case it's not created a new one is created
     if (node.parent != null) {
-      JSONArray array = node.parent.getJSONObject().optJSONArray("nodes");
+      JSONArray array = node.parent.getJsonObject().optJSONArray("nodes");
       if (array == null) {
         array = new JSONArray();
-        node.parent.getJSONObject().put("nodes", array);
+        node.parent.getJsonObject().put("nodes", array);
       }
 
       // The node's JSONObject is put inside parent's JSONArray
-      array.put(node.getJSONObject());
+      array.put(node.getJsonObject());
     }
   }
 
   // Visit method for Intervals
-  public void visit (Interval interval) {
+  public void visit(Interval interval) {
 
     try {
       // Set Interval data into JSONObject
-      interval.getJSONObject().put("initialDate", interval.getStartDate());
-      interval.getJSONObject().put("lastDate", interval.getLastDate());
-      interval.getJSONObject().put("duration", interval.getDurationSeconds());
-      interval.getJSONObject().put("type", interval.getType());
+      interval.getJsonObject().put("initialDate", interval.getStartDate());
+      interval.getJsonObject().put("lastDate", interval.getLastDate());
+      interval.getJsonObject().put("duration", interval.getDurationSeconds());
+      interval.getJsonObject().put("type", interval.getType());
 
-    }catch (JSONException jsonException) {
+    } catch (JSONException jsonException) {
       System.out.println(jsonException);
     }
 
     // Checks if parent has a JSONArray object created inside its JSONObject
     // In case it's not created a new one is created
     if (interval.parent != null) {
-      JSONArray array = interval.parent.getJSONObject().optJSONArray("intervals");
+      JSONArray array = interval.parent.getJsonObject().optJSONArray("intervals");
       if (array == null) {
         array = new JSONArray();
-        interval.parent.getJSONObject().put("intervals", array);
+        interval.parent.getJsonObject().put("intervals", array);
       }
 
       // The node's JSONObject is put inside parent's JSONArray
-      array.put(interval.getJSONObject());
+      array.put(interval.getJsonObject());
     }
   }
 }
