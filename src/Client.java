@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 public class Client {
 
-  static private Logger logger = LoggerFactory.getLogger("Client.class");
+  static private final Logger logger = LoggerFactory.getLogger("Client.class");
 
   private static synchronized String createId() {
     UUID uuid = UUID.randomUUID();
