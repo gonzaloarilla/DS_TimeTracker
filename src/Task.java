@@ -1,5 +1,7 @@
+import java.util.ArrayList;
+import java.util.List;
 import org.json.JSONObject;
-import java.util.*;
+
 
 /*
  Task is a type of Node, it uses Composite pattern design.
@@ -12,11 +14,11 @@ public class Task extends Node {
   public Task(String id, String name, Node parent) {
     super(id, name, parent);
     this.intervalList = new ArrayList<>();
-    this.nodeJSONObject = new JSONObject();
+    this.nodeJsonObject = new JSONObject();
   }
 
-  public JSONObject getJSONObject() {
-    return nodeJSONObject;
+  public JSONObject getJsonObject() {
+    return nodeJsonObject;
   }
 
   // A task will start if it hasn't started yet and has the ID we're looking for
@@ -24,11 +26,11 @@ public class Task extends Node {
   @Override
   public boolean startTask(String id) {
     if (!this.isActive && id.equals(this.id)) {
-        Interval newInterval = new Interval(this, true);
-        intervalList.add(newInterval);
-        this.isActive = true;
-        System.out.println("Task " + this.name + " started");
-        return true;
+      Interval newInterval = new Interval(this, true);
+      intervalList.add(newInterval);
+      this.isActive = true;
+      System.out.println("Task " + this.name + " started");
+      return true;
     }
     return false;
   }
@@ -38,19 +40,19 @@ public class Task extends Node {
   @Override
   public boolean stopTask(String id) {
     if (this.isActive && id.equals(this.id)) {
-        for (Interval interval : intervalList){
-          interval.finish();
-        }
-        //intervals.get(intervals.size()-1).finish(); -> stop last interval
-        this.isActive = false;
-        System.out.println("Task " + this.name + " stopped");
-        return true;
+      for (Interval interval : intervalList) {
+        interval.finish();
       }
+      //intervals.get(intervals.size()-1).finish(); -> stop last interval
+      this.isActive = false;
+      System.out.println("Task " + this.name + " stopped");
+      return true;
+    }
     return false;
   }
 
   // Method to use Visitor pattern design
-  public void acceptVisit(NodeVisitor visitor){
+  public void acceptVisit(NodeVisitor visitor) {
 
     visitor.visit(this);
     System.out.println("Task " + this.name + " visited");

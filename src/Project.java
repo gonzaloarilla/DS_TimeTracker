@@ -1,21 +1,21 @@
+import java.util.ArrayList;
+import java.util.List;
 import org.json.JSONObject;
-import java.util.*;
 
 /*
 Project is a type of Node, it uses Composite pattern design
  */
 public class Project extends Node {
-
 	private List<Node> nodeList; // Might be Project or Task
 
 	public Project(String id, String name, Node parent) {
 		super(id, name, parent);
     this.nodeList = new ArrayList<>();
-		this.nodeJSONObject = new JSONObject();
+		this.nodeJsonObject = new JSONObject();
 	}
 
-	public JSONObject getJSONObject() {
-		return nodeJSONObject;
+	public JSONObject getJsonObject() {
+		return nodeJsonObject;
 	}
 
 	// Add a new node to its list
@@ -56,8 +56,7 @@ public class Project extends Node {
 	}
 
 	// Method to use Visitor pattern design
-	public void acceptVisit(NodeVisitor visitor){
-
+	public void acceptVisit(NodeVisitor visitor) {
 		visitor.visit(this);
 		System.out.println("Project " + this.name + " visited");
 
@@ -65,5 +64,4 @@ public class Project extends Node {
 			node.acceptVisit(visitor);
 		}
 	}
-
 }

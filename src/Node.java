@@ -1,8 +1,8 @@
-import org.json.JSONObject;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import org.json.JSONObject;
 
 /*
 Node class represents the Component class in the Composite pattern.
@@ -18,8 +18,9 @@ public abstract class Node {
   protected boolean isActive;
   protected List<String> tags;
   protected Node parent;
-  protected DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-  protected JSONObject nodeJSONObject;
+  protected DateTimeFormatter dateTimeFormatter =
+      DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+  protected JSONObject nodeJsonObject;
 
 
   protected Node(String id, String name, Node parent) {
@@ -30,11 +31,11 @@ public abstract class Node {
     this.duration = Duration.ZERO;
     this.initialDate = LocalDateTime.now();
     this.lastDate = this.initialDate;
-    this.nodeJSONObject = new JSONObject();
+    this.nodeJsonObject = new JSONObject();
   }
 
-  public JSONObject getJSONObject() {
-    return nodeJSONObject;
+  public JSONObject getJsonObject() {
+    return nodeJsonObject;
   }
 
   void setName(String name) {
@@ -57,7 +58,7 @@ public abstract class Node {
     return true;
   }
 
-  public void acceptVisit(NodeVisitor op){};
+  public void acceptVisit(NodeVisitor op){}
 
   public Duration getDuration() {
     return duration;

@@ -1,9 +1,12 @@
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import java.io.*;
-import java.time.Duration;
-import java.time.LocalDateTime;
+
 
 /*
 Persistence management class which has methods for saving and loading
@@ -20,8 +23,9 @@ public class PersistenceManager {
     root.acceptVisit(nodePersistence);
 
     // Creating and writing the file
-    FileWriter fileWriter = new FileWriter("./"+filename, false);
-    fileWriter.write(root.getJSONObject().toString(2));   // indentFactor = tabulates the JSON correctly
+    FileWriter fileWriter = new FileWriter("./" + filename, false);
+    fileWriter.write(root.getJsonObject().toString(2));
+    // indentFactor = tabulates the JSON correctly
     fileWriter.close();
   }
 
@@ -46,7 +50,8 @@ public class PersistenceManager {
     String name = jsonNodeObject.optString("name");
     String initialDateString = jsonNodeObject.optString("initialDate");
     String lastDateString = jsonNodeObject.optString("lastDate");
-    long duration = jsonNodeObject.optLong("duration"); // JSON no guarda objectes de tipus Duration -> long pels segons
+    long duration = jsonNodeObject.optLong("duration");
+    // JSON no guarda objectes de tipus Duration -> long pels segons
 
     String type = jsonNodeObject.optString("type");
     JSONArray array;

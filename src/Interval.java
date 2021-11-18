@@ -1,9 +1,9 @@
-import org.json.JSONObject;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 import java.util.Observer;
+import org.json.JSONObject;
 
 /*Interval class which controls the information of a single interval.
 It implements Observer to receive timer data from Clock class.
@@ -16,11 +16,11 @@ public class Interval implements Observer {
   private LocalDateTime lastDate;
   private Duration duration;
   private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-  private JSONObject nodeJSONObject;
+  private JSONObject nodeJsonObject;
 
   public Interval(Node parent, boolean isActive) {
     this.parent = parent;
-    this.nodeJSONObject = new JSONObject();
+    this.nodeJsonObject = new JSONObject();
     this.isActive = isActive;
     this.duration = Duration.ZERO;
 
@@ -58,8 +58,8 @@ public class Interval implements Observer {
     return initialDate;
   }
 
-  public JSONObject getJSONObject() {
-    return nodeJSONObject;
+  public JSONObject getJsonObject() {
+    return nodeJsonObject;
   }
 
   public Node getParent() {
@@ -115,7 +115,7 @@ public class Interval implements Observer {
   }
 
   // Method to use Visitor pattern design
-  public void acceptVisit(NodeVisitor visitor){
+  public void acceptVisit(NodeVisitor visitor) {
     visitor.visit(this);
     System.out.println("Interval of " + parent.name + " visited");
   }
