@@ -13,11 +13,8 @@ public class Project extends Node {
 
   public Project(String id, String name, Node parent) {
     super(id, name, parent);
-
-    // preconditions (not sure)
-    assert !id.isEmpty();
-    assert name.isEmpty();
-    assert parent != null;
+    // pre-conditions
+    assert !id.isEmpty() && !name.isEmpty() && parent != null;
 
     this.nodeList = new ArrayList<>();
     this.nodeJsonObject = new JSONObject();
@@ -26,7 +23,7 @@ public class Project extends Node {
 
   @Override
   protected boolean invariant() {
-    // nodelist cannot be null
+    // nodelist cannot be null but empty
     return (this.nodeList != null) && (logger != null);
   }
 
@@ -44,6 +41,7 @@ public class Project extends Node {
   // If node is a project, code gets back here until task instance reached
   @Override
   public boolean startTask(String id) {
+    assert !id.isEmpty(); // id required
 
     // Search for the task with matching name
     boolean started = false;
@@ -60,6 +58,7 @@ public class Project extends Node {
   // If node is a project, code gets back here until task instance reached
   @Override
   public boolean stopTask(String id) {
+    assert !id.isEmpty(); // id required
 
     // Search for the task with matching name
     boolean stopped = false;

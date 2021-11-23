@@ -19,11 +19,8 @@ public class Task extends Node {
   public Task(String id, String name, Node parent) {
     super(id, name, parent);
 
-    // preconditions (not sure)
-    assert !id.isEmpty();
-    assert !name.isEmpty();
-    assert parent != null;
-
+    // pre-conditions
+    assert !id.isEmpty() && !name.isEmpty() && parent != null;
 
     this.intervalList = new ArrayList<>();
     this.nodeJsonObject = new JSONObject();
@@ -43,6 +40,8 @@ public class Task extends Node {
   // It will create and start a new interval and added it its list of intervals
   @Override
   public boolean startTask(String id) {
+    assert !id.isEmpty(); // id required
+
     if (!this.isActive && id.equals(this.id)) {
       Interval newInterval = new Interval(this, true);
       intervalList.add(newInterval);
@@ -57,6 +56,8 @@ public class Task extends Node {
   // It will also finish all its intervals and set the task to not active
   @Override
   public boolean stopTask(String id) {
+    assert !id.isEmpty(); // id required
+
     if (this.isActive && id.equals(this.id)) {
       for (Interval interval : intervalList) {
         interval.finish();
@@ -71,7 +72,7 @@ public class Task extends Node {
 
   // Method to use Visitor pattern design
   public void acceptVisit(NodeVisitor visitor) {
-
+    assert invariant();
     visitor.visit(this);
     System.out.println("Task " + this.name + " visited");
     assert invariant(); // intervalList cannot be null
