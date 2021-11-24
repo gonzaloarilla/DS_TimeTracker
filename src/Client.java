@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 import org.slf4j.Logger;
@@ -7,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 public class Client {
 
-  static private final Logger logger = LoggerFactory.getLogger("Client.class");
+  static private final Logger logger = LoggerFactory.getLogger(Client.class);
 
   private static synchronized String createId() {
     UUID uuid = UUID.randomUUID();
@@ -25,14 +27,22 @@ public class Client {
     // Projects setup
     String softwareDesignId = createId();
     Project softwareDesign = new Project(softwareDesignId, "software design", root);
+    softwareDesign.addTag("java");
+    softwareDesign.addTag("flutter");
     root.addNode(softwareDesign);
 
     String softwareTestingId = createId();
     Project softwareTesting = new Project(softwareTestingId, "software testing", root);
+    softwareTesting.addTag("c++");
+    softwareTesting.addTag("Java");
+    softwareTesting.addTag("python");
     root.addNode(softwareTesting);
 
     String databasesId = createId();
     Project databases = new Project(databasesId, "databases", root);
+    databases.addTag("SQL");
+    databases.addTag("python");
+    databases.addTag("C++");
     root.addNode(databases);
 
     String problemsId = createId();
@@ -51,10 +61,12 @@ public class Client {
 
     String firstListId = createId();
     Task firstList = new Task(firstListId, "first list", problems);
+    firstList.addTag("java");
     problems.addNode(firstList);
 
     String secondListId = createId();
     Task secondList = new Task(secondListId, "second list", problems);
+    secondList.addTag("Dart");
     problems.addNode(secondList);
 
     String readHandoutId = createId();
@@ -63,6 +75,8 @@ public class Client {
 
     String firstMilestoneId = createId();
     Task firstMilestone = new Task(firstMilestoneId, "first milestone", projectTimeTracker);
+    firstMilestone.addTag("Java");
+    firstMilestone.addTag("IntelliJ");
     projectTimeTracker.addNode(firstMilestone);
 
 
@@ -99,6 +113,8 @@ public class Client {
     //System.out.println("Data saved");
     logger.info("Test B finished");
 
+    testSearchByTag(root);
+
   }
 
 
@@ -120,6 +136,7 @@ public class Client {
 
     String databasesId = createId();
     Project databases = new Project(databasesId, "databases", root);
+    databases.addTag("SQL");
     root.addNode(databases);
 
     String problemsId = createId();
@@ -262,5 +279,13 @@ public class Client {
 
     Project root = (Project) PersistenceManager.loadData("NodeData.json");
     PersistenceManager.saveData(root, "LoadedData.json");
+  }
+
+  private static void testSearchByTag(Project root) {
+
+    List<Node> nodelist = Search.searchByTag(root, "java" );
+    for(Node node : nodelist) {
+      System.out.println(node.name);
+    }
   }
 }
