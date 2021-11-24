@@ -1,20 +1,16 @@
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SearchTagVisitor implements NodeVisitor {
-
+  private static Logger logger = LoggerFactory.getLogger(SearchTagVisitor.class);
   private String tag;
-  private Boolean tagFound;
   private List<Node> nodeList;
 
   SearchTagVisitor(String tag) {
-    this.tagFound = false;
     this.nodeList = new ArrayList<>();
     this.tag = tag.toLowerCase();
-  }
-
-  public Boolean getTagFound() {
-    return tagFound;
   }
 
   public List<Node> getNodeList() {
@@ -22,11 +18,16 @@ public class SearchTagVisitor implements NodeVisitor {
   }
   @Override
   public void visit(Node node) {
-
+    for (String tag : node.getTagList()) {
+      if (tag.equals(this.tag)) {
+        nodeList.add(node);
+        break;
+      }
+    }
   }
 
   @Override
   public void visit(Interval interval) {
-
+    // Do nothing
   }
 }

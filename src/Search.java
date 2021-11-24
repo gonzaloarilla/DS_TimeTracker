@@ -8,16 +8,16 @@ public class Search {
   static private Logger logger = LoggerFactory.getLogger(Search.class);
 
 
-  public List<Node> searchByTag(Project root, String tag) {
-    SearchTagVisitor operation = new SearchTagVisitor(tag);
+  public static List<Node> searchByTag(Project root, String tag) {
+    SearchTagVisitor search = new SearchTagVisitor(tag);
 
     logger.debug("Searching nodes with tag " + tag);
-    root.acceptVisit(operation);
+    root.acceptVisit(search);
 
-    if (operation.getTagFound()) {
+    if (!search.getNodeList().isEmpty()) {
       logger.debug("Nodes found with tag " + tag);
     }
 
-    return operation.getNodeList();
+    return search.getNodeList();
   }
 }

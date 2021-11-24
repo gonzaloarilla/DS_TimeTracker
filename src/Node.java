@@ -1,6 +1,7 @@
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -18,7 +19,7 @@ public abstract class Node {
   protected LocalDateTime lastDate;
   protected Duration duration;
   protected boolean isActive;
-  protected List<String> tags;
+  protected List<String> tagList;
   protected Node parent;
   protected DateTimeFormatter dateTimeFormatter =
       DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -35,6 +36,7 @@ public abstract class Node {
     this.initialDate = LocalDateTime.now();
     this.lastDate = this.initialDate;
     this.nodeJsonObject = new JSONObject();
+    this.tagList = new ArrayList<>();
 
     // pre-conditions
     assert !id.isEmpty() && !name.isEmpty() && parent != null;
@@ -46,6 +48,10 @@ public abstract class Node {
   protected boolean invariant() {
     return logger != null;
   }
+
+  public void addTag(String tag) {this.tagList.add(tag.toLowerCase());}
+
+  public List<String> getTagList() {return this.tagList;}
 
   public JSONObject getJsonObject() {
     return nodeJsonObject;
@@ -147,7 +153,7 @@ public abstract class Node {
     this.lastDate = lastDate;
     this.updateDuration(durationToSum);
     //System.out.println(this);
-    logger.debug(this.name + "has been updated");
+    logger.debug(this.name + " has been updated");
     if (parent != null) {
       parent.update(lastDate, durationToSum);
     }
