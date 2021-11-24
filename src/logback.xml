@@ -2,7 +2,7 @@
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>INFO</level>
+            <level>WARN</level>
         </filter>
 
         <encoder> <pattern>
@@ -12,7 +12,7 @@
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>INFO</level>
+            <level>WARN</level>
         </filter>
 
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
@@ -29,5 +29,18 @@
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
     </root>
+
+<!--    <logger name="Client.class" level="ERROR"/>-->
+<!--    <logger name="Clock.class" level="ERROR"/>-->
+<!--    <logger name="Node.class" level="ERROR"/>-->
+<!--    <logger name="Project.class" level="ERROR"/>-->
+<!--    <logger name="Task.class" level="ERROR"/>-->
+<!--    <logger name="Interval.class" level="ERROR"/>-->
+<!--    <logger name="PersistenceManager.class" level="ERROR"/>-->
+<!--    <logger name="PersistenceVisitor.class" level="ERROR"/>-->
+
+<!--    <logger name="SearchTagVisitor.class" level="ERROR"/>-->
+<!--    <logger name="Search.class" level="ERROR"/>-->
+
 
 </configuration>
