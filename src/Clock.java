@@ -27,6 +27,11 @@ public class Clock extends Observable {
       }
     };
     timer.schedule(timerTask, delay, period);
+    assert invariant();
+  }
+
+  private boolean invariant() {
+    return logger != null;
   }
 
   // This method implements Singleton

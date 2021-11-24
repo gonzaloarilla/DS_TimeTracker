@@ -22,6 +22,9 @@ public class Interval implements Observer {
   static private Logger logger = LoggerFactory.getLogger(Interval.class);
 
   public Interval(Node parent, boolean isActive) {
+    // precondition
+    assert parent != null;
+
     this.parent = parent;
     this.nodeJsonObject = new JSONObject();
     this.isActive = isActive;
@@ -32,8 +35,13 @@ public class Interval implements Observer {
       this.initialDate = lastDate.minus(Duration.ofMillis(Clock.getPeriod()));
       Clock.getRunningClock().addObserver(this);
     }
+    assert invariant();
 
     logger.debug("Interval created and running");
+  }
+
+  private boolean invariant() {
+    return logger != null;
   }
 
   public void setInitialDate(LocalDateTime initialDate) {

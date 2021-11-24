@@ -22,6 +22,10 @@ public class PersistenceManager {
   // Once they're visited, we save its JSON objects into a file
   public static void saveData(Node root, String filename) {
 
+    // preconditions
+    assert root != null;
+    assert !filename.isEmpty();
+
     // Saving all attributes while visit
     NodeVisitor nodePersistence = new NodePersistenceVisitor();
     root.acceptVisit(nodePersistence);
@@ -40,7 +44,7 @@ public class PersistenceManager {
   }
 
   // Given a json file, we read it and return a root Node
-  public static Node loadData(String filename) {
+    public static Node loadData(String filename) {
 
     JSONObject object = null;
     try {
@@ -54,13 +58,15 @@ public class PersistenceManager {
     }
 
     return restoreNodeStructure(null, object);
-  }
+
 
   // Recursive function which restores all the node structure from a JSONObject
   // Depending on the node type retrieved (Project or Task) it will create the
   // corresponding object type with the data retrieved. Task objects also
   // create its intervals.
   private static Node restoreNodeStructure(Node parent, JSONObject jsonNodeObject) {
+    assert parent != null;
+    assert jsonNodeObject != null;  // restore requires data
 
     // Retrieve data from JSONObject
     String id = jsonNodeObject.optString("id");

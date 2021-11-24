@@ -35,6 +35,16 @@ public abstract class Node {
     this.initialDate = LocalDateTime.now();
     this.lastDate = this.initialDate;
     this.nodeJsonObject = new JSONObject();
+
+    // pre-conditions
+    assert !id.isEmpty() && !name.isEmpty() && parent != null;
+
+    // logger check
+    assert invariant();
+  }
+
+  protected boolean invariant() {
+    return logger != null;
   }
 
   public JSONObject getJsonObject() {

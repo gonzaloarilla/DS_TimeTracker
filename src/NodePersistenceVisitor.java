@@ -10,8 +10,12 @@ public class NodePersistenceVisitor implements NodeVisitor {
 
   static private Logger logger = LoggerFactory.getLogger("NodePersistenceVisitor.class");
 
+
   // Visit method for Projects and Tasks. It puts the node data into its own JSONObject attribute
   public void visit(Node node) {
+
+    assert invariant();
+
     try {
       // Set Node data into JSONObject
       node.getJsonObject().put("id", node.getId());
@@ -26,6 +30,8 @@ public class NodePersistenceVisitor implements NodeVisitor {
 
     // Checks if parent has a JSONArray object created inside its JSONObject
     // In case it's not created a new one is created
+
+    // assert node.parent != null;
     if (node.parent != null) {
       JSONArray array = node.parent.getJsonObject().optJSONArray("nodes");
       if (array == null) {
@@ -39,8 +45,14 @@ public class NodePersistenceVisitor implements NodeVisitor {
     }
   }
 
+  private boolean invariant() {
+    return logger != null;
+  }
+
   // Visit method for Intervals
   public void visit(Interval interval) {
+
+    assert invariant();
 
     try {
       // Set Interval data into JSONObject

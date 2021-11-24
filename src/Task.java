@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.ToDoubleBiFunction;
+
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +18,18 @@ public class Task extends Node {
 
   public Task(String id, String name, Node parent) {
     super(id, name, parent);
+
+    // pre-conditions
+    assert !id.isEmpty() && !name.isEmpty() && parent != null;
+
     this.intervalList = new ArrayList<>();
     this.nodeJsonObject = new JSONObject();
     logger.debug("Task " + name + " has been created.");
+  }
+
+  @Override
+  protected boolean invariant() { // same as project, intervallist cannot be empty
+    return (logger != null) && (this.intervalList != null);
   }
 
   public JSONObject getJsonObject() {
@@ -29,6 +40,8 @@ public class Task extends Node {
   // It will create and start a new interval and added it its list of intervals
   @Override
   public boolean startTask(String id) {
+    assert !id.isEmpty(); // id required
+
     if (!this.isActive && id.equals(this.id)) {
       Interval newInterval = new Interval(this, true);
       intervalList.add(newInterval);
@@ -43,6 +56,8 @@ public class Task extends Node {
   // It will also finish all its intervals and set the task to not active
   @Override
   public boolean stopTask(String id) {
+    assert !id.isEmpty(); // id required
+
     if (this.isActive && id.equals(this.id)) {
       for (Interval interval : intervalList) {
         interval.finish();
@@ -57,10 +72,10 @@ public class Task extends Node {
 
   // Method to use Visitor pattern design
   public void acceptVisit(NodeVisitor visitor) {
-
+    assert invariant();
     visitor.visit(this);
     logger.debug("Task " + this.name + " visited");
-
+    assert invariant(); // intervalList cannot be null
     for (Interval interval : intervalList) {
       interval.acceptVisit(visitor);
     }

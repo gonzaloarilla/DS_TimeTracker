@@ -13,9 +13,18 @@ public class Project extends Node {
 
   public Project(String id, String name, Node parent) {
     super(id, name, parent);
+    // pre-conditions
+    assert !id.isEmpty() && !name.isEmpty() && parent != null;
+
     this.nodeList = new ArrayList<>();
     this.nodeJsonObject = new JSONObject();
     logger.debug("Project " + name + " has been created.");
+  }
+
+  @Override
+  protected boolean invariant() {
+    // nodelist cannot be null but empty
+    return (this.nodeList != null) && (logger != null);
   }
 
   public JSONObject getJsonObject() {
@@ -24,6 +33,7 @@ public class Project extends Node {
 
   // Add a new node to its list
   public void addNode(Node node) {
+    assert invariant();   // nodelist must be initialised
     nodeList.add(node);
     logger.info(node.name + "has been added to Project " + this.name);
   }
@@ -32,6 +42,7 @@ public class Project extends Node {
   // If node is a project, code gets back here until task instance reached
   @Override
   public boolean startTask(String id) {
+    assert !id.isEmpty(); // id required
 
     // Search for the task with matching name
     boolean started = false;
@@ -52,6 +63,7 @@ public class Project extends Node {
   // If node is a project, code gets back here until task instance reached
   @Override
   public boolean stopTask(String id) {
+    assert !id.isEmpty(); // id required
 
     // Search for the task with matching name
     boolean stopped = false;
@@ -73,6 +85,7 @@ public class Project extends Node {
     visitor.visit(this);
     logger.debug("Project " + this.name + " visited");
 
+    assert invariant();   // nodeList cannot be null
     for (Node node : nodeList) {
       node.acceptVisit(visitor);
     }
