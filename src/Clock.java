@@ -15,7 +15,7 @@ public class Clock extends Observable {
   private final Timer timer;
   private final TimerTask timerTask;
   private LocalDateTime lastDate;
-  static private Logger logger = LoggerFactory.getLogger("Clock.class");
+  static private Logger logger = LoggerFactory.getLogger(Clock.class);
 
   // Private constructor so we just have one instance of Clock
   private Clock() {
@@ -33,7 +33,7 @@ public class Clock extends Observable {
   public static synchronized Clock getRunningClock() {
     if (runningClock == null) {
       runningClock = new Clock();
-      System.out.println("Clock created");
+      logger.debug("Clock created");
     }
     return runningClock;
   }
@@ -44,14 +44,14 @@ public class Clock extends Observable {
       runningClock.deleteObservers();
       runningClock.timer.cancel();
       runningClock = null;
-      System.out.println("Clock stopped");
+      logger.debug("Clock stopped");
     }
   }
 
   // Updates Clock's date and notify to observers
   private void update() {
     lastDate = LocalDateTime.now();
-    //System.out.println("Clock updated");
+    logger.debug("Clock updated");
     setChanged();
     notifyObservers(lastDate);
   }

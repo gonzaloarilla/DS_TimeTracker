@@ -16,31 +16,44 @@ the Node structure data within a JSON file
  */
 public class PersistenceManager {
 
-  static private Logger logger = LoggerFactory.getLogger("PersistenceManager.class");
+  static private Logger logger = LoggerFactory.getLogger(PersistenceManager.class);
 
   // Given a root project, we visit all its children using Visitor design pattern
   // Once they're visited, we save its JSON objects into a file
-  public static void saveData(Node root, String filename) throws IOException {
+  public static void saveData(Node root, String filename) {
 
     // Saving all attributes while visit
     NodeVisitor nodePersistence = new NodePersistenceVisitor();
     root.acceptVisit(nodePersistence);
+    logger.debug("Full node structure visited");
+    try {
+      // Creating and writing the file
+      FileWriter fileWriter = new FileWriter("./" + filename, false);
+      fileWriter.write(root.getJsonObject().toString(2));
+      // indentFactor = tabulates the JSON correctly
+      fileWriter.close();
+      logger.debug("Data saved correctly");
+    } catch (IOException e) {
+      logger.warn(e.toString());
+    }
 
-    // Creating and writing the file
-    FileWriter fileWriter = new FileWriter("./" + filename, false);
-    fileWriter.write(root.getJsonObject().toString(2));
-    // indentFactor = tabulates the JSON correctly
-    fileWriter.close();
   }
 
   // Given a json file, we read it and return a root Node
-  public static Node loadData(String filename) throws IOException {
-    FileReader fileReader = new FileReader(filename);
-    JSONTokener tokener = new JSONTokener(fileReader);
-    JSONObject object = new JSONObject(tokener);
-    fileReader.close();
-    return restoreNodeStructure(null, object);
+  public static Node loadData(String filename) {
 
+    JSONObject object = null;
+    try {
+      FileReader fileReader = new FileReader(filename);
+      JSONTokener tokener = new JSONTokener(fileReader);
+      object = new JSONObject(tokener);
+      fileReader.close();
+      logger.debug("Data loaded correctly");
+    } catch (IOException e) {
+      logger.warn(e.toString());
+    }
+
+    return restoreNodeStructure(null, object);
   }
 
   // Recursive function which restores all the node structure from a JSONObject
@@ -55,7 +68,6 @@ public class PersistenceManager {
     String initialDateString = jsonNodeObject.optString("initialDate");
     String lastDateString = jsonNodeObject.optString("lastDate");
     long duration = jsonNodeObject.optLong("duration");
-    // JSON no guarda objectes de tipus Duration -> long pels segons
 
     String type = jsonNodeObject.optString("type");
     JSONArray array;
@@ -85,7 +97,7 @@ public class PersistenceManager {
             project.addNode(node);
           }
         }
-
+        logger.debug("Data from Project " + name + " has been restored");
         return project;
 
       case "task":
@@ -109,10 +121,13 @@ public class PersistenceManager {
             interval = setupNewInterval(interval, jsonNodeObject);
             task.addInterval(interval);
           }
-        }
 
+          logger.debug("Intervals from Task " + name + " have been restored");
+        }
+        logger.debug("Complete data from Task " + name + " has been restored");
         return task;
       default:
+        logger.warn("Trying to retrieve data from an incorrect Node Type");
         return null;
     }
   }

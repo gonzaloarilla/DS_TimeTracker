@@ -237,8 +237,8 @@ public class Client {
   public static void main(String[] args) throws InterruptedException, IOException {
     //testLoad();
 
-    //testB();
-    testBWithPersistence();
+    testB();
+    //testBWithPersistence();
   }
 
 

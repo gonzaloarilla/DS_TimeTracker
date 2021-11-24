@@ -9,12 +9,13 @@ Project is a type of Node, it uses Composite pattern design
  */
 public class Project extends Node {
   private List<Node> nodeList; // Might be Project or Task
-  static private Logger logger = LoggerFactory.getLogger("Project.class");
+  static private Logger logger = LoggerFactory.getLogger(Project.class);
 
   public Project(String id, String name, Node parent) {
     super(id, name, parent);
     this.nodeList = new ArrayList<>();
     this.nodeJsonObject = new JSONObject();
+    logger.debug("Project " + name + " has been created.");
   }
 
   public JSONObject getJsonObject() {
@@ -24,6 +25,7 @@ public class Project extends Node {
   // Add a new node to its list
   public void addNode(Node node) {
     nodeList.add(node);
+    logger.info(node.name + "has been added to Project " + this.name);
   }
 
   // Start task looking for its ID
@@ -37,6 +39,10 @@ public class Project extends Node {
     while (!started && i < nodeList.size()) {
       started = nodeList.get(i).startTask(id);
       i++;
+
+      if (started) {
+        logger.debug("Project " + this.name + " has started");
+      }
     }
 
     return started;
@@ -53,6 +59,10 @@ public class Project extends Node {
     while (!stopped && i < nodeList.size()) {
       stopped = nodeList.get(i).stopTask(id);
       i++;
+
+      if (stopped) {
+        logger.debug("Project " + this.name + " has stopped");
+      }
     }
 
     return stopped;
@@ -61,7 +71,7 @@ public class Project extends Node {
   // Method to use Visitor pattern design
   public void acceptVisit(NodeVisitor visitor) {
     visitor.visit(this);
-    System.out.println("Project " + this.name + " visited");
+    logger.debug("Project " + this.name + " visited");
 
     for (Node node : nodeList) {
       node.acceptVisit(visitor);

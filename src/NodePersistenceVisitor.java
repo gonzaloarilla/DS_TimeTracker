@@ -21,7 +21,7 @@ public class NodePersistenceVisitor implements NodeVisitor {
       node.getJsonObject().put("duration", node.getDurationSeconds());
       node.getJsonObject().put("type", node.getType());
     } catch (JSONException jsonException) {
-      System.out.println(jsonException);
+      logger.warn(jsonException.toString());
     }
 
     // Checks if parent has a JSONArray object created inside its JSONObject
@@ -31,6 +31,7 @@ public class NodePersistenceVisitor implements NodeVisitor {
       if (array == null) {
         array = new JSONArray();
         node.parent.getJsonObject().put("nodes", array);
+        logger.trace("New JSONArray added to parent Project " + node.parent.getName());
       }
 
       // The node's JSONObject is put inside parent's JSONArray
@@ -49,7 +50,7 @@ public class NodePersistenceVisitor implements NodeVisitor {
       interval.getJsonObject().put("type", interval.getType());
 
     } catch (JSONException jsonException) {
-      System.out.println(jsonException);
+      logger.warn(jsonException.toString());
     }
 
     // Checks if parent has a JSONArray object created inside its JSONObject
@@ -59,6 +60,7 @@ public class NodePersistenceVisitor implements NodeVisitor {
       if (array == null) {
         array = new JSONArray();
         interval.parent.getJsonObject().put("intervals", array);
+        logger.trace("New JSONArray added to parent Task " + interval.parent.getName());
       }
 
       // The node's JSONObject is put inside parent's JSONArray

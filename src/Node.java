@@ -23,7 +23,7 @@ public abstract class Node {
   protected DateTimeFormatter dateTimeFormatter =
       DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   protected JSONObject nodeJsonObject;
-  static private Logger logger = LoggerFactory.getLogger("Node.class");
+  static private Logger logger = LoggerFactory.getLogger(Node.class);
 
 
   protected Node(String id, String name, Node parent) {
@@ -127,6 +127,8 @@ public abstract class Node {
   void updateDuration(Duration durationToSum) {
     if (this.duration != null) {
       this.duration = this.duration.plus(durationToSum);
+
+      logger.debug("Duration of " + this.name + " has been updated to " + String.valueOf(this.duration.getSeconds()));
     }
   }
 
@@ -134,7 +136,8 @@ public abstract class Node {
   void update(LocalDateTime lastDate, Duration durationToSum) {
     this.lastDate = lastDate;
     this.updateDuration(durationToSum);
-    System.out.println(this);
+    //System.out.println(this);
+    logger.debug(this.name + "has been updated");
     if (parent != null) {
       parent.update(lastDate, durationToSum);
     }

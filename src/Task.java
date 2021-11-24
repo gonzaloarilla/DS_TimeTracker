@@ -12,12 +12,13 @@ import org.slf4j.LoggerFactory;
 public class Task extends Node {
 
   private List<Interval> intervalList;
-  static private Logger logger = LoggerFactory.getLogger("Task.class");
+  static private Logger logger = LoggerFactory.getLogger(Task.class);
 
   public Task(String id, String name, Node parent) {
     super(id, name, parent);
     this.intervalList = new ArrayList<>();
     this.nodeJsonObject = new JSONObject();
+    logger.debug("Task " + name + " has been created.");
   }
 
   public JSONObject getJsonObject() {
@@ -32,7 +33,7 @@ public class Task extends Node {
       Interval newInterval = new Interval(this, true);
       intervalList.add(newInterval);
       this.isActive = true;
-      System.out.println("Task " + this.name + " started");
+      logger.info("Task " + this.name + " started");
       return true;
     }
     return false;
@@ -48,7 +49,7 @@ public class Task extends Node {
       }
       //intervals.get(intervals.size()-1).finish(); -> stop last interval
       this.isActive = false;
-      System.out.println("Task " + this.name + " stopped");
+      logger.info("Task " + this.name + " stopped");
       return true;
     }
     return false;
@@ -58,7 +59,7 @@ public class Task extends Node {
   public void acceptVisit(NodeVisitor visitor) {
 
     visitor.visit(this);
-    System.out.println("Task " + this.name + " visited");
+    logger.debug("Task " + this.name + " visited");
 
     for (Interval interval : intervalList) {
       interval.acceptVisit(visitor);
@@ -68,5 +69,6 @@ public class Task extends Node {
   // Add interval to its list (useful when loading from json)
   public void addInterval(Interval interval) {
     intervalList.add(interval);
+    logger.debug("New Interval added to Task " + this.name);
   }
 }

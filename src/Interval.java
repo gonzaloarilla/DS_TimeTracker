@@ -19,7 +19,7 @@ public class Interval implements Observer {
   private Duration duration;
   private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   private JSONObject nodeJsonObject;
-  static private Logger logger = LoggerFactory.getLogger("Interval.class");
+  static private Logger logger = LoggerFactory.getLogger(Interval.class);
 
   public Interval(Node parent, boolean isActive) {
     this.parent = parent;
@@ -33,7 +33,7 @@ public class Interval implements Observer {
       Clock.getRunningClock().addObserver(this);
     }
 
-    //System.out.println("Interval created and running");
+    logger.debug("Interval created and running");
   }
 
   public void setInitialDate(LocalDateTime initialDate) {
@@ -92,13 +92,13 @@ public class Interval implements Observer {
   // every time the Observable has a notification to its observer.
   // It will updated intervals values and its parents (task and then project)
   public void update(Observable o, Object arg) {
-    System.out.println("Updating interval of " + this.parent.getName());
+    logger.debug("Updating interval of " + this.parent.getName());
 
     //Duration durationToSum = Duration.between(lastDate, (LocalDateTime) arg);
     Duration durationToSum = Duration.ofMillis(Clock.getPeriod());
     this.lastDate = (LocalDateTime) arg;
     this.duration = this.duration.plus(durationToSum);
-    System.out.println(this);
+    //System.out.println(this);
     parent.update(lastDate, durationToSum);
   }
 
@@ -111,7 +111,7 @@ public class Interval implements Observer {
       Duration durationToSum = Duration.ofMillis(Clock.getPeriod());
       this.duration = this.duration.plus(durationToSum);
       Clock.getRunningClock().deleteObserver(this);
-      System.out.println("Interval finished");
+      logger.debug("Interval finished");
       //System.out.println(this);
       //parent.update(lastDate, durationToSum);
     }
@@ -120,7 +120,7 @@ public class Interval implements Observer {
   // Method to use Visitor pattern design
   public void acceptVisit(NodeVisitor visitor) {
     visitor.visit(this);
-    System.out.println("Interval of " + parent.name + " visited");
+    logger.debug("Interval of " + parent.name + " visited");
   }
 
 }
