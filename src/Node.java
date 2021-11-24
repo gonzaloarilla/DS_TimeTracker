@@ -49,7 +49,7 @@ public abstract class Node {
     return logger != null;
   }
 
-  public void addTag(String tag) {this.tagList.add(tag.toLowerCase());}
+  public void addTag(String tag) {this.tagList.add(tag);}
 
   public List<String> getTagList() {return this.tagList;}
 

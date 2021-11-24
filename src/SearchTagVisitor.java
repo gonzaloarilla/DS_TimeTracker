@@ -19,7 +19,7 @@ public class SearchTagVisitor implements NodeVisitor {
   @Override
   public void visit(Node node) {
     for (String tag : node.getTagList()) {
-      if (tag.equals(this.tag)) {
+      if (tag.toLowerCase().equals(this.tag)) {
         nodeList.add(node);
         break;
       }
