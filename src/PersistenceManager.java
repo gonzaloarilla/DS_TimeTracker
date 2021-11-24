@@ -46,18 +46,19 @@ public class PersistenceManager {
   // Given a json file, we read it and return a root Node
     public static Node loadData(String filename) {
 
-    JSONObject object = null;
-    try {
-      FileReader fileReader = new FileReader(filename);
-      JSONTokener tokener = new JSONTokener(fileReader);
-      object = new JSONObject(tokener);
-      fileReader.close();
-      logger.debug("Data loaded correctly");
-    } catch (IOException e) {
-      logger.warn(e.toString());
-    }
+      JSONObject object = null;
+      try {
+        FileReader fileReader = new FileReader(filename);
+        JSONTokener tokener = new JSONTokener(fileReader);
+        object = new JSONObject(tokener);
+        fileReader.close();
+        logger.debug("Data loaded correctly");
+      } catch (IOException e) {
+        logger.warn(e.toString());
+      }
 
-    return restoreNodeStructure(null, object);
+      return restoreNodeStructure(null, object);
+    }
 
 
   // Recursive function which restores all the node structure from a JSONObject
