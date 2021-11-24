@@ -67,7 +67,8 @@ public class Client {
 
 
     // Test Execution
-    System.out.println("\nTest B starts:\n");
+    //System.out.println("\nTest B starts:\n");
+    logger.info("\nTest B starts:\n");
 
     transportation.startTask(transportationId);
     Thread.sleep(4000);
@@ -90,11 +91,13 @@ public class Client {
 
     Clock.stopClock();
 
-    System.out.println("Test B finished");
+    //System.out.println("Test B finished");
+    logger.info("Test B finished");
 
     PersistenceManager.saveData(root, "NodeData.json");
 
-    System.out.println("Data saved");
+    //System.out.println("Data saved");
+    logger.info("Test B finished");
 
   }
 
@@ -153,6 +156,7 @@ public class Client {
 
     // Test Execution
     System.out.println("\nTest B starts:\n");
+    logger.info("\nTest B starts:\n");
 
     transportation.startTask(transportationId);
     Thread.sleep(4000);
@@ -176,22 +180,27 @@ public class Client {
     Clock.stopClock();
 
     System.out.println("Test B finished");
-
+    logger.info("Test B finished");
 
     // SAVE DATA
-    System.out.println("\n");
-    System.out.println("\nSaving Data:\n");
+    logger.info("\n");
+    logger.info("\nSaving Data:\n");
+    logger.info("\n");
+    //System.out.println("\n");
+    //System.out.println("\nSaving Data:\n");
     PersistenceManager.saveData(root, "NodeData.json");
-    System.out.println("\n");
+    //System.out.println("\n");
 
     Thread.sleep(1000);
 
     root = new Project(rootId, "root", null);
 
     // LOAD DATA
-    System.out.println("\nLoading Data:\n");
+    //System.out.println("\nLoading Data:\n");
+    logger.info("\nLoading Data:\n");
     root = (Project) PersistenceManager.loadData("NodeData.json");
-    System.out.println("\n");
+    //System.out.println("\n");
+    logger.info("\n");
 
 
     // START AND STOP ONE TASK AGAIN
@@ -211,24 +220,31 @@ public class Client {
   public static void jsonMenu(Node root, String filename) throws IOException {
     Scanner scanner = new Scanner(System.in);
 
-    System.out.println("\nWhat do you want to do?\n");
-    System.out.println("1. Save JSON");
-    System.out.println("2. Load JSON\n");
+    //System.out.println("\nWhat do you want to do?\n");
+    //System.out.println("1. Save JSON");
+    //System.out.println("2. Load JSON\n");
+    logger.info("\nWhat do you want to do?\n");
+    logger.info("1. Save JSON");
+    logger.info("2. Load JSON\n");
 
-    System.out.print("Option (1 or 2): ");
+    //System.out.print("Option (1 or 2): ");
+    logger.info("Option (1 or 2): ");
     int option = scanner.nextInt();
 
     switch (option) {
       case 1: // Save
         PersistenceManager.saveData(root, filename);
-        System.out.println("Data has been saved correctly");
+        //System.out.println("Data has been saved correctly");
+        logger.info("Data has been saved correctly");
         break;
       case 2: // Load
         PersistenceManager.loadData(filename);
-        System.out.println("Data has been loaded correctly");
+        //System.out.println("Data has been loaded correctly");
+        logger.info("Data has been loaded correctly");
         break;
       default:
-        System.out.println("Error, invalid input!\n");
+        //System.out.println("Error, invalid input!\n");
+        logger.info("Error, invalid input!\n");
         break;
     }
     scanner.close();
