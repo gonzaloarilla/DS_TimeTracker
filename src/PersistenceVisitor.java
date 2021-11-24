@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 /*
 Class which implements the visit() methods from NodeVisitor
  */
-public class NodePersistenceVisitor implements NodeVisitor {
+public class PersistenceVisitor implements NodeVisitor {
 
   static private Logger logger = LoggerFactory.getLogger("NodePersistenceVisitor.class");
 

@@ -27,6 +27,7 @@ public class Clock extends Observable {
       }
     };
     timer.schedule(timerTask, delay, period);
+    logger.trace("New timer scheduled");
     assert invariant();
   }
 

@@ -27,7 +27,7 @@ public class PersistenceManager {
     assert !filename.isEmpty();
 
     // Saving all attributes while visit
-    NodeVisitor nodePersistence = new NodePersistenceVisitor();
+    NodeVisitor nodePersistence = new PersistenceVisitor();
     root.acceptVisit(nodePersistence);
     logger.debug("Full node structure visited");
     try {
