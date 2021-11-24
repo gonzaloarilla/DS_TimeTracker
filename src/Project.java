@@ -9,7 +9,7 @@ Project is a type of Node, it uses Composite pattern design
  */
 public class Project extends Node {
   private List<Node> nodeList; // Might be Project or Task
-  static private Logger logger = LoggerFactory.getLogger(Project.class);
+  private static Logger logger = LoggerFactory.getLogger(Project.class);
 
   public Project(String id, String name, Node parent) {
     super(id, name, parent);

@@ -16,7 +16,7 @@ the Node structure data within a JSON file
  */
 public class PersistenceManager {
 
-  static private Logger logger = LoggerFactory.getLogger(PersistenceManager.class);
+  private static Logger logger = LoggerFactory.getLogger(PersistenceManager.class);
 
   // Given a root project, we visit all its children using Visitor design pattern
   // Once they're visited, we save its JSON objects into a file
@@ -44,21 +44,19 @@ public class PersistenceManager {
   }
 
   // Given a json file, we read it and return a root Node
-    public static Node loadData(String filename) {
-
-      JSONObject object = null;
-      try {
-        FileReader fileReader = new FileReader(filename);
-        JSONTokener tokener = new JSONTokener(fileReader);
-        object = new JSONObject(tokener);
-        fileReader.close();
-        logger.debug("Data loaded correctly");
-      } catch (IOException e) {
-        logger.warn(e.toString());
-      }
-
-      return restoreNodeStructure(null, object);
+  public static Node loadData(String filename) {
+    JSONObject object = null;
+    try {
+      FileReader fileReader = new FileReader(filename);
+      JSONTokener tokener = new JSONTokener(fileReader);
+      object = new JSONObject(tokener);
+      fileReader.close();
+      logger.debug("Data loaded correctly");
+    } catch (IOException e) {
+      logger.warn(e.toString());
     }
+    return restoreNodeStructure(null, object);
+  }
 
 
   // Recursive function which restores all the node structure from a JSONObject
@@ -142,11 +140,11 @@ public class PersistenceManager {
   // Retrieves and sets the interval data from a JSONObject
   private static Interval setupNewInterval(Interval interval, JSONObject jsonObject) {
 
-    LocalDateTime initialDate;
-    LocalDateTime lastDate;
-    String initialDateString = jsonObject.optString("initialDate");
-    String lastDateString = jsonObject.optString("lastDate");
-    long duration = jsonObject.optLong("duration");
+    final LocalDateTime initialDate;
+    final LocalDateTime lastDate;
+    final String initialDateString = jsonObject.optString("initialDate");
+    final String lastDateString = jsonObject.optString("lastDate");
+    final long duration = jsonObject.optLong("duration");
 
     // Duration
     interval.setDuration(Duration.ZERO.plusSeconds(duration));

@@ -24,7 +24,7 @@ public abstract class Node {
   protected DateTimeFormatter dateTimeFormatter =
       DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   protected JSONObject nodeJsonObject;
-  static private Logger logger = LoggerFactory.getLogger(Node.class);
+  private static Logger logger = LoggerFactory.getLogger(Node.class);
 
 
   protected Node(String id, String name, Node parent) {
@@ -49,9 +49,13 @@ public abstract class Node {
     return logger != null;
   }
 
-  public void addTag(String tag) {this.tagList.add(tag);}
+  public void addTag(String tag) {
+    this.tagList.add(tag);
+  }
 
-  public List<String> getTagList() {return this.tagList;}
+  public List<String> getTagList() {
+    return this.tagList;
+  }
 
   public JSONObject getJsonObject() {
     return nodeJsonObject;
@@ -144,7 +148,8 @@ public abstract class Node {
     if (this.duration != null) {
       this.duration = this.duration.plus(durationToSum);
 
-      logger.debug("Duration of " + this.name + " has been updated to " + String.valueOf(this.duration.getSeconds()));
+      logger.debug("Duration of " + this.name
+          + " has been updated to " + String.valueOf(this.duration.getSeconds()));
     }
   }
 

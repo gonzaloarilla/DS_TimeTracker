@@ -8,8 +8,11 @@ Class which implements the visit() methods from NodeVisitor
  */
 public class PersistenceVisitor implements NodeVisitor {
 
-  static private Logger logger = LoggerFactory.getLogger("NodePersistenceVisitor.class");
+  private static Logger logger = LoggerFactory.getLogger("NodePersistenceVisitor.class");
 
+  private boolean invariant() {
+    return logger != null;
+  }
 
   // Visit method for Projects and Tasks. It puts the node data into its own JSONObject attribute
   public void visit(Node node) {
@@ -43,10 +46,6 @@ public class PersistenceVisitor implements NodeVisitor {
       // The node's JSONObject is put inside parent's JSONArray
       array.put(node.getJsonObject());
     }
-  }
-
-  private boolean invariant() {
-    return logger != null;
   }
 
   // Visit method for Intervals

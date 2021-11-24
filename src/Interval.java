@@ -19,7 +19,7 @@ public class Interval implements Observer {
   private Duration duration;
   private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   private JSONObject nodeJsonObject;
-  static private Logger logger = LoggerFactory.getLogger(Interval.class);
+  private static Logger logger = LoggerFactory.getLogger(Interval.class);
 
   public Interval(Node parent, boolean isActive) {
     // precondition

@@ -15,7 +15,7 @@ public class Clock extends Observable {
   private final Timer timer;
   private final TimerTask timerTask;
   private LocalDateTime lastDate;
-  static private Logger logger = LoggerFactory.getLogger(Clock.class);
+  private static Logger logger = LoggerFactory.getLogger(Clock.class);
 
   // Private constructor so we just have one instance of Clock
   private Clock() {

@@ -16,6 +16,7 @@ public class SearchTagVisitor implements NodeVisitor {
   public List<Node> getNodeList() {
     return nodeList;
   }
+
   @Override
   public void visit(Node node) {
     for (String tag : node.getTagList()) {

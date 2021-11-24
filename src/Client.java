@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 public class Client {
 
-  static private final Logger logger = LoggerFactory.getLogger(Client.class);
+  private static final Logger logger = LoggerFactory.getLogger(Client.class);
 
   private static synchronized String createId() {
     UUID uuid = UUID.randomUUID();
@@ -283,8 +283,8 @@ public class Client {
 
   private static void testSearchByTag(Project root) {
 
-    List<Node> nodelist = Search.searchByTag(root, "java" );
-    for(Node node : nodelist) {
+    List<Node> nodelist = Search.searchByTag(root, "java");
+    for (Node node : nodelist) {
       System.out.println(node.name);
     }
   }
