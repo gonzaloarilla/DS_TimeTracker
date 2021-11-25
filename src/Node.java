@@ -51,6 +51,7 @@ public abstract class Node {
 
   public void addTag(String tag) {
     this.tagList.add(tag);
+    logger.debug("Tag " + tag + " has been added to " + this.name);
   }
 
   public List<String> getTagList() {
@@ -110,6 +111,7 @@ public abstract class Node {
     if (this.parent != null) {
       this.parent.setActive();
     }
+    assert !this.isActive;
   }
 
   // Set itself and its parent not active
@@ -118,6 +120,7 @@ public abstract class Node {
     if (this.parent != null) {
       this.parent.setNotActive();
     }
+    assert this.isActive;
   }
 
   public void setInitialDate(LocalDateTime initialDate) {

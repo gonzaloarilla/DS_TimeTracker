@@ -284,8 +284,6 @@ public class Client {
   private static void testSearchByTag(Project root) {
 
     List<Node> nodelist = Search.searchByTag(root, "java");
-    for (Node node : nodelist) {
-      System.out.println(node.name);
-    }
+
   }
 }

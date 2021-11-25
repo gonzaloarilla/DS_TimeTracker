@@ -15,9 +15,15 @@ public class Search {
     logger.debug("Searching nodes with tag " + tag);
     root.acceptVisit(search);
     if (!search.getNodeList().isEmpty()) {
-      logger.debug("Nodes found with tag " + tag);
+      String nodesFound = new String();
+      for (Node node : search.getNodeList()) {
+        nodesFound += node.name + ", ";
+      }
+      //Delete the last ", " of the string
+      nodesFound = nodesFound.substring(0, nodesFound.length() - 2);
+      logger.info(search.getNodeList().size() + " nodes found with tag " + tag + ": " + nodesFound);
     } else {
-      logger.debug("No nodes found with tag " + tag);
+      logger.info("No nodes found with tag " + tag);
     }
     return search.getNodeList();
   }
