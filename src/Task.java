@@ -18,9 +18,7 @@ public class Task extends Node {
     super(id, name, parent);
 
     // pre-conditions
-    assert !id.isEmpty();
-    assert !name.isEmpty();
-    assert parent != null;
+    assert !id.isEmpty() && !name.isEmpty() && parent != null;
 
     this.intervalList = new ArrayList<>();
     this.nodeJsonObject = new JSONObject();

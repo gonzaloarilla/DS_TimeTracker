@@ -18,7 +18,8 @@ public class Project extends Node {
     this.nodeList = new ArrayList<>();
     this.nodeJsonObject = new JSONObject();
 
-    assert !id.isEmpty() || !name.isEmpty() || parent != null;
+    // Parent assert no required (on root, parent is null)
+    assert !id.isEmpty() && !name.isEmpty();
 
     logger.debug("Project " + name + " has been created.");
   }
