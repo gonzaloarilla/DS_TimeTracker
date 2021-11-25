@@ -14,10 +14,12 @@ public class Project extends Node {
   public Project(String id, String name, Node parent) {
     super(id, name, parent);
     // pre-conditions
-    assert !id.isEmpty() && !name.isEmpty() && parent != null;
 
     this.nodeList = new ArrayList<>();
     this.nodeJsonObject = new JSONObject();
+
+    assert !id.isEmpty() || !name.isEmpty() || parent != null;
+
     logger.debug("Project " + name + " has been created.");
   }
 

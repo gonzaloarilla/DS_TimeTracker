@@ -39,10 +39,10 @@ public abstract class Node {
     this.tagList = new ArrayList<>();
 
     // pre-conditions
-    assert !id.isEmpty() && !name.isEmpty() && parent != null;
+    //assert !id.isEmpty() && !name.isEmpty() && parent != null;
 
     // logger check
-    assert invariant();
+    assert !invariant();
   }
 
   protected boolean invariant() {
@@ -50,6 +50,7 @@ public abstract class Node {
   }
 
   public void addTag(String tag) {
+    assert !tag.isEmpty();
     this.tagList.add(tag);
     logger.debug("Tag " + tag + " has been added to " + this.name);
   }

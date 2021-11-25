@@ -18,7 +18,9 @@ public class Task extends Node {
     super(id, name, parent);
 
     // pre-conditions
-    assert !id.isEmpty() && !name.isEmpty() && parent != null;
+    assert !id.isEmpty();
+    assert !name.isEmpty();
+    assert parent != null;
 
     this.intervalList = new ArrayList<>();
     this.nodeJsonObject = new JSONObject();
@@ -81,6 +83,7 @@ public class Task extends Node {
 
   // Add interval to its list (useful when loading from json)
   public void addInterval(Interval interval) {
+    assert invariant();
     intervalList.add(interval);
     logger.debug("New Interval added to Task " + this.name);
   }
