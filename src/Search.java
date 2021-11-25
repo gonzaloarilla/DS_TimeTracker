@@ -14,6 +14,7 @@ public class Search {
     SearchTagVisitor search = new SearchTagVisitor(tag);
     logger.debug("Searching nodes with tag " + tag);
     root.acceptVisit(search);
+
     if (!search.getNodeList().isEmpty()) {
       String nodesFound = new String();
       for (Node node : search.getNodeList()) {
