@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /*
-Class which implements the visit() methods from NodeVisitor
+Class which implements the visit() methods from PersistenceVisitor
  */
 public class PersistenceVisitor implements NodeVisitor {
 
