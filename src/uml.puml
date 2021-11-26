@@ -8,6 +8,21 @@ class Client {
 + main()
 }
 
+class Search{
+- logger : Logger
++ searchByTag(Project, String) : List<Node>
+}
+
+class SearchTagVisitor{
+- logger : Logger
+- tag : String
+- nodeList : List<Node>
++ SearchTagVisitor()
++ getNodeList() : List<Node>
++ visit(Interval)
++ visit(Node)
+}
+
 abstract Node {
 - name : String
 - id : string
@@ -120,5 +135,4 @@ Clock -down-|> java.util.Observable
 Interval -.down.-|> java.util.Observer
 Interval "*" --* "0" Task
 NodePersistenceVisitor -.down-|> NodeVisitor
-
 @enduml
