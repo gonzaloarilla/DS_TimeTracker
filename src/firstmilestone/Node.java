@@ -1,3 +1,5 @@
+package firstmilestone;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -14,7 +16,7 @@ It has the common attributes and methods in Project and Task
 public abstract class Node {
 
   protected String id;
-  protected String name;
+  public String name;
   protected LocalDateTime initialDate;
   protected LocalDateTime lastDate;
   protected Duration duration;

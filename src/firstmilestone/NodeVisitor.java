@@ -1,3 +1,5 @@
+package firstmilestone;
+
 /*
 Visitor Interface with visit methods for Nodes and Intervals
  */

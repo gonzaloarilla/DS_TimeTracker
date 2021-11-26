@@ -1,4 +1,10 @@
+package secondmilestone;
+
 import java.util.List;
+
+import firstmilestone.Node;
+import firstmilestone.Project;
+import firstmilestone.SearchTagVisitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

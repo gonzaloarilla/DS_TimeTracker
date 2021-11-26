@@ -1,10 +1,13 @@
+package firstmilestone;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /*
-Class which implements the visit() methods from SearchTagVisitor
+Class which implements the visit() methods from firstmilestone.SearchTagVisitor
  */
 public class SearchTagVisitor implements NodeVisitor {
   private static Logger logger = LoggerFactory.getLogger(SearchTagVisitor.class);
@@ -12,7 +15,7 @@ public class SearchTagVisitor implements NodeVisitor {
   private List<Node> nodeList;
 
   // It's important to lower case the tag we're going to search
-  SearchTagVisitor(String tag) {
+  public SearchTagVisitor(String tag) {
     this.nodeList = new ArrayList<>();
     this.tag = tag.toLowerCase();
   }
