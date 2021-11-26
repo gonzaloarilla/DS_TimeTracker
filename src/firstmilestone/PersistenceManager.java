@@ -40,7 +40,7 @@ public class PersistenceManager {
       fileWriter.close();
       logger.debug("Data saved correctly");
     } catch (IOException e) {
-      logger.warn(e.toString());
+      logger.error(e.toString());
     }
 
   }
@@ -55,7 +55,7 @@ public class PersistenceManager {
       fileReader.close();
       logger.debug("Data loaded correctly");
     } catch (IOException e) {
-      logger.warn(e.toString());
+      logger.error(e.toString());
     }
     return restoreNodeStructure(null, object);
   }

@@ -28,7 +28,7 @@ public class Search {
       }
       //Delete the last ", " of the string
       nodesFound = nodesFound.substring(0, nodesFound.length() - 2);
-      logger.info(search.getNodeList().size() + " nodes found with tag " + tag + ": " + nodesFound);
+      logger.info(search.getNodeList().size() + " node/s found with tag " + tag + ": " + nodesFound);
     } else {
       logger.info("No nodes found with tag " + tag);
     }

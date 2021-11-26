@@ -30,7 +30,7 @@ public class PersistenceVisitor implements NodeVisitor {
       node.getJsonObject().put("duration", node.getDurationSeconds());
       node.getJsonObject().put("type", node.getType());
     } catch (JSONException jsonException) {
-      logger.warn(jsonException.toString());
+      logger.error(jsonException.toString());
     }
 
     // Checks if parent has a JSONArray object created inside its JSONObject
@@ -63,7 +63,7 @@ public class PersistenceVisitor implements NodeVisitor {
       interval.getJsonObject().put("type", interval.getType());
 
     } catch (JSONException jsonException) {
-      logger.warn(jsonException.toString());
+      logger.error(jsonException.toString());
     }
 
     // Checks if parent has a JSONArray object created inside its JSONObject

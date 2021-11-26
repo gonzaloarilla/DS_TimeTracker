@@ -32,12 +32,15 @@ public class SearchTagVisitor implements NodeVisitor {
   @Override
   public void visit(Interval interval) {
     // Do nothing
+    logger.debug("Visiting an interval as searching for tag " + this.tag);
   }
 
   @Override
   public void visit(Node node) {
     for (String tag : node.getTagList()) {
+      logger.debug("Visiting a node as searching for tag " + this.tag);
       if (tag.toLowerCase().equals(this.tag)) {
+        logger.debug("Node " + node.name + " was found");
         nodeList.add(node);
         break;
       }
