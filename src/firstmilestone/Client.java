@@ -11,7 +11,7 @@ import secondmilestone.Search;
 
 public class Client {
 
-  private static final Logger logger = LoggerFactory.getLogger(Client.class);
+  private static final Logger logger = LoggerFactory.getLogger(firstmilestone.Client.class);
 
   private static synchronized String createId() {
     UUID uuid = UUID.randomUUID();

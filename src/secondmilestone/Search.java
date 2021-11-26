@@ -4,7 +4,6 @@ import java.util.List;
 
 import firstmilestone.Node;
 import firstmilestone.Project;
-import firstmilestone.SearchTagVisitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +12,7 @@ Class which will search Nodes based on tags or future implementations
  */
 public class Search {
 
-  private static Logger logger = LoggerFactory.getLogger(Search.class);
+  private static Logger logger = LoggerFactory.getLogger(secondmilestone.Search.class);
 
   // This methods allows to search Nodes by its tags. It uses Visitor design pattern.
   public static List<Node> searchByTag(Project root, String tag) {

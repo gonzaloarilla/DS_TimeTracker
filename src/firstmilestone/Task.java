@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 public class Task extends Node {
 
   private List<Interval> intervalList;
-  private static Logger logger = LoggerFactory.getLogger(Task.class);
+  private static Logger logger = LoggerFactory.getLogger(firstmilestone.Task.class);
 
   public Task(String id, String name, Node parent) {
     super(id, name, parent);

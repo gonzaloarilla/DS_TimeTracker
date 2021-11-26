@@ -32,17 +32,8 @@
     </root>
 
 
-<!--    <logger name="Client.class" level="ERROR"/>-->
-<!--    <logger name="Clock.class" level="ERROR"/>-->
-<!--    <logger name="Node.class" level="ERROR"/>-->
-<!--    <logger name="Project.class" level="ERROR"/>-->
-<!--    <logger name="Task.class" level="ERROR"/>-->
-<!--    <logger name="Interval.class" level="ERROR"/>-->
-<!--    <logger name="PersistenceManager.class" level="ERROR"/>-->
-<!--    <logger name="PersistenceVisitor.class" level="ERROR"/>-->
-
-<!--    <logger name="firstmilestone.SearchTagVisitor.class" level="ERROR"/>-->
-<!--    <logger name="Search.class" level="ERROR"/>-->
+<!--<logger name="firstmilestone" level="ERROR"/>-->
+<!--<logger name="secondmilestone" level="ERROR"/>-->
 
 
 </configuration>

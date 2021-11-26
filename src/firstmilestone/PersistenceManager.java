@@ -18,7 +18,7 @@ the Node structure data within a JSON file
  */
 public class PersistenceManager {
 
-  private static Logger logger = LoggerFactory.getLogger(PersistenceManager.class);
+  private static Logger logger = LoggerFactory.getLogger(firstmilestone.PersistenceManager.class);
 
   // Given a root project, we visit all its children using Visitor design pattern
   // Once they're visited, we save its JSON objects into a file

@@ -10,7 +10,7 @@ Class which implements the visit() methods from PersistenceVisitor
  */
 public class PersistenceVisitor implements NodeVisitor {
 
-  private static Logger logger = LoggerFactory.getLogger("NodePersistenceVisitor.class");
+  private static Logger logger = LoggerFactory.getLogger(firstmilestone.PersistenceVisitor.class);
 
   private boolean invariant() {
     return logger != null;

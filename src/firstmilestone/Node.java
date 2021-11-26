@@ -26,7 +26,7 @@ public abstract class Node {
   protected DateTimeFormatter dateTimeFormatter =
       DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   protected JSONObject nodeJsonObject;
-  private static Logger logger = LoggerFactory.getLogger(Node.class);
+  private static Logger logger = LoggerFactory.getLogger(firstmilestone.Node.class);
 
 
   protected Node(String id, String name, Node parent) {
