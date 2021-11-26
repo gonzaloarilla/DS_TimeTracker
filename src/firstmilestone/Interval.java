@@ -108,6 +108,7 @@ public class Interval implements Observer {
     Duration durationToSum = Duration.ofMillis(Clock.getPeriod());
     this.lastDate = (LocalDateTime) arg;
     this.duration = this.duration.plus(durationToSum);
+    logger.trace("Interval updated duration = " + String.valueOf(this.duration.getSeconds()));
     //System.out.println(this);
     parent.update(lastDate, durationToSum);
   }
@@ -121,8 +122,8 @@ public class Interval implements Observer {
       Duration durationToSum = Duration.ofMillis(Clock.getPeriod());
       this.duration = this.duration.plus(durationToSum);
       Clock.getRunningClock().deleteObserver(this);
-      logger.debug("Interval finished");
-      //System.out.println(this);
+      logger.debug("Interval finished with duration = " + String.valueOf(this.duration.getSeconds()));
+
       //parent.update(lastDate, durationToSum);
     }
   }

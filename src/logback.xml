@@ -31,9 +31,8 @@
         <appender-ref ref="FILE" />
     </root>
 
-
-<logger name="firstmilestone" level="ERROR"/>
-<!--<logger name="secondmilestone" level="ERROR"/>-->
-
+    <!-- Els packages descommentats s'ignoren -->
+    <!--<logger name="firstmilestone" level="ERROR"/>-->
+    <!--<logger name="secondmilestone" level="ERROR"/>-->
 
 </configuration>

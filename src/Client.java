@@ -1,9 +1,9 @@
-package firstmilestone;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
+
+import firstmilestone.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import secondmilestone.Search;
@@ -11,7 +11,7 @@ import secondmilestone.Search;
 
 public class Client {
 
-  private static final Logger logger = LoggerFactory.getLogger(firstmilestone.Client.class);
+  private static final Logger logger = LoggerFactory.getLogger(Client.class);
 
   private static synchronized String createId() {
     UUID uuid = UUID.randomUUID();
@@ -284,8 +284,12 @@ public class Client {
   }
 
   private static void testSearchByTag(Project root) {
+    Scanner scanner = new Scanner(System.in);
 
-    List<Node> nodelist = Search.searchByTag(root, "dart");
-
+    while (true) {
+      logger.info("TAG search | write tag: ");
+      String tag = scanner.next();
+      List<Node> nodelist = Search.searchByTag(root, tag);
+    }
   }
 }
