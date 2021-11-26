@@ -1,0 +1,124 @@
+@startuml
+class Client {
+- createId() : String
+- testB()
+- testBWithPersistence()
+- testLoad()
++ JSONMenu()
++ main()
+}
+
+abstract Node {
+- name : String
+- id : string
+- initialDate : LocalDateTime
+- lastDate : LocalDateTime
+- duration : Duration
+- isActive : boolean
+- parent : Node
+- dateTimeFormatter : DateTimeFormatter
+- nodeJSONObject : JSONObject
+- tags : List<String>
++ getJSONObject : JSONObject
++ setName(String)
++ getName() : String
++ getId() : string
++ startTask(String) : boolean
++ stopTask(String) : boolean
++ acceptVisit(NodeVisitor)
++ getDuration() : Duration
++ getExactTime() : Duration
++ getDurationSeconds() : long
++ getLastDate() : LocalDateTime
++ getStartDate() : LocalDateTime
++ isActive(t : Task) : boolean
++ setActive()
++ setNotActive()
++ setInitialDate(LocalDateTime)
++ setLastDate(LocalDateTime)
++ setDuration(Duration)
++ toString() : String
++ updateDuration(Duration)
++ update(LocalDateTime, Duration)
++ getType() : String
+}
+
+class Project {
++ getJSONObject() : JSONObject
++ addNode(Node)
++ startTask(String) : boolean
++ stopTask(String) : boolean
++ acceptVisit(NodeVisitor)
+}
+
+class Task {
++ startTask(String) : boolean
++ stopTask(String) : boolean
++ acceptVisit(NodeVisitor)
++ getJSONObject() : JSONObject
++ addInterval(Interval)
+}
+
+class Interval {
+- initialDate : LocalDateTime
+- lastDate : LocalDateTime
+- duration : Duration
+- isActive : boolean
+- parent : Node
+- dateTimeFormatter : DateTimeFormatter
+- nodeJSONObject : JSONObject
++ setInitialDate(LocalDateTime)
++ setLastDate(LocalDateTime)
++ setDuration(Duration)
++ getJSONObject() : JSONObject
++ getDurationSeconds() : long
++ getLastDate() : LocalDateTime
++ getStartDate() : LocalDateTime
++ getParent() : Node
++ isActive() : boolean
++ getType() : String
++ toString() : String
++ update(Observable, Object)
++ finish()
++ acceptVisit(NodeVisitor)
+}
+
+class Clock {
+- timer : Timer
+- timerTask : TimerTask
+- lastDate : LocalDateTime
+- runningClock : Clock
+- delay : int
+- period : int
++ getRunningClock()
++ stopClock()
+- update()
++ getPeriod()
+}
+
+class NodePersistenceVisitor {
++ visit(Node)
++ visit(Interval)
+}
+
+interface NodeVisitor {
++ visit(Node)
++ visit(Interval)
+}
+
+class PersistenceManager {
++ saveData(Node, String)
++ loadData(String) : Node
+- restoreNodeStructure(Node, JSONObject) : Node
+- setupNewInterval(Interval, JSONObject) : Interval
+}
+
+Project -|> Node
+Node "*" *-- "1" Project
+Task -.|> Node
+Clock -down-|> java.util.Observable
+Interval -.down.-|> java.util.Observer
+Interval "*" --* "0" Task
+NodePersistenceVisitor -.down-|> NodeVisitor
+
+@enduml
