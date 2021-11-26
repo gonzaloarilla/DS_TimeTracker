@@ -32,7 +32,7 @@
     </root>
 
 
-<!--<logger name="firstmilestone" level="ERROR"/>-->
+<logger name="firstmilestone" level="ERROR"/>
 <!--<logger name="secondmilestone" level="ERROR"/>-->
 
 
