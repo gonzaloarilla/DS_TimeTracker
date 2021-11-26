@@ -8,6 +8,8 @@ Logger
 
 
 Marc:
+DbyC
+Logger error fixing
 
 
 Oriol:
