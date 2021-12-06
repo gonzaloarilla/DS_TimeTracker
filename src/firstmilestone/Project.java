@@ -95,4 +95,15 @@ public class Project extends Node {
       node.acceptVisit(visitor);
     }
   }
+
+  // TODO
+  @Override
+  public Node findActivityById(int id) {
+    return null;
+  }
+
+  @Override
+  public Object toJson(int i) {
+    return null;
+  }
 }

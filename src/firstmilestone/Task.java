@@ -81,6 +81,16 @@ public class Task extends Node {
     }
   }
 
+  @Override
+  public Node findActivityById(int id) {
+    return null;
+  }
+
+  @Override
+  public Object toJson(int i) {
+    return null;
+  }
+
   // Add interval to its list (useful when loading from json)
   public void addInterval(Interval interval) {
     assert invariant();

@@ -57,6 +57,12 @@ public abstract class Node {
     logger.debug("Tag " + tag + " has been added to " + this.name);
   }
 
+  public void makeTreeCourses() {
+    // implement this method that returns the tree of
+    // appendix A in the practicum handout
+  }
+
+
   public List<String> getTagList() {
     return this.tagList;
   }
@@ -176,4 +182,11 @@ public abstract class Node {
   }
 
 
+  // TODO
+  public abstract Node findActivityById(int id);
+
+  // TODO
+  public abstract Object toJson(int i);
+  // The 1 means the desired depth of the tree, root plus its children and no more descendants.
+  // Each recursive call to toJson decrements the passed depth value, when received depth is zero do nothing.
 }
