@@ -23,7 +23,7 @@ public class MainWebServer {
   }
 
   public static Node makeTreeCourses() {
-    String rootId = "1";
+    String rootId = "0";
     Project root = new Project(rootId, "root", null);
 
     return root;
