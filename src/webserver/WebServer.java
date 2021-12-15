@@ -151,6 +151,7 @@ public class WebServer {
       String answer = "";
       answer += "HTTP/1.0 200 OK\r\n";
       answer += "Content-type: application/json\r\n";
+      answer +=   "Access-Control-Allow-Origin: *\r\n";
       answer += "\r\n";
       // blank line between headers and content, very important !
       return answer;
