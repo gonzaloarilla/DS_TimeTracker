@@ -121,20 +121,20 @@ public class WebServer {
           break;
         }
         case "start": {
-          int id = Integer.parseInt(tokens[1]);
+          Integer id = Integer.parseInt(tokens[1]);
           Node activity = findActivityById(id);
           assert (activity != null);
           Task task = (Task) activity;
-          task.startTask(toString(id));
+          task.startTask(id.toString());
           body = "{}";
           break;
         }
         case "stop": {
-          int id = Integer.parseInt(tokens[1]);
+          Integer id = Integer.parseInt(tokens[1]);
           Node activity = findActivityById(id);
           assert (activity != null);
           Task task = (Task) activity;
-          task.stopTask(toString(id));
+          task.stopTask(id.toString());
           body = "{}";
           break;
         }
