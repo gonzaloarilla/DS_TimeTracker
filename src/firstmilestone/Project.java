@@ -1,5 +1,6 @@
 package firstmilestone;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,11 +111,10 @@ public class Project extends Node {
   public JSONObject toJson(int id) {
     JSONObject json = new JSONObject();
     try {
-      // Set Node data into JSONObject
       json.put("id", id);
       json.put("name", name);
-      json.put("initialDate", initialDate);
-      json.put("lastDate", lastDate);
+      json.put("initialDate", initialDate.format(dateTimeFormatter));
+      json.put("lastDate", lastDate.format(dateTimeFormatter));
       json.put("duration", duration.getSeconds());
       json.put("type", this.getType());
     } catch (JSONException jsonException) {

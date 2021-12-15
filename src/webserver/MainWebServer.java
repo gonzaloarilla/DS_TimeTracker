@@ -1,9 +1,6 @@
 package webserver;
 
-import firstmilestone.Identifier;
-import firstmilestone.Node;
-import firstmilestone.Clock;
-import firstmilestone.Project;
+import firstmilestone.*;
 
 public class MainWebServer {
 
@@ -23,6 +20,7 @@ public class MainWebServer {
   }
 
   public static Node makeTreeCourses() {
+    // Root
     Project root = new Project(0, "root", null);
 
     return root;

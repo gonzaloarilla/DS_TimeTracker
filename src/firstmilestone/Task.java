@@ -2,6 +2,8 @@ package firstmilestone;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,6 +83,13 @@ public class Task extends Node {
     }
   }
 
+  // Add interval to its list (useful when loading from json)
+  public void addInterval(Interval interval) {
+    assert invariant();
+    intervalList.add(interval);
+    logger.debug("New Interval added to Task " + this.name);
+  }
+
   @Override
   public Node findActivityById(int id) {
     if (id == this.id) {
@@ -91,13 +100,19 @@ public class Task extends Node {
 
   @Override
   public JSONObject toJson(int i) {
-    return this.getJsonObject();
+    JSONObject json = new JSONObject();
+    try {
+      json.put("id", id);
+      json.put("name", name);
+      json.put("initialDate", initialDate.format(dateTimeFormatter));
+      json.put("lastDate", lastDate.format(dateTimeFormatter));
+      json.put("duration", duration.getSeconds());
+      json.put("type", this.getType());
+    } catch (JSONException jsonException) {
+      logger.error(jsonException.toString());
+    }
+    return json;
   }
 
-  // Add interval to its list (useful when loading from json)
-  public void addInterval(Interval interval) {
-    assert invariant();
-    intervalList.add(interval);
-    logger.debug("New Interval added to Task " + this.name);
-  }
+
 }
