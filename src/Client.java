@@ -24,59 +24,59 @@ public class Client {
 
     // Root
     String rootId = createId();
-    Project root = new Project(rootId, "root", null);
+    Project root = new Project(0, "root", null);
 
     // Projects setup
     String softwareDesignId = createId();
-    Project softwareDesign = new Project(softwareDesignId, "software design", root);
+    Project softwareDesign = new Project(1, "software design", root);
     softwareDesign.addTag("java");
     softwareDesign.addTag("flutter");
     root.addNode(softwareDesign);
 
     String softwareTestingId = createId();
-    Project softwareTesting = new Project(softwareTestingId, "software testing", root);
+    Project softwareTesting = new Project(2, "software testing", root);
     softwareTesting.addTag("c++");
     softwareTesting.addTag("Java");
     softwareTesting.addTag("python");
     root.addNode(softwareTesting);
 
     String databasesId = createId();
-    Project databases = new Project(databasesId, "databases", root);
+    Project databases = new Project(3, "databases", root);
     databases.addTag("SQL");
     databases.addTag("python");
     databases.addTag("C++");
     root.addNode(databases);
 
     String problemsId = createId();
-    Project problems = new Project(problemsId, "problems", softwareDesign);
+    Project problems = new Project(4, "problems", softwareDesign);
     softwareDesign.addNode(problems);
 
     String projectTimeTrackerId = createId();
-    Project projectTimeTracker = new Project(projectTimeTrackerId,
+    Project projectTimeTracker = new Project(5,
         "project time tracker", softwareDesign);
     softwareDesign.addNode(projectTimeTracker);
 
     // Tasks Setup
     String transportationId = createId();
-    Task transportation = new Task(transportationId, "transportation", root);
+    Task transportation = new Task(6, "transportation", root);
     root.addNode(transportation);
 
     String firstListId = createId();
-    Task firstList = new Task(firstListId, "first list", problems);
+    Task firstList = new Task(7, "first list", problems);
     firstList.addTag("java");
     problems.addNode(firstList);
 
     String secondListId = createId();
-    Task secondList = new Task(secondListId, "second list", problems);
+    Task secondList = new Task(8, "second list", problems);
     secondList.addTag("Dart");
     problems.addNode(secondList);
 
     String readHandoutId = createId();
-    Task readHandout = new Task(readHandoutId, "read handout", projectTimeTracker);
+    Task readHandout = new Task(9, "read handout", projectTimeTracker);
     projectTimeTracker.addNode(readHandout);
 
     String firstMilestoneId = createId();
-    Task firstMilestone = new Task(firstMilestoneId, "first milestone", projectTimeTracker);
+    Task firstMilestone = new Task(10, "first milestone", projectTimeTracker);
     firstMilestone.addTag("Java");
     firstMilestone.addTag("IntelliJ");
     projectTimeTracker.addNode(firstMilestone);
@@ -86,6 +86,7 @@ public class Client {
     //System.out.println("\nTest B starts:\n");
     logger.info("\nTest B starts:\n");
 
+    /*
     transportation.startTask(transportationId);
     Thread.sleep(4000);
     transportation.stopTask(transportationId);
@@ -104,7 +105,7 @@ public class Client {
     transportation.startTask(transportationId);
     Thread.sleep(4000);
     transportation.stopTask(transportationId);
-
+*/
     Clock.stopClock();
 
     //System.out.println("Test B finished");
@@ -122,7 +123,7 @@ public class Client {
 
   // Test B from project document using persistence and adding some more seconds
   private static void testBWithPersistence() throws InterruptedException, IOException {
-
+/*
     // Root
     String rootId = createId();
     Project root = new Project(rootId, "root", null);
@@ -232,7 +233,7 @@ public class Client {
 
     // Showing the menu to the user
     jsonMenu(root, "NodeData.json");
-
+*/
   }
 
   // Menu that let the user save or load data using JSON

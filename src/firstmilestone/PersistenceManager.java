@@ -70,7 +70,7 @@ public class PersistenceManager {
     assert jsonNodeObject != null;  // restore requires data
 
     // Retrieve data from JSONObject
-    String id = jsonNodeObject.optString("id");
+    int id = jsonNodeObject.optInt("id");
     String name = jsonNodeObject.optString("name");
     String initialDateString = jsonNodeObject.optString("initialDate");
     String lastDateString = jsonNodeObject.optString("lastDate");

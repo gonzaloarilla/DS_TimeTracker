@@ -125,7 +125,7 @@ public class WebServer {
           Node activity = findActivityById(id);
           assert (activity != null);
           Task task = (Task) activity;
-          task.startTask(id.toString());
+          task.startTask(id);
           body = "{}";
           break;
         }
@@ -134,7 +134,7 @@ public class WebServer {
           Node activity = findActivityById(id);
           assert (activity != null);
           Task task = (Task) activity;
-          task.stopTask(id.toString());
+          task.stopTask(id);
           body = "{}";
           break;
         }

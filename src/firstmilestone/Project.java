@@ -15,7 +15,7 @@ public class Project extends Node {
   private List<Node> nodeList; // Might be Project or Task
   private static Logger logger = LoggerFactory.getLogger(firstmilestone.Project.class);
 
-  public Project(String id, String name, Node parent) {
+  public Project(int id, String name, Node parent) {
     super(id, name, parent);
     // pre-conditions
 
@@ -23,7 +23,7 @@ public class Project extends Node {
     this.nodeJsonObject = new JSONObject();
 
     // Parent assert no required (on root, parent is null)
-    assert !id.isEmpty() && !name.isEmpty();
+    //assert !id.isEmpty() && !name.isEmpty();
 
     logger.debug("Project " + name + " has been created.");
   }
@@ -48,8 +48,8 @@ public class Project extends Node {
   // Start task looking for its ID
   // If node is a project, code gets back here until task instance reached
   @Override
-  public boolean startTask(String id) {
-    assert !id.isEmpty(); // id required
+  public boolean startTask(int id) {
+    //assert !id.isEmpty(); // id required
     // Search for the task with matching name
     boolean started = false;
     int i = 0;
@@ -66,8 +66,8 @@ public class Project extends Node {
   // Stop task looking for its ID
   // If node is a project, code gets back here until task instance reached
   @Override
-  public boolean stopTask(String id) {
-    assert !id.isEmpty(); // id required
+  public boolean stopTask(int id) {
+    //assert !id.isEmpty(); // id required
     // Search for the task with matching name
     boolean stopped = false;
     int i = 0;
@@ -94,9 +94,7 @@ public class Project extends Node {
 
   @Override
   public Node findActivityById(int id) {
-    Integer int_id = id;
-    String s_id = int_id.toString();
-    if (s_id.equals(this.id)) {
+    if (id == this.id) {
       System.out.println("return this");
       return this;
     } else {
@@ -109,7 +107,7 @@ public class Project extends Node {
   }
 
   @Override
-  public JSONObject toJson(int i) {
+  public JSONObject toJson(int id) {
     JSONObject json = new JSONObject();
     try {
       // Set Node data into JSONObject

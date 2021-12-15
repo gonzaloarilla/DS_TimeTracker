@@ -15,7 +15,7 @@ It has the common attributes and methods in Project and Task
  */
 public abstract class Node {
 
-  protected String id;
+  protected int id;
   public String name;
   protected LocalDateTime initialDate;
   protected LocalDateTime lastDate;
@@ -29,7 +29,7 @@ public abstract class Node {
   private static Logger logger = LoggerFactory.getLogger(firstmilestone.Node.class);
 
 
-  protected Node(String id, String name, Node parent) {
+  protected Node(int id, String name, Node parent) {
     this.name = name;
     this.id = id;
     this.parent = parent;
@@ -73,15 +73,15 @@ public abstract class Node {
     return name;
   }
 
-  public String getId() {
+  public int getId() {
     return id;
   }
 
-  public boolean startTask(String id) {
+  public boolean startTask(int id) {
     return true;
   }
 
-  public boolean stopTask(String id) {
+  public boolean stopTask(int id) {
     return true;
   }
 

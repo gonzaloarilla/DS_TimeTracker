@@ -16,11 +16,11 @@ public class Task extends Node {
   private List<Interval> intervalList;
   private static Logger logger = LoggerFactory.getLogger(firstmilestone.Task.class);
 
-  public Task(String id, String name, Node parent) {
+  public Task(int id, String name, Node parent) {
     super(id, name, parent);
 
     // pre-conditions
-    assert !id.isEmpty() && !name.isEmpty() && parent != null;
+    //assert !id.isEmpty() && !name.isEmpty() && parent != null;
 
     this.intervalList = new ArrayList<>();
     this.nodeJsonObject = new JSONObject();
@@ -39,10 +39,10 @@ public class Task extends Node {
   // A task will start if it hasn't started yet and has the ID we're looking for
   // It will create and start a new interval and added it its list of intervals
   @Override
-  public boolean startTask(String id) {
-    assert !id.isEmpty(); // id required
+  public boolean startTask(int id) {
+    //assert !id.isEmpty(); // id required
 
-    if (!this.isActive && id.equals(this.id)) {
+    if (!this.isActive && id == this.id) {
       Interval newInterval = new Interval(this, true);
       intervalList.add(newInterval);
       this.isActive = true;
@@ -55,10 +55,10 @@ public class Task extends Node {
   // A task will be stopped if it's active and has the ID we're looking for
   // It will also finish all its intervals and set the task to not active
   @Override
-  public boolean stopTask(String id) {
-    assert !id.isEmpty(); // id required
+  public boolean stopTask(int id) {
+    //assert !id.isEmpty(); // id required
 
-    if (this.isActive && id.equals(this.id)) {
+    if (this.isActive && id == this.id) {
       for (Interval interval : intervalList) {
         interval.finish();
       }
@@ -83,9 +83,7 @@ public class Task extends Node {
 
   @Override
   public Node findActivityById(int id) {
-    Integer int_id = id;
-    String s_id = int_id.toString();
-    if (s_id.equals(this.id)) {
+    if (id == this.id) {
       return this;
     }
     return null;
