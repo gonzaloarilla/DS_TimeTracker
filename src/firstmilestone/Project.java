@@ -2,6 +2,8 @@ package firstmilestone;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,19 +50,16 @@ public class Project extends Node {
   @Override
   public boolean startTask(String id) {
     assert !id.isEmpty(); // id required
-
     // Search for the task with matching name
     boolean started = false;
     int i = 0;
     while (!started && i < nodeList.size()) {
       started = nodeList.get(i).startTask(id);
       i++;
-
       if (started) {
         logger.debug("Project " + this.name + " has started");
       }
     }
-
     return started;
   }
 
@@ -69,19 +68,16 @@ public class Project extends Node {
   @Override
   public boolean stopTask(String id) {
     assert !id.isEmpty(); // id required
-
     // Search for the task with matching name
     boolean stopped = false;
     int i = 0;
     while (!stopped && i < nodeList.size()) {
       stopped = nodeList.get(i).stopTask(id);
       i++;
-
       if (stopped) {
         logger.debug("Project " + this.name + " has stopped");
       }
     }
-
     return stopped;
   }
 
@@ -96,14 +92,36 @@ public class Project extends Node {
     }
   }
 
-  // TODO
   @Override
   public Node findActivityById(int id) {
+    Integer int_id = id;
+    String s_id = int_id.toString();
+    if (s_id.equals(this.id)) {
+      System.out.println("return this");
+      return this;
+    } else {
+      System.out.println("else");
+      for (Node node : nodeList) {
+        node.findActivityById(id);
+      }
+    }
     return null;
   }
 
   @Override
-  public Object toJson(int i) {
-    return null;
+  public JSONObject toJson(int i) {
+    JSONObject json = new JSONObject();
+    try {
+      // Set Node data into JSONObject
+      json.put("id", id);
+      json.put("name", name);
+      json.put("initialDate", initialDate);
+      json.put("lastDate", lastDate);
+      json.put("duration", duration.getSeconds());
+      json.put("type", this.getType());
+    } catch (JSONException jsonException) {
+      logger.error(jsonException.toString());
+    }
+    return json;
   }
 }

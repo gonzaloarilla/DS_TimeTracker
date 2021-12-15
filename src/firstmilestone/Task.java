@@ -83,12 +83,17 @@ public class Task extends Node {
 
   @Override
   public Node findActivityById(int id) {
+    Integer int_id = id;
+    String s_id = int_id.toString();
+    if (s_id.equals(this.id)) {
+      return this;
+    }
     return null;
   }
 
   @Override
-  public Object toJson(int i) {
-    return null;
+  public JSONObject toJson(int i) {
+    return this.getJsonObject();
   }
 
   // Add interval to its list (useful when loading from json)

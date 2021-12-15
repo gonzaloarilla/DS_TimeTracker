@@ -18,13 +18,13 @@ import java.util.StringTokenizer;
 public class WebServer {
   private static final int PORT = 8080; // port to listen to
 
-  private Node currentActivity;
+  private Node currentNode;
   private final Node root;
 
   public WebServer(Node root) {
     this.root = root;
     System.out.println(root);
-    currentActivity = root;
+    currentNode = root;
     try {
       ServerSocket serverConnect = new ServerSocket(PORT);
       System.out.println("Server started.\nListening for connections on port : " + PORT + " ...\n");
@@ -155,6 +155,7 @@ public class WebServer {
       // blank line between headers and content, very important !
       return answer;
     }
+
   } // SocketThread
 
 } // WebServer
