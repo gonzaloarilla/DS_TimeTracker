@@ -4,6 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -95,28 +96,45 @@ public class Project extends Node {
 
   @Override
   public Node findActivityById(int id) {
-    if (id == this.id) {
-      System.out.println("return this");
+    if (this.id == id) {
       return this;
     } else {
-      System.out.println("else");
-      for (Node node : nodeList) {
-        node.findActivityById(id);
+      Node node = null;
+      boolean found = false;
+      int i = 0;
+      while (!found && i < nodeList.size()) {
+        node = nodeList.get(i).findActivityById(id);
+        if (node != null && node.getId() == id) {
+          found = true;
+        }
+        i++;
       }
+      return node;
     }
-    return null;
   }
 
   @Override
-  public JSONObject toJson(int id) {
+  public JSONObject toJson(int i) {
+
     JSONObject json = new JSONObject();
+    JSONArray children = new JSONArray();
+
     try {
-      json.put("id", id);
+      json.put("id", this.id);
       json.put("name", name);
       json.put("initialDate", initialDate.format(dateTimeFormatter));
       json.put("lastDate", lastDate.format(dateTimeFormatter));
       json.put("duration", duration.getSeconds());
       json.put("type", this.getType());
+
+      if (i>0) {
+        for (Node node : nodeList) {
+          JSONObject subNode = node.toJson(i--);
+          children.put(subNode);
+        }
+        json.put("nodeList", children);
+      }
+
     } catch (JSONException jsonException) {
       logger.error(jsonException.toString());
     }

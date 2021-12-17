@@ -3,6 +3,7 @@ package firstmilestone;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -92,22 +93,34 @@ public class Task extends Node {
 
   @Override
   public Node findActivityById(int id) {
-    if (id == this.id) {
+    if (this.id == id) {
       return this;
+    } else {
+      return null;
     }
-    return null;
   }
 
   @Override
   public JSONObject toJson(int i) {
+
     JSONObject json = new JSONObject();
+    JSONArray jsonIntervals = new JSONArray();
+
     try {
-      json.put("id", id);
+      json.put("id", this.id);
       json.put("name", name);
+      json.put("active", isActive);
       json.put("initialDate", initialDate.format(dateTimeFormatter));
       json.put("lastDate", lastDate.format(dateTimeFormatter));
       json.put("duration", duration.getSeconds());
       json.put("type", this.getType());
+
+      for (Interval interval : intervalList) {
+        JSONObject subNode = interval.toJson();
+        jsonIntervals.put(subNode);
+      }
+      json.put("intervals", jsonIntervals);
+
     } catch (JSONException jsonException) {
       logger.error(jsonException.toString());
     }

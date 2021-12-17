@@ -123,7 +123,7 @@ public class WebServer {
         case "start": {
           Integer id = Integer.parseInt(tokens[1]);
           Node activity = findActivityById(id);
-          assert (activity != null);
+          assert (activity != null); //comprovar que sigui una task?
           Task task = (Task) activity;
           task.startTask(id);
           body = "{}";

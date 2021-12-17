@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 import java.util.Observer;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -133,5 +135,24 @@ public class Interval implements Observer {
     visitor.visit(this);
     logger.debug("Interval of " + parent.name + " visited");
   }
+
+  public JSONObject toJson() {
+    JSONObject json = new JSONObject();
+
+    try {
+      //json.put("id", "");
+      json.put("active", isActive);
+      json.put("initialDate", initialDate.format(dateTimeFormatter));
+      json.put("lastDate", lastDate.format(dateTimeFormatter));
+      json.put("duration", duration.getSeconds());
+      json.put("type", this.getType());
+
+    } catch (JSONException jsonException) {
+      logger.error(jsonException.toString());
+    }
+    return json;
+  }
+
+
 
 }
