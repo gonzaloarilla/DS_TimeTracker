@@ -6,8 +6,9 @@ import 'package:time_tracker_flutter/requests.dart';
 
 class PageCreateTask extends StatefulWidget {
   late final int id;
+  late int parentId;
 
-
+  PageCreateTask(this.parentId);
   @override
   _CreateProjectTask createState() => _CreateProjectTask();
 }
@@ -17,13 +18,16 @@ class _CreateProjectTask extends State<PageCreateTask> {
   //late Future<Tree> futureTree;
   //late Tree tree;
 
+  late int parentId;
 
-  //@override
-  //void initState() {
-  //  super.initState();
-  //  id = widget.id; // of PageActivities
-  //  futureTree = getTree(id);
-  //}
+  @override
+  void initState() {
+    super.initState();
+    //id = widget.id; // of PageActivities
+    //futureTree = getTree(id);
+
+    parentId = widget.parentId;
+  }
 
   GlobalKey formKey = GlobalKey<FormState>();
 

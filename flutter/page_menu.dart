@@ -9,17 +9,27 @@ import 'package:time_tracker_flutter/page_create_task.dart';
 class PageMenu extends StatefulWidget {
   // late final int id;
 
+  late int parentId;
+  PageMenu(this.parentId);
+
   // @override
   _PageMenuState createState() => _PageMenuState();
+
+
 
 
 }
 
 class _PageMenuState extends State<PageMenu> {
 
+  late int parentId;
+
   @override
   void initState() {
     super.initState();
+
+    parentId = widget.parentId;
+
     // id = widget.id; // of PageActivities
     // futureTree = getTree(id);
   }
@@ -68,7 +78,7 @@ class _PageMenuState extends State<PageMenu> {
                                     primary: Colors.white,
                                     textStyle: const TextStyle(fontSize: 20),
                                   ),
-                                  onPressed: () { _onCreateClick("Project");},
+                                  onPressed: () { _onCreateClick("Project", parentId);},
                                   child: const Text('Add new project'),
                                 ),
                               ],
@@ -91,7 +101,7 @@ class _PageMenuState extends State<PageMenu> {
                                     primary: Colors.white,
                                     textStyle: const TextStyle(fontSize: 20),
                                   ),
-                                  onPressed: () {_onCreateClick("Task");},
+                                  onPressed: () {_onCreateClick("Task", parentId);},
                                   child: const Text('Add new task'),
                                 ),
                               ],
@@ -107,15 +117,16 @@ class _PageMenuState extends State<PageMenu> {
     );
   }
 
-  void _onCreateClick(String name) {
+  void _onCreateClick(String name, int parentId) {
     if (name == "Project")
       {
+        print("Parent id: " + parentId.toString());
         Navigator.of(context)
-            .push(MaterialPageRoute<void>(builder: (context) => PageCreateProject()));
+            .push(MaterialPageRoute<void>(builder: (context) => PageCreateProject(parentId)));
       } else if (name == "Task")
       {
         Navigator.of(context)
-            .push(MaterialPageRoute<void>(builder: (context) => PageCreateTask()));
+            .push(MaterialPageRoute<void>(builder: (context) => PageCreateTask(parentId)));
       }
     }
 }

@@ -9,8 +9,8 @@ import 'dart:convert';
 class PageCreateProject extends StatefulWidget {
   late final int id;
   // late TextEditingController projectController;
-
-
+  late int parentId;
+  PageCreateProject(this.parentId);
 
   @override
   _CreateProjectState createState() => _CreateProjectState();
@@ -23,11 +23,13 @@ class _CreateProjectState extends State<PageCreateProject> {
   late TextEditingController nameCtrl = TextEditingController();
   late TextEditingController tagsCtrl = TextEditingController();
   late TextEditingController descriptionCtrl = TextEditingController();
+  late int parentId;
 
   @override
   void initState() {
     super.initState();
     // nameCtrl, tags = TextEditingController();
+    parentId = widget.parentId;
   }
 
   @override

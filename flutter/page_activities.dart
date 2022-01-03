@@ -61,7 +61,7 @@ class _PageActivitiesState extends State<PageActivities> {
             floatingActionButton: FloatingActionButton(
               backgroundColor: Colors.blue,
               child: const Icon(Icons.add,),
-              onPressed: () {_onMenuClick();},
+              onPressed: () {_onMenuClick(snapshot.data!.root.id);},
               tooltip: "Add a new node",
               
             ),
@@ -94,7 +94,7 @@ class _PageActivitiesState extends State<PageActivities> {
     // split by '.' and taking first element of resulting list removes the microseconds part
     if (activity is Project) {
       return ListTile(
-        title: Text('${activity.name}'),
+        title: Text('Project - ${activity.name}'),
         trailing: Text('$strDuration'),
         onTap: () => _navigateDownActivities(activity.id),
       );
@@ -104,7 +104,7 @@ class _PageActivitiesState extends State<PageActivities> {
       Widget trailing;
       trailing = Text('$strDuration');
       return ListTile(
-        title: Text('${activity.name}'),
+        title: Text('Task - ${activity.name}'),
         trailing: trailing,
         onTap: () => _navigateDownIntervals(activity.id),
         onLongPress: () {}, // TODO start/stop counting the time for tis task
@@ -135,8 +135,12 @@ class _PageActivitiesState extends State<PageActivities> {
     Navigator.of(context)
         .push(MaterialPageRoute<void>(builder: (context) => PageReport()));
   }
-  void _onMenuClick() {
+  void _onMenuClick(id) {
+    print("Add node clicked");
+    print("Current node id: " + id.toString());
     Navigator.of(context)
-        .push(MaterialPageRoute<void>(builder: (context) => PageMenu()));
+        .push(MaterialPageRoute<void>(builder: (context) => PageMenu(id)));
   }
+
+
 }
