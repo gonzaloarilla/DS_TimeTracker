@@ -1,46 +1,34 @@
 {
-  "duration": 24,
+  "duration": 0,
   "nodes": [
     {
-      "duration": 14,
+      "duration": 0,
       "nodes": [
         {
-          "duration": 14,
+          "duration": 0,
           "nodes": [
             {
-              "duration": 8,
-              "intervals": [{
-                "duration": 10,
-                "type": "interval",
-                "initialDate": "2021-11-26T16:38:54.339361200",
-                "lastDate": "2021-11-26T16:39:06.352916600"
-              }],
+              "duration": 0,
               "name": "first list",
-              "id": "5d6fa695-dc7a-4ae9-9d9a-aac0bfa095b6",
+              "id": 7,
               "type": "task",
-              "initialDate": "2021-11-26T16:38:50.308374600",
-              "lastDate": "2021-11-26T16:39:04.366538700"
+              "initialDate": "2021-12-18T12:38:53.923345200",
+              "lastDate": "2021-12-18T12:38:53.923345200"
             },
             {
-              "duration": 6,
-              "intervals": [{
-                "duration": 8,
-                "type": "interval",
-                "initialDate": "2021-11-26T16:39:00.350537600",
-                "lastDate": "2021-11-26T16:39:08.357587700"
-              }],
+              "duration": 0,
               "name": "second list",
-              "id": "835850ab-34e6-4d77-8c3e-e3339186cc37",
+              "id": 8,
               "type": "task",
-              "initialDate": "2021-11-26T16:38:50.308374600",
-              "lastDate": "2021-11-26T16:39:06.370569300"
+              "initialDate": "2021-12-18T12:38:53.924333",
+              "lastDate": "2021-12-18T12:38:53.924333"
             }
           ],
           "name": "problems",
-          "id": "2bfaec7c-1085-4c3b-990c-3fdadd784ab7",
+          "id": 4,
           "type": "project",
-          "initialDate": "2021-11-26T16:38:50.306383",
-          "lastDate": "2021-11-26T16:39:06.370569300"
+          "initialDate": "2021-12-18T12:38:53.919330",
+          "lastDate": "2021-12-18T12:38:53.919330"
         },
         {
           "duration": 0,
@@ -48,75 +36,61 @@
             {
               "duration": 0,
               "name": "read handout",
-              "id": "afaa4580-b3fe-46e1-92bc-5a4fb4ea47cd",
+              "id": 9,
               "type": "task",
-              "initialDate": "2021-11-26T16:38:50.308374600",
-              "lastDate": "2021-11-26T16:38:50.308374600"
+              "initialDate": "2021-12-18T12:38:53.924333",
+              "lastDate": "2021-12-18T12:38:53.924333"
             },
             {
               "duration": 0,
               "name": "first milestone",
-              "id": "aefe5beb-794a-44f4-808d-09a1ce251e43",
+              "id": 10,
               "type": "task",
-              "initialDate": "2021-11-26T16:38:50.308374600",
-              "lastDate": "2021-11-26T16:38:50.308374600"
+              "initialDate": "2021-12-18T12:38:53.925335",
+              "lastDate": "2021-12-18T12:38:53.925335"
             }
           ],
           "name": "project time tracker",
-          "id": "b0a970c5-0488-4e5c-9cfb-cd9d56301c45",
+          "id": 5,
           "type": "project",
-          "initialDate": "2021-11-26T16:38:50.307377900",
-          "lastDate": "2021-11-26T16:38:50.307377900"
+          "initialDate": "2021-12-18T12:38:53.920333200",
+          "lastDate": "2021-12-18T12:38:53.920333200"
         }
       ],
       "name": "software design",
-      "id": "093e1623-2efa-418b-828a-5dd167196644",
+      "id": 1,
       "type": "project",
-      "initialDate": "2021-11-26T16:38:50.301335800",
-      "lastDate": "2021-11-26T16:39:06.370569300"
+      "initialDate": "2021-12-18T12:38:53.909329700",
+      "lastDate": "2021-12-18T12:38:53.909329700"
     },
     {
       "duration": 0,
       "name": "software testing",
-      "id": "70e1b712-55fb-4fc3-affe-d12ff2c1aaaa",
+      "id": 2,
       "type": "project",
-      "initialDate": "2021-11-26T16:38:50.306383",
-      "lastDate": "2021-11-26T16:38:50.306383"
+      "initialDate": "2021-12-18T12:38:53.917340800",
+      "lastDate": "2021-12-18T12:38:53.917340800"
     },
     {
       "duration": 0,
       "name": "databases",
-      "id": "31b1f472-70b1-43c7-8b4e-0c32fbb19f4f",
+      "id": 3,
       "type": "project",
-      "initialDate": "2021-11-26T16:38:50.306383",
-      "lastDate": "2021-11-26T16:38:50.306383"
+      "initialDate": "2021-12-18T12:38:53.918329100",
+      "lastDate": "2021-12-18T12:38:53.918329100"
     },
     {
-      "duration": 10,
-      "intervals": [
-        {
-          "duration": 8,
-          "type": "interval",
-          "initialDate": "2021-11-26T16:38:48.309372200",
-          "lastDate": "2021-11-26T16:38:54.325144500"
-        },
-        {
-          "duration": 6,
-          "type": "interval",
-          "initialDate": "2021-11-26T16:39:08.364464400",
-          "lastDate": "2021-11-26T16:39:14.368011200"
-        }
-      ],
+      "duration": 0,
       "name": "transportation",
-      "id": "1d7736d0-3a21-4b6e-89bc-403f1e8237fa",
+      "id": 6,
       "type": "task",
-      "initialDate": "2021-11-26T16:38:50.307377900",
-      "lastDate": "2021-11-26T16:39:12.391205600"
+      "initialDate": "2021-12-18T12:38:53.921333",
+      "lastDate": "2021-12-18T12:38:53.921333"
     }
   ],
   "name": "root",
-  "id": "005a9d59-b87e-435e-abe1-df86dd4579f2",
+  "id": 0,
   "type": "project",
-  "initialDate": "2021-11-26T16:38:50.291453500",
-  "lastDate": "2021-11-26T16:39:12.391205600"
+  "initialDate": "2021-12-18T12:38:53.881331600",
+  "lastDate": "2021-12-18T12:38:53.881331600"
 }
