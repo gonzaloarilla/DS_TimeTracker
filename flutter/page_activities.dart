@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
@@ -24,11 +26,16 @@ class _PageActivitiesState extends State<PageActivities> {
   PageReport pageReport = new PageReport();
   var isActive = false;
 
+  late Timer _timer;
+  static const int periodeRefresh = 2; // better a multiple of periode in TimeTracker, 2 seconds
+
+
   @override
   void initState() {
     super.initState();
     id = widget.id; // of PageActivities
     futureTree = getTree(id);
+    _activateTimer();
   }
 
   @override
@@ -73,6 +80,7 @@ class _PageActivitiesState extends State<PageActivities> {
                           } else {
                             start(activity.id);
                           }
+                          _refresh();
                         },
                         trailingIcon: isActive ? Icon(Icons.pause_outlined) : Icon(Icons.play_arrow_outlined)),
                     FocusedMenuItem(title: Text("Details"), onPressed: () => _onDetailsClick(), trailingIcon: Icon(Icons.info_outline)),
@@ -140,17 +148,25 @@ class _PageActivitiesState extends State<PageActivities> {
   }
 
   void _navigateDownActivities(int childId) {
+    _timer.cancel();
     Navigator.of(context)
         .push(MaterialPageRoute<void>(
       builder: (context) => PageActivities(childId),
-    ));
+    )).then((var value) {
+      _activateTimer();
+      _refresh();
+    });
   }
 
   void _navigateDownIntervals(int childId) {
+    _timer.cancel();
     Navigator.of(context)
         .push(MaterialPageRoute<void>(
       builder: (context) => PageIntervals(childId),
-    ));
+    )).then((var value) {
+      _activateTimer();
+      _refresh();
+    });
   }
 
   void _onReportClick() {
@@ -170,5 +186,26 @@ class _PageActivitiesState extends State<PageActivities> {
     Navigator.of(context)
         .push(MaterialPageRoute<void>(builder: (context) => PageInfo()));
   }
+
+  void _refresh() async {
+    futureTree = getTree(id);
+    setState(() {});
+  }
+
+  void _activateTimer() {
+    _timer = Timer.periodic(Duration(seconds: periodeRefresh), (Timer t) {
+      futureTree = getTree(id);
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    // "The framework calls this method when this State object will never build again"
+    // therefore when going up
+    _timer.cancel();
+    super.dispose();
+  }
+
 
 }

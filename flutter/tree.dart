@@ -62,15 +62,14 @@ class Task extends Activity {
 
 
 class Interval {
-  int id;
+
   DateTime? initialDate;
   DateTime? lastDate;
   int duration;
   bool active;
 
   Interval.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        initialDate = json['initialDate'] == null ? null : _dateFormatter.parse(json['initialDate']),
+      :  initialDate = json['initialDate'] == null ? null : _dateFormatter.parse(json['initialDate']),
         lastDate = json['lastDate'] == null ? null : _dateFormatter.parse(json['lastDate']),
         duration = json['duration'],
         active = json['active'];
