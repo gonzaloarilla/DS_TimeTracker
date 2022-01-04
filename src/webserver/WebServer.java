@@ -6,12 +6,10 @@ import firstmilestone.Task;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URLDecoder;
 import java.util.StringTokenizer;
 
 // Based on
@@ -116,7 +114,7 @@ public class WebServer {
     }
 
 
-    private String makeBodyAnswer(String[] tokens) {
+    private String makeBodyAnswer(String[] tokens) throws UnsupportedEncodingException {
       String body = "";
       switch (tokens[0]) {
         case "get_tree": {
@@ -150,9 +148,9 @@ public class WebServer {
           Project parent = (Project) findActivityById(parentId);
           assert (parent != null);
           Integer isProject = Integer.parseInt(tokens[2]);
-          String name = tokens[3];
-          String description = tokens[4];
-          String tags = tokens[5];
+          String name = URLDecoder.decode(tokens[3], "UTF-8");
+          String description = URLDecoder.decode(tokens[4], "UTF-8");
+          String tags = URLDecoder.decode(tokens[5], "UTF-8");
 
           System.out.println("TAGS: " + tags);
 
