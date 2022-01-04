@@ -1,7 +1,10 @@
 package webserver;
 
 import firstmilestone.Node;
+import firstmilestone.Project;
 import firstmilestone.Task;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,6 +23,9 @@ public class WebServer {
 
   private Node currentNode;
   private final Node root;
+
+  private int lastId = 99;
+
 
   public WebServer(Node root) {
     this.root = root;
@@ -138,7 +144,33 @@ public class WebServer {
           body = "{}";
           break;
         }
-        // TODO: add new task, project
+        case "add_node": {
+          //TODO: obtenir IDs correctes pels nous nodes // inserir tags al node
+          Integer parentId = Integer.parseInt(tokens[1]);
+          Project parent = (Project) findActivityById(parentId);
+          assert (parent != null);
+          Integer isProject = Integer.parseInt(tokens[2]);
+          String name = tokens[3];
+          String description = tokens[4];
+          String tags = tokens[5];
+
+          System.out.println("TAGS: " + tags);
+
+
+          if (isProject == 1) {
+            System.out.println("NAME of new node: " + name);
+
+            Project newNode = new Project(lastId+1, name, parent);
+            //add tags
+            parent.addNode(newNode);
+          } else {
+            Task newNode = new Task(lastId+1, name, parent);
+            //add tags
+            parent.addNode(newNode);
+          }
+          lastId++;
+          break;
+        }
         // TODO: edit task, project properties
         default:
           assert false;
@@ -151,7 +183,7 @@ public class WebServer {
       String answer = "";
       answer += "HTTP/1.0 200 OK\r\n";
       answer += "Content-type: application/json\r\n";
-      answer +=   "Access-Control-Allow-Origin: *\r\n";
+      answer += "Access-Control-Allow-Origin: *\r\n";
       answer += "\r\n";
       // blank line between headers and content, very important !
       return answer;

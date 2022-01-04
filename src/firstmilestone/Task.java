@@ -105,6 +105,8 @@ public class Task extends Node {
 
     JSONObject json = new JSONObject();
     JSONArray jsonIntervals = new JSONArray();
+    JSONArray tagsJson = new JSONArray();
+
 
     try {
       json.put("id", this.id);
@@ -114,6 +116,12 @@ public class Task extends Node {
       json.put("lastDate", lastDate.format(dateTimeFormatter));
       json.put("duration", duration.getSeconds());
       json.put("type", this.getType());
+
+      for (String tag : tagList) {
+        tagsJson.put(tag);
+      }
+
+      json.put("tags", tagsJson);
 
       for (Interval interval : intervalList) {
         JSONObject subNode = interval.toJson();

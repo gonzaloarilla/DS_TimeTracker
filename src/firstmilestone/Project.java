@@ -118,6 +118,7 @@ public class Project extends Node {
 
     JSONObject json = new JSONObject();
     JSONArray children = new JSONArray();
+    JSONArray tagsJson = new JSONArray();
 
     try {
       json.put("id", this.id);
@@ -126,6 +127,12 @@ public class Project extends Node {
       json.put("lastDate", lastDate.format(dateTimeFormatter));
       json.put("duration", duration.getSeconds());
       json.put("type", this.getType());
+
+      for (String tag : tagList) {
+        tagsJson.put(tag);
+      }
+
+      json.put("tags", tagsJson);
 
       if (i>0) {
         for (Node node : nodeList) {
