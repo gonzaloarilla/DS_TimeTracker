@@ -156,7 +156,6 @@ public class WebServer {
 
           System.out.println("TAGS: " + tags);
 
-
           if (isProject == 1) {
             System.out.println("NAME of new node: " + name);
 

@@ -120,7 +120,6 @@ public class Task extends Node {
       for (String tag : tagList) {
         tagsJson.put(tag);
       }
-
       json.put("tags", tagsJson);
 
       for (Interval interval : intervalList) {

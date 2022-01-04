@@ -131,7 +131,6 @@ public class Project extends Node {
       for (String tag : tagList) {
         tagsJson.put(tag);
       }
-
       json.put("tags", tagsJson);
 
       if (i>0) {
