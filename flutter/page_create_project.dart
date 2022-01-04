@@ -153,20 +153,7 @@ void _dialogForTest(String txt) async {
     var jsoned = json.encode(toJson);
     // print(jsoned);
 
-  void _onClearSearch(TextEditingController controller) {
-    controller.text = "";
-
-  }
-
-  List<String> _onSearchTag(TextEditingController controller){
-    var tagsToSearch = controller.text.split(", ");
-    // _dialogForTest(tagsToSearch);
-
-    print(tagsToSearch);
-
-    Navigator.of(context)
-        .push(MaterialPageRoute<void>(builder: (context) => PageSearch()));
-    return tagsToSearch;
+    addNode(parentId, 1, name, description, tags);
   }
 }
 

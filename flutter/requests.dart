@@ -71,7 +71,6 @@ void addNode(int parentId, int isProject, String name,
 
   print(parentId);
   print(isProject);
-  //print(convert.jsonEncode(json));
   String tagsAsString = tags.join(",");
   print(tagsAsString);
 
@@ -89,7 +88,7 @@ void addNode(int parentId, int isProject, String name,
     print("statusCode=$response.statusCode");
   } else {
     print("statusCode=$response.statusCode");
-    throw Exception('Failed to get children');
+    throw Exception('Failed to add new node');
   }
 
 
