@@ -84,10 +84,10 @@ class _PageActivitiesState extends State<PageActivities> {
                             _refresh();
                           },
                           trailingIcon: (activity as Task).active ? Icon(Icons.pause_outlined) : Icon(Icons.play_arrow_outlined)),
-                      FocusedMenuItem(title: Text("Details"), onPressed: () => _onDetailsClick(), trailingIcon: Icon(Icons.info_outline)),
+                      FocusedMenuItem(title: Text("Details"), onPressed: () => _onDetailsClick(id), trailingIcon: Icon(Icons.info_outline)),
                       FocusedMenuItem(title: Text("Delete", style: TextStyle(color: Colors.white),), onPressed: (){}, trailingIcon: Icon(Icons.delete, color: Colors.white), backgroundColor: Colors.redAccent),
                     ] : <FocusedMenuItem>[
-                      FocusedMenuItem(title: Text("Details"), onPressed: () => _onDetailsClick(), trailingIcon: Icon(Icons.info_outline)),
+                      FocusedMenuItem(title: Text("Details"), onPressed: () => _onDetailsClick(id), trailingIcon: Icon(Icons.info_outline)),
                       FocusedMenuItem(title: Text("Delete", style: TextStyle(color: Colors.white),), onPressed: (){}, trailingIcon: Icon(Icons.delete, color: Colors.white), backgroundColor: Colors.redAccent),
                     ]);
               },
@@ -186,10 +186,10 @@ class _PageActivitiesState extends State<PageActivities> {
         .push(MaterialPageRoute<void>(builder: (context) => PageMenu(id)));
   }
 
-  void _onDetailsClick() {
+  void _onDetailsClick(id) {
     print("Click");
     Navigator.of(context)
-        .push(MaterialPageRoute<void>(builder: (context) => PageInfo()));
+        .push(MaterialPageRoute<void>(builder: (context) => PageInfo(id)));
   }
 
   void _refresh() async {

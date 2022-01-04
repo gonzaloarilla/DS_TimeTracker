@@ -3,6 +3,7 @@ import 'package:time_tracker_flutter/page_intervals.dart';
 import 'package:time_tracker_flutter/page_report.dart';
 import 'package:time_tracker_flutter/tree.dart' hide getTree;
 import 'package:time_tracker_flutter/requests.dart';
+import 'package:time_tracker_flutter/page_search.dart';
 import 'dart:core';
 import 'dart:convert';
 
@@ -23,6 +24,8 @@ class _CreateProjectState extends State<PageCreateProject> {
   late TextEditingController nameCtrl = TextEditingController();
   late TextEditingController tagsCtrl = TextEditingController();
   late TextEditingController descriptionCtrl = TextEditingController();
+  late TextEditingController clearCtrl = TextEditingController();
+  late TextEditingController searchCtrl = TextEditingController();
   late int parentId;
 
   @override
@@ -45,18 +48,34 @@ class _CreateProjectState extends State<PageCreateProject> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("New Project"),
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.home),
-              onPressed: () {
-                Navigator.popUntil(context, ModalRoute.withName('/'));
-              }
-          ),
-          IconButton(
-              onPressed: () {
-              }, icon: Icon(Icons.search))
-        ],
-      ),
+        // The search area here
+          title: Container(
+            width: MediaQuery.of(context).size.width,
+            height: 40,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(5)),
+            child: Center(
+              child: TextField(
+                controller: searchCtrl,
+                decoration: InputDecoration(
+                    prefixIcon: IconButton(
+                        icon: Icon(Icons.clear),
+                        onPressed: () {
+                          _onClearSearch(searchCtrl);
+                        }
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.search),
+                      onPressed: () {
+                        _onSearchTag(searchCtrl);
+                      },
+                    ),
+                    hintText: 'Search a tag...',
+                    border: InputBorder.none),
+              ),
+            ),
+          )),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Form(
@@ -94,11 +113,11 @@ class _CreateProjectState extends State<PageCreateProject> {
 
                 },
                 style: OutlinedButton.styleFrom(
-                    side: BorderSide(
-                      width: 2.0,
-                      color: Colors.blue,
-                      style: BorderStyle.solid,
-                    ),
+                  side: BorderSide(
+                    width: 2.0,
+                    color: Colors.blue,
+                    style: BorderStyle.solid,
+                  ),
 
                 ),
               )
@@ -110,7 +129,7 @@ class _CreateProjectState extends State<PageCreateProject> {
   }
 
   // per testejar els resultats dels controladors
-void _dialogForTest(String txt) async {
+  void _dialogForTest(dynamic txt) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -151,9 +170,24 @@ void _dialogForTest(String txt) async {
     Map<String, dynamic> toJson = {'name': name, 'description': description, 'tags': tags};
     // print(toJson);
     var jsoned = json.encode(toJson);
-    // print(jsoned);
+    print(jsoned);
 
-    addNode(parentId, 1, name, description, tags);
+  }
+
+  void _onClearSearch(TextEditingController controller) {
+    controller.text = "";
+
+  }
+
+  List<String> _onSearchTag(TextEditingController controller){
+    var tagsToSearch = controller.text.split(", ");
+    // _dialogForTest(tagsToSearch);
+
+    print(tagsToSearch);
+
+    Navigator.of(context)
+        .push(MaterialPageRoute<void>(builder: (context) => PageSearch()));
+    return tagsToSearch;
   }
 }
 
