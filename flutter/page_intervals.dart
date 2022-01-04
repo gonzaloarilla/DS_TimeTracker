@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:time_tracker_flutter/tree.dart' as Tree hide getTree;
 // to avoid collision with an Interval class in another library
@@ -15,12 +17,30 @@ class PageIntervals extends StatefulWidget {
 class _PageIntervalsState extends State<PageIntervals> {
   late int id;
   late Future<Tree.Tree> futureTree;
+  late Timer _timer;
+  static const int periodeRefresh = 2; // better a multiple of periode in TimeTracker, 2 seconds
+
+  void _activateTimer() {
+    _timer = Timer.periodic(Duration(seconds: periodeRefresh), (Timer t) {
+      futureTree = getTree(id);
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    // "The framework calls this method when this State object will never build again"
+    // therefore when going up
+    _timer.cancel();
+    super.dispose();
+  }
 
   @override
   void initState() {
     super.initState();
     id = widget.id;
     futureTree = getTree(id);
+    _activateTimer();
   }
 
   @override
@@ -81,5 +101,6 @@ class _PageIntervalsState extends State<PageIntervals> {
       title: Text('from ${sInitialDate} to ${sLastDate}', style: currentStyle,),
       trailing: Text('$sDuration',style: currentStyle,),
     );
+
   }
 }

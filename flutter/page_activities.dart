@@ -63,29 +63,34 @@ class _PageActivitiesState extends State<PageActivities> {
               // it's like ListView.builder() but better because it includes a separator between items
               padding: const EdgeInsets.all(16.0),
               itemCount: snapshot.data!.root.children.length,
-              itemBuilder: (BuildContext context, int index) => FocusedMenuHolder( // Open option menu list
-                  child: _buildRow(snapshot.data!.root.children[index], index),
-                  blurSize: 2,
-                  blurBackgroundColor: Colors.white,
-                  menuWidth: MediaQuery.of(context).size.width*0.5,
-                  menuItemExtent: 70,
-                  onPressed: (){},
-                  menuItems: <FocusedMenuItem>[
-                    FocusedMenuItem(
-                        title: Text("Start Task"),
-                        onPressed: (){
-                          Activity activity = snapshot.data!.root.children[index];
-                          if ((activity as Task).active) {
-                            stop(activity.id);
-                          } else {
-                            start(activity.id);
-                          }
-                          _refresh();
-                        },
-                        trailingIcon: isActive ? Icon(Icons.pause_outlined) : Icon(Icons.play_arrow_outlined)),
-                    FocusedMenuItem(title: Text("Details"), onPressed: () => _onDetailsClick(), trailingIcon: Icon(Icons.info_outline)),
-                    FocusedMenuItem(title: Text("Delete", style: TextStyle(color: Colors.white),), onPressed: (){}, trailingIcon: Icon(Icons.delete, color: Colors.white), backgroundColor: Colors.redAccent),
-                  ]),
+              itemBuilder: (BuildContext context, int index) {
+                Activity activity = snapshot.data!.root.children[index];
+                return FocusedMenuHolder( // Open option menu list
+                    child: _buildRow(activity, index),
+                    blurSize: 2,
+                    blurBackgroundColor: Colors.white,
+                    menuWidth: MediaQuery.of(context).size.width*0.5,
+                    menuItemExtent: 70,
+                    onPressed: (){},
+                    menuItems: (activity is Task) ? <FocusedMenuItem>[
+                      FocusedMenuItem(
+                          title: activity.active ? Text("Stop Task") : Text("Start Task"),
+                          onPressed: (){
+                            if ((activity as Task).active) {
+                              stop(activity.id);
+                            } else {
+                              start(activity.id);
+                            }
+                            _refresh();
+                          },
+                          trailingIcon: (activity as Task).active ? Icon(Icons.pause_outlined) : Icon(Icons.play_arrow_outlined)),
+                      FocusedMenuItem(title: Text("Details"), onPressed: () => _onDetailsClick(), trailingIcon: Icon(Icons.info_outline)),
+                      FocusedMenuItem(title: Text("Delete", style: TextStyle(color: Colors.white),), onPressed: (){}, trailingIcon: Icon(Icons.delete, color: Colors.white), backgroundColor: Colors.redAccent),
+                    ] : <FocusedMenuItem>[
+                      FocusedMenuItem(title: Text("Details"), onPressed: () => _onDetailsClick(), trailingIcon: Icon(Icons.info_outline)),
+                      FocusedMenuItem(title: Text("Delete", style: TextStyle(color: Colors.white),), onPressed: (){}, trailingIcon: Icon(Icons.delete, color: Colors.white), backgroundColor: Colors.redAccent),
+                    ]);
+              },
               separatorBuilder: (BuildContext context, int index) =>
               const Divider(),
             ),
