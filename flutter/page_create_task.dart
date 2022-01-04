@@ -89,6 +89,9 @@ class _CreateTaskState extends State<PageCreateTask> {
                 onPressed: (){
                   // _dialogForTest(tagsCtrl.text);
                   _makeEncoded(nameCtrl.text, descriptionCtrl.text, _splitTags(tagsCtrl.text));
+                  int count = 0;
+                  Navigator.of(context).popUntil((_) => count++ >= 2);
+                  
                 },
                 style: OutlinedButton.styleFrom(
                   side: BorderSide(
