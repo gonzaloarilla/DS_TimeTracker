@@ -3,33 +3,42 @@ import 'package:time_tracker_flutter/page_intervals.dart';
 import 'package:time_tracker_flutter/page_report.dart';
 import 'package:time_tracker_flutter/tree.dart' hide getTree;
 import 'package:time_tracker_flutter/requests.dart';
+import 'dart:core';
+import 'dart:convert';
 
 class PageCreateTask extends StatefulWidget {
   late final int id;
+  // late TextEditingController taskController;
   late int parentId;
-
   PageCreateTask(this.parentId);
+
   @override
-  _CreateProjectTask createState() => _CreateProjectTask();
+  _CreateTaskState createState() => _CreateTaskState();
+
+
 }
 
-class _CreateProjectTask extends State<PageCreateTask> {
-  //late int id;
-  //late Future<Tree> futureTree;
-  //late Tree tree;
-
+class _CreateTaskState extends State<PageCreateTask> {
+  GlobalKey formKey = GlobalKey<FormState>();
+  late TextEditingController nameCtrl = TextEditingController();
+  late TextEditingController tagsCtrl = TextEditingController();
+  late TextEditingController descriptionCtrl = TextEditingController();
   late int parentId;
 
   @override
   void initState() {
     super.initState();
-    //id = widget.id; // of PageActivities
-    //futureTree = getTree(id);
-
+    // nameCtrl, tags = TextEditingController();
     parentId = widget.parentId;
   }
 
-  GlobalKey formKey = GlobalKey<FormState>();
+  @override
+  void dispose() {
+    nameCtrl.dispose();
+    tagsCtrl.dispose();
+    descriptionCtrl.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,16 +64,19 @@ class _CreateProjectTask extends State<PageCreateTask> {
           child: Column(
             children: <Widget>[
               TextFormField(
+                controller: nameCtrl,
                 decoration: InputDecoration(
                     labelText: "Name: "
                 ),
               ),
               TextFormField(
+                controller: tagsCtrl,
                 decoration: InputDecoration(
                     labelText: "Tags: "
                 ),
               ),
               TextFormField(
+                controller: descriptionCtrl,
                 decoration: InputDecoration(
                     labelText: "Description: "
                 ),
@@ -75,7 +87,8 @@ class _CreateProjectTask extends State<PageCreateTask> {
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: (){
-                  Text("Project Created!");
+                  // _dialogForTest(tagsCtrl.text);
+                  _makeEncoded(nameCtrl.text, descriptionCtrl.text, _splitTags(tagsCtrl.text));
                 },
                 style: OutlinedButton.styleFrom(
                   side: BorderSide(
@@ -93,7 +106,51 @@ class _CreateProjectTask extends State<PageCreateTask> {
     );
   }
 
+  // per testejar els resultats dels controladors
+  void _dialogForTest(String txt) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Controller Value'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(txt),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                'ACCEPT',
+                style: TextStyle(fontSize: 20),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
+  // per separar els tags
+  List<String> _splitTags(String tags) {
+    var splitted = tags.split(", ");
+    return splitted;
+  }
 
+  void _makeEncoded(String name, String description, List<String> tags) {
+    // dynamic --> pot ser qualsevol tipus
+    Map<String, dynamic> toJson = {'name': name, 'description': description, 'tags': tags};
+    // print(toJson);
+    var jsoned = json.encode(toJson);
+    // print(jsoned);
+
+    addNode(parentId, 0, name, description, tags);
+  }
 }
 
