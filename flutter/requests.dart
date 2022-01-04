@@ -1,4 +1,5 @@
 import 'dart:convert' as convert;
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'tree.dart';
 
@@ -62,4 +63,34 @@ Future<void> stop(int id) async {
     print("statusCode=$response.statusCode");
     throw Exception('Failed to get children');
   }
+}
+
+
+void addNode(int parentId, int isProject, String name,
+    String description, List<String> tags) async {
+
+  print(parentId);
+  print(isProject);
+  //print(convert.jsonEncode(json));
+  String tagsAsString = tags.join(",");
+  print(tagsAsString);
+
+
+
+  var uri = Uri.parse("$baseUrl/add_node?$parentId&$isProject&$name&$description&$tagsAsString");
+  print(uri);
+
+  final response = await client.get(uri);
+  //final headers = {HttpHeaders.contentTypeHeader: 'application/json'};
+  //final response = await client.post(uri, headers: headers, body: convert.jsonEncode(json));
+
+
+  if (response.statusCode == 200) {
+    print("statusCode=$response.statusCode");
+  } else {
+    print("statusCode=$response.statusCode");
+    throw Exception('Failed to get children');
+  }
+
+
 }

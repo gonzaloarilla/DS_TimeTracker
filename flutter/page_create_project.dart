@@ -148,8 +148,9 @@ void _dialogForTest(String txt) async {
     Map<String, dynamic> toJson = {'name': name, 'description': description, 'tags': tags};
     // print(toJson);
     var jsoned = json.encode(toJson);
-    print(jsoned);
+    // print(jsoned);
 
+    addNode(parentId, 1, name, description, tags);
   }
 }
 
