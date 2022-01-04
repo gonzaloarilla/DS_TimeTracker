@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:focused_menu/focused_menu.dart';
+import 'package:focused_menu/modals.dart';
+import 'package:time_tracker_flutter/page_info.dart';
 import 'package:time_tracker_flutter/page_intervals.dart';
 import 'package:time_tracker_flutter/page_report.dart';
 import 'package:time_tracker_flutter/tree.dart' hide getTree;
@@ -19,7 +22,7 @@ class _PageActivitiesState extends State<PageActivities> {
   late Future<Tree> futureTree;
   late Tree tree;
   PageReport pageReport = new PageReport();
-
+  var isActive = false;
 
   @override
   void initState() {
@@ -53,8 +56,28 @@ class _PageActivitiesState extends State<PageActivities> {
               // it's like ListView.builder() but better because it includes a separator between items
               padding: const EdgeInsets.all(16.0),
               itemCount: snapshot.data!.root.children.length,
-              itemBuilder: (BuildContext context, int index) =>
-                  _buildRow(snapshot.data!.root.children[index], index),
+              itemBuilder: (BuildContext context, int index) => FocusedMenuHolder( // Open option menu list
+                  child: _buildRow(snapshot.data!.root.children[index], index),
+                  blurSize: 2,
+                  blurBackgroundColor: Colors.white,
+                  menuWidth: MediaQuery.of(context).size.width*0.5,
+                  menuItemExtent: 70,
+                  onPressed: (){},
+                  menuItems: <FocusedMenuItem>[
+                    FocusedMenuItem(
+                        title: Text("Start Task"),
+                        onPressed: (){
+                          Activity activity = snapshot.data!.root.children[index];
+                          if ((activity as Task).active) {
+                            stop(activity.id);
+                          } else {
+                            start(activity.id);
+                          }
+                        },
+                        trailingIcon: isActive ? Icon(Icons.pause_outlined) : Icon(Icons.play_arrow_outlined)),
+                    FocusedMenuItem(title: Text("Details"), onPressed: () => _onDetailsClick(), trailingIcon: Icon(Icons.info_outline)),
+                    FocusedMenuItem(title: Text("Delete", style: TextStyle(color: Colors.white),), onPressed: (){}, trailingIcon: Icon(Icons.delete, color: Colors.white), backgroundColor: Colors.redAccent),
+                  ]),
               separatorBuilder: (BuildContext context, int index) =>
               const Divider(),
             ),
@@ -107,7 +130,7 @@ class _PageActivitiesState extends State<PageActivities> {
         title: Text('Task - ${activity.name}'),
         trailing: trailing,
         onTap: () => _navigateDownIntervals(activity.id),
-        onLongPress: () {}, // TODO start/stop counting the time for tis task
+
       );
     } else {
       throw(Exception("Activity that is neither a Task or a Project"));
@@ -142,5 +165,10 @@ class _PageActivitiesState extends State<PageActivities> {
         .push(MaterialPageRoute<void>(builder: (context) => PageMenu(id)));
   }
 
+  void _onDetailsClick() {
+    print("Click");
+    Navigator.of(context)
+        .push(MaterialPageRoute<void>(builder: (context) => PageInfo()));
+  }
 
 }
