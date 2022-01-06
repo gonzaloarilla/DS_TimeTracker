@@ -121,19 +121,6 @@ class _PageInfoState extends State<PageInfo> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                  textStyle: TextStyle(
-                                      fontSize: 20, fontWeight: FontWeight.bold)
-                              ),
-                              onPressed: () {
-                                // _printThings(id);
-                                // _getInfoTree(id);
-                              },
-                              child: const Text('Test'),
-                            )
-                        )
                       ],
                     ),
                   ],
