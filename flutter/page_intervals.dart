@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:time_tracker_flutter/page_info.dart';
 import 'package:time_tracker_flutter/tree.dart' as Tree hide getTree;
 // to avoid collision with an Interval class in another library
 import 'package:time_tracker_flutter/requests.dart';
@@ -24,6 +25,12 @@ class _PageIntervalsState extends State<PageIntervals> {
 
   _PageIntervalsState(this.isActive);
 
+
+  void _onDetailsClick(id) {
+    print("Click");
+    Navigator.of(context)
+        .push(MaterialPageRoute<void>(builder: (context) => PageInfo(id)));
+  }
 
   void _refresh() async {
     futureTree = getTree(id);
@@ -66,9 +73,16 @@ class _PageIntervalsState extends State<PageIntervals> {
             appBar: AppBar(
               title: Text(snapshot.data!.root.name),
               actions: <Widget>[
+                IconButton(icon: Icon(Icons.info_outline_rounded),
+                  onPressed: (){
+                    _onDetailsClick(this.id);
+                  },
+                ),
                 IconButton(icon: Icon(Icons.home),
-                  onPressed: () {}, // TODO
-                )
+                  onPressed: () {
+                    Navigator.popUntil(context, ModalRoute.withName('/'));
+                  },
+                ),
               ],
             ),
             body: ListView.separated(

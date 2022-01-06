@@ -86,10 +86,10 @@ class _PageActivitiesState extends State<PageActivities> {
                             _refresh();
                           },
                           trailingIcon: (activity as Task).active ? Icon(Icons.pause_outlined) : Icon(Icons.play_arrow_outlined)),
-                      FocusedMenuItem(title: Text("Details"), onPressed: () => _onDetailsClick(id), trailingIcon: Icon(Icons.info_outline)),
+                      FocusedMenuItem(title: Text("Details"), onPressed: () => _onDetailsClick(activity.id), trailingIcon: Icon(Icons.info_outline)),
                       FocusedMenuItem(title: Text("Delete", style: TextStyle(color: Colors.white),), onPressed: (){}, trailingIcon: Icon(Icons.delete, color: Colors.white), backgroundColor: Colors.redAccent),
                     ] : <FocusedMenuItem>[
-                      FocusedMenuItem(title: Text("Details"), onPressed: () => _onDetailsClick(id), trailingIcon: Icon(Icons.info_outline)),
+                      FocusedMenuItem(title: Text("Details"), onPressed: () => _onDetailsClick(activity.id), trailingIcon: Icon(Icons.info_outline)),
                       FocusedMenuItem(title: Text("Delete", style: TextStyle(color: Colors.white),), onPressed: (){}, trailingIcon: Icon(Icons.delete, color: Colors.white), backgroundColor: Colors.redAccent),
                     ]);
               },
