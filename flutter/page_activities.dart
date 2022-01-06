@@ -48,17 +48,31 @@ class _PageActivitiesState extends State<PageActivities> {
       builder: (context, snapshot) {
         // anonymous function
         if (snapshot.hasData) {
+          bool isRoot = false;
+          if (snapshot.data!.root.name == "root") {
+            isRoot = true;
+          }
           return Scaffold(
             appBar: AppBar(
               title : _titleText(snapshot),
               //title: Text(snapshot.data!.root.name),
-              actions: <Widget>[
+              actions: isRoot ? <Widget>[
                 IconButton(icon: Icon(Icons.home),
                     onPressed: () {
                       Navigator.popUntil(context, ModalRoute.withName('/'));
-                    } // TODO Gonzalo: comprovar be aixo
+                    }
                 ),
-                //TODO other actions
+              ] : <Widget>[
+                IconButton(icon: Icon(Icons.info_outline_rounded),
+                  onPressed: (){
+                    _onDetailsClick(this.id);
+                  },
+                ),
+                IconButton(icon: Icon(Icons.home),
+                    onPressed: () {
+                      Navigator.popUntil(context, ModalRoute.withName('/'));
+                    }
+                ),
               ],
             ),
             body: ListView.separated(

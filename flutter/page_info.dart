@@ -115,7 +115,9 @@ class _PageInfoState extends State<PageInfo> {
                               ),
                             )
                         ),
-                       _getTextIfNotEmpty(snapshot.data!.root.description.toString()),
+                        Flexible(
+                          child: _getTextIfNotEmpty(snapshot.data!.root.description.toString()),
+                        )
                       ],
                     ),
                     Row(
@@ -136,7 +138,10 @@ class _PageInfoState extends State<PageInfo> {
     if (text == "" || text == null) {
       text = "undefined";
     }
-    return Text(text);
+    return Text(
+        text,
+        overflow: TextOverflow.fade,
+    );
   }
 
 }
