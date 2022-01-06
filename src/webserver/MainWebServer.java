@@ -27,6 +27,8 @@ public class MainWebServer {
     Project softwareDesign = new Project(1, "software design", root);
     softwareDesign.addTag("java");
     softwareDesign.addTag("flutter");
+    // description:
+    softwareDesign.setDescription("Descripció del project software design... Disseny del software.");
     root.addNode(softwareDesign);
 
     Project softwareTesting = new Project(2, "software testing", root);

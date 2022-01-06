@@ -127,6 +127,7 @@ public class Project extends Node {
       json.put("lastDate", lastDate.format(dateTimeFormatter));
       json.put("duration", duration.getSeconds());
       json.put("type", this.getType());
+      json.put("description", this.getDescription());
 
       for (String tag : tagList) {
         tagsJson.put(tag);

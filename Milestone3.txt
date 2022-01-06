@@ -1,5 +1,11 @@
 Gonzalo:
-
+- Connexió del server amb la app
+- Adaptació de classes per la comunicació (id, per exemple)
+- Nous mètodes i atributs (JSON, descripcions de nodes, etc.)
+- Punts 1-3:
+    - Diferenciació entre project i task
+    - Modificació del títol "root"
+    - Creació de projectes i tasques
 
 Arnau:
 

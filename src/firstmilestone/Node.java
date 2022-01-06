@@ -17,6 +17,7 @@ public abstract class Node {
 
   protected int id;
   public String name;
+  protected String description;
   protected LocalDateTime initialDate;
   protected LocalDateTime lastDate;
   protected Duration duration;
@@ -39,6 +40,7 @@ public abstract class Node {
     this.lastDate = this.initialDate;
     this.nodeJsonObject = new JSONObject();
     this.tagList = new ArrayList<>();
+    this.description = "";
 
     // pre-conditions
     //assert !id.isEmpty() && !name.isEmpty() && parent != null;
@@ -55,6 +57,16 @@ public abstract class Node {
     assert !tag.isEmpty();
     this.tagList.add(tag);
     logger.debug("Tag " + tag + " has been added to " + this.name);
+  }
+
+  public void setDescription(String description) {
+    assert !description.isEmpty();
+    this.description = description;
+    logger.debug("Description '" + description + "' has been updated to " + this.name);
+  }
+
+  public String getDescription() {
+    return description;
   }
 
   public List<String> getTagList() {
@@ -181,15 +193,10 @@ public abstract class Node {
     // appendix A in the practicum handout
   }
 
-
-  // TODO
   public abstract Node findActivityById(int id);
 
-  // TODO
   public abstract JSONObject toJson(int i);
   // The 1 means the desired depth of the tree, root plus its children and no more descendants.
   // Each recursive call to toJson decrements the passed depth value, when received depth is zero do nothing.
-
-
 
 }

@@ -25,7 +25,8 @@ class SearchTagVisitor{
 
 abstract Node {
 - name : String
-- id : string
+- description : String
+- id : int
 - initialDate : LocalDateTime
 - lastDate : LocalDateTime
 - duration : Duration
@@ -41,7 +42,9 @@ abstract Node {
 + getJSONObject() : JSONObject
 + setName(String)
 + getName() : String
-+ getId() : string
++ setDescription(String)
++ getDescription() : String
++ getId() : String
 + startTask(String) : boolean
 + stopTask(String) : boolean
 + acceptVisit(NodeVisitor)

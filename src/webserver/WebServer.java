@@ -3,13 +3,13 @@ package webserver;
 import firstmilestone.Node;
 import firstmilestone.Project;
 import firstmilestone.Task;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URLDecoder;
+import java.util.Arrays;
+import java.util.List;
 import java.util.StringTokenizer;
 
 // Based on
@@ -143,28 +143,31 @@ public class WebServer {
           break;
         }
         case "add_node": {
-          //TODO: obtenir IDs correctes pels nous nodes // inserir tags al node
+          //TODO: millorar la obtencio de IDs correctes pels nous nodes
           Integer parentId = Integer.parseInt(tokens[1]);
           Project parent = (Project) findActivityById(parentId);
           assert (parent != null);
           Integer isProject = Integer.parseInt(tokens[2]);
           String name = URLDecoder.decode(tokens[3], "UTF-8");
           String description = URLDecoder.decode(tokens[4], "UTF-8");
-          String tags = URLDecoder.decode(tokens[5], "UTF-8");
+          String tagsAsString = URLDecoder.decode(tokens[5], "UTF-8");
+          List<String> tags = Arrays.asList(tagsAsString.split("\\s*,\\s*"));
 
-          System.out.println("TAGS: " + tags);
+          Node newNode = null;
 
           if (isProject == 1) {
-            System.out.println("NAME of new node: " + name);
-
-            Project newNode = new Project(lastId+1, name, parent);
-            //add tags
-            parent.addNode(newNode);
+            newNode = new Project(lastId+1, name, parent);
           } else {
-            Task newNode = new Task(lastId+1, name, parent);
-            //add tags
-            parent.addNode(newNode);
+            newNode = new Task(lastId+1, name, parent);
           }
+
+          assert (newNode != null);
+          for (String tag : tags) {
+            newNode.addTag(tag);
+          }
+          newNode.setDescription(description);
+          parent.addNode(newNode);
+
           lastId++;
           break;
         }
