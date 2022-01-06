@@ -90,7 +90,7 @@ class _CreateTaskState extends State<PageCreateTask> {
                   // _dialogForTest(tagsCtrl.text);
                   _makeEncoded(nameCtrl.text, descriptionCtrl.text, _splitTags(tagsCtrl.text));
                   int count = 0;
-                  Navigator.of(context).popUntil((_) => count++ >= 2);
+                  Navigator.of(context).popUntil((_) => count++ >= 1);
                   
                 },
                 style: OutlinedButton.styleFrom(
