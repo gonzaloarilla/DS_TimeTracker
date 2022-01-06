@@ -33,8 +33,12 @@ abstract Node {
 - parent : Node
 - dateTimeFormatter : DateTimeFormatter
 - nodeJSONObject : JSONObject
-- tags : List<String>
-+ getJSONObject : JSONObject
+- tagList : List<String>
+- logger : Logger
+- invariant() : boolean
++ addTag(String)
++ getTaglist() : List<String>
++ getJSONObject() : JSONObject
 + setName(String)
 + getName() : String
 + getId() : string
@@ -42,7 +46,6 @@ abstract Node {
 + stopTask(String) : boolean
 + acceptVisit(NodeVisitor)
 + getDuration() : Duration
-+ getExactTime() : Duration
 + getDurationSeconds() : long
 + getLastDate() : LocalDateTime
 + getStartDate() : LocalDateTime
@@ -56,22 +59,36 @@ abstract Node {
 + updateDuration(Duration)
 + update(LocalDateTime, Duration)
 + getType() : String
++ findActivityById(int) : Node
++ toJson(int) : JSONObject
+
 }
 
 class Project {
+- nodeList : List<Node>
+- logger : Logger
+- invariant() : boolean
 + getJSONObject() : JSONObject
 + addNode(Node)
 + startTask(String) : boolean
 + stopTask(String) : boolean
 + acceptVisit(NodeVisitor)
++ findActivityById(int) : Node
++ toJson(int) : JSONObject
 }
 
 class Task {
+- intervalList : List<Interval>
+- logger : Logger
+- invariant() : boolean
++ getJSONObject() : JSONObject
 + startTask(String) : boolean
 + stopTask(String) : boolean
 + acceptVisit(NodeVisitor)
 + getJSONObject() : JSONObject
 + addInterval(Interval)
++ findActivityById(int) : Node
++ toJson(int) : JSONObject
 }
 
 class Interval {
@@ -82,6 +99,8 @@ class Interval {
 - parent : Node
 - dateTimeFormatter : DateTimeFormatter
 - nodeJSONObject : JSONObject
+- logger : Logger
+- invariant() : boolean
 + setInitialDate(LocalDateTime)
 + setLastDate(LocalDateTime)
 + setDuration(Duration)
@@ -96,6 +115,7 @@ class Interval {
 + update(Observable, Object)
 + finish()
 + acceptVisit(NodeVisitor)
++ toJson() : JSONObject
 }
 
 class Clock {
@@ -105,13 +125,27 @@ class Clock {
 - runningClock : Clock
 - delay : int
 - period : int
+- logger : Logger
+- invariant() : boolean
 + getRunningClock()
 + stopClock()
 - update()
 + getPeriod()
+
 }
 
-class NodePersistenceVisitor {
+class Identifier {
++ id : int
+- ids : List<Integer>
++ getId() : int
++ setId(int)
++ getNextId() : int
+- checkId(int) : boolean
+}
+
+class PersistenceVisitor {
+- logger : Logger
+- invariant() : boolean
 + visit(Node)
 + visit(Interval)
 }
@@ -122,10 +156,24 @@ interface NodeVisitor {
 }
 
 class PersistenceManager {
+- logger : Logger
 + saveData(Node, String)
 + loadData(String) : Node
 - restoreNodeStructure(Node, JSONObject) : Node
 - setupNewInterval(Interval, JSONObject) : Interval
+}
+
+class MainWebServer {
++ main(String)
++ webServer()
++ makeTreeCourses() : Node
+}
+
+class WebServer {
+- PORT : int
+- currentNode : Node
+- lastId : int
+- findActivityById(int) : Node
 }
 
 Project -|> Node
@@ -134,5 +182,5 @@ Task -.|> Node
 Clock -down-|> java.util.Observable
 Interval -.down.-|> java.util.Observer
 Interval "*" --* "0" Task
-NodePersistenceVisitor -.down-|> NodeVisitor
+PersistenceVisitor -.down-|> NodeVisitor
 @enduml
