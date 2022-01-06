@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
+import 'package:time_tracker_flutter/page_create_project.dart';
+import 'package:time_tracker_flutter/page_create_task.dart';
 import 'package:time_tracker_flutter/page_info.dart';
 import 'package:time_tracker_flutter/page_intervals.dart';
 import 'package:time_tracker_flutter/page_report.dart';
@@ -24,11 +27,10 @@ class _PageActivitiesState extends State<PageActivities> {
   late Future<Tree> futureTree;
   late Tree tree;
   PageReport pageReport = new PageReport();
-  var isActive = false;
 
   late Timer _timer;
   static const int periodeRefresh = 2; // better a multiple of periode in TimeTracker, 2 seconds
-
+  ValueNotifier<bool> isDialOpen = ValueNotifier(false);
 
   @override
   void initState() {
@@ -94,12 +96,33 @@ class _PageActivitiesState extends State<PageActivities> {
               separatorBuilder: (BuildContext context, int index) =>
               const Divider(),
             ),
-            floatingActionButton: FloatingActionButton(
+            floatingActionButton: SpeedDial(
+              icon: Icons.add,
+              activeIcon: Icons.close,
               backgroundColor: Colors.blue,
-              child: const Icon(Icons.add,),
-              onPressed: () {_onMenuClick(snapshot.data!.root.id);},
-              tooltip: "Add a new node",
-              
+              activeBackgroundColor: Colors.redAccent,
+              openCloseDial: isDialOpen,
+              overlayColor: Colors.grey,
+              overlayOpacity: 0.5,
+              spacing: 15,
+              spaceBetweenChildren: 15,
+              closeManually: false,
+              children: [
+                SpeedDialChild(
+                    label: 'Add Project',
+                    labelStyle: TextStyle(fontSize: 24),
+                    onTap: (){
+                      _onAddProjectClick(snapshot.data!.root.id);
+                    }
+                ),
+                SpeedDialChild(
+                    label: 'Add Task',
+                    labelStyle: TextStyle(fontSize: 24),
+                    onTap: (){
+                      _onAddTaskClick(snapshot.data!.root.id);
+                    }
+                ),
+              ],
             ),
           );
         } else if (snapshot.hasError) {
@@ -142,7 +165,7 @@ class _PageActivitiesState extends State<PageActivities> {
       return ListTile(
         title: Text('Task - ${activity.name}'),
         trailing: trailing,
-        onTap: () => _navigateDownIntervals(activity.id),
+        onTap: () => _navigateDownIntervals(activity.id, activity.active),
 
       );
     } else {
@@ -163,11 +186,11 @@ class _PageActivitiesState extends State<PageActivities> {
     });
   }
 
-  void _navigateDownIntervals(int childId) {
+  void _navigateDownIntervals(int childId, bool isActive) {
     _timer.cancel();
     Navigator.of(context)
         .push(MaterialPageRoute<void>(
-      builder: (context) => PageIntervals(childId),
+      builder: (context) => PageIntervals(childId, isActive),
     )).then((var value) {
       _activateTimer();
       _refresh();
@@ -179,11 +202,19 @@ class _PageActivitiesState extends State<PageActivities> {
     Navigator.of(context)
         .push(MaterialPageRoute<void>(builder: (context) => PageReport()));
   }
-  void _onMenuClick(id) {
-    print("Add node clicked");
-    print("Current node id: " + id.toString());
+
+  void _onAddProjectClick(int parentId) {
+    print("Add Project clicked");
+    print("Parent id: " + parentId.toString());
     Navigator.of(context)
-        .push(MaterialPageRoute<void>(builder: (context) => PageMenu(id)));
+        .push(MaterialPageRoute<void>(builder: (context) => PageCreateProject(parentId)));
+  }
+
+  void _onAddTaskClick(int parentId) {
+    print("Add Task clicked");
+    print("Parent id: " + parentId.toString());
+    Navigator.of(context)
+        .push(MaterialPageRoute<void>(builder: (context) => PageCreateTask(parentId)));
   }
 
   void _onDetailsClick(id) {

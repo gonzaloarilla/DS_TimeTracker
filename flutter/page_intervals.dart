@@ -7,18 +7,28 @@ import 'package:time_tracker_flutter/requests.dart';
 
 class PageIntervals extends StatefulWidget {
   final int id; // final because StatefulWidget is immutable
-
-  PageIntervals(this.id);
+  bool isActive;
+  PageIntervals(this.id, this.isActive);
 
   @override
-  _PageIntervalsState createState() => _PageIntervalsState();
+  _PageIntervalsState createState() => _PageIntervalsState(this.isActive);
 }
 
 class _PageIntervalsState extends State<PageIntervals> {
   late int id;
   late Future<Tree.Tree> futureTree;
   late Timer _timer;
+  late bool isActive;
+
   static const int periodeRefresh = 2; // better a multiple of periode in TimeTracker, 2 seconds
+
+  _PageIntervalsState(this.isActive);
+
+
+  void _refresh() async {
+    futureTree = getTree(id);
+    setState(() {});
+  }
 
   void _activateTimer() {
     _timer = Timer.periodic(Duration(seconds: periodeRefresh), (Timer t) {
@@ -69,6 +79,20 @@ class _PageIntervalsState extends State<PageIntervals> {
                   _buildRow(snapshot.data!.root.children[index], index),
               separatorBuilder: (BuildContext context, int index) =>
               const Divider(),
+            ),
+            floatingActionButton: FloatingActionButton(
+              backgroundColor: Colors.blue,
+              child: this.isActive ? Icon(Icons.pause_rounded) : Icon(Icons.play_arrow_rounded),
+              onPressed: () {
+                if (this.isActive) {
+                  stop(this.id);
+                  this.isActive = false;
+                } else {
+                  start(this.id);
+                  this.isActive = true;
+                }
+                _refresh();
+              },
             ),
           );
         } else if (snapshot.hasError) {
