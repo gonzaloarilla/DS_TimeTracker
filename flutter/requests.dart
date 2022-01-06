@@ -69,12 +69,7 @@ Future<void> stop(int id) async {
 void addNode(int parentId, int isProject, String name,
     String description, List<String> tags) async {
 
-  print(parentId);
-  print(isProject);
   String tagsAsString = tags.join(",");
-  print(tagsAsString);
-
-
 
   var uri = Uri.parse("$baseUrl/add_node?$parentId&$isProject&$name&$description&$tagsAsString");
   print(uri);
@@ -83,13 +78,11 @@ void addNode(int parentId, int isProject, String name,
   //final headers = {HttpHeaders.contentTypeHeader: 'application/json'};
   //final response = await client.post(uri, headers: headers, body: convert.jsonEncode(json));
 
-
   if (response.statusCode == 200) {
     print("statusCode=$response.statusCode");
   } else {
     print("statusCode=$response.statusCode");
     throw Exception('Failed to add new node');
   }
-
 
 }

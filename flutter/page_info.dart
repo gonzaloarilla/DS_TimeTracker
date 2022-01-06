@@ -101,7 +101,7 @@ class _PageInfoState extends State<PageInfo> {
                               ),
                             )
                         ),
-                        Text("getTags"),
+                        _getTextIfNotEmpty(snapshot.data!.root.tags.toString()),
                       ],
                     ),
                     Row(
@@ -115,7 +115,7 @@ class _PageInfoState extends State<PageInfo> {
                               ),
                             )
                         ),
-                        Text("getDescription"),
+                       _getTextIfNotEmpty(snapshot.data!.root.description.toString()),
                       ],
                     ),
                     Row(
@@ -131,4 +131,12 @@ class _PageInfoState extends State<PageInfo> {
         }
     );
   }
+
+  Widget _getTextIfNotEmpty(var text) {
+    if (text == "" || text == null) {
+      text = "undefined";
+    }
+    return Text(text);
+  }
+
 }

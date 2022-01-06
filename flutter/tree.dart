@@ -12,6 +12,8 @@ abstract class Activity {
   DateTime? initialDate;
   DateTime? lastDate;
   int duration;
+  String description;
+  List<dynamic> tags;
   List<dynamic> children = List<dynamic>.empty(growable: true);
 
   // formerly List<dynamic>(); but now because of null safety it has to be
@@ -22,7 +24,9 @@ abstract class Activity {
         name = json['name'],
         initialDate = json['initialDate'] == null ? null : _dateFormatter.parse(json['initialDate']),
         lastDate = json['lastDate'] == null ? null : _dateFormatter.parse(json['lastDate']),
-        duration = json['duration'];
+        duration = json['duration'],
+        description = json['description'],
+        tags = json['tags'];
 }
 
 class Project extends Activity {
@@ -31,15 +35,11 @@ class Project extends Activity {
     if (json.containsKey('nodeList')) {
       // json has only 1 level because depth=1 or 0 in time_tracker
       for (Map<String, dynamic> jsonChild in json['nodeList']) {
-        print("in2 " + jsonChild['name'] + ", type: " + jsonChild['type']);
-
         if (jsonChild['type'] == "project") {
           children.add(Project.fromJson(jsonChild));
           // condition on key avoids infinite recursion
         } else if (jsonChild['type'] == "task") {
-          print("adding " + jsonChild['name']);
           children.add(Task.fromJson(jsonChild));
-          print("added");
         } else {
           assert(false);
         }
