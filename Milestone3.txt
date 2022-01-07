@@ -8,7 +8,10 @@ Gonzalo:
     - Creació de projectes i tasques
 
 Arnau:
-
+- UML final
+- webServer
+- MainWebServer
+- pantalla create project i task
 
 
 Marc:
