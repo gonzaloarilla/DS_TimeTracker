@@ -15,9 +15,10 @@ Arnau:
 
 
 Marc:
-- Pantalla de create project/
+- Pantalla de create project / task
 - Pantalla de project i task details
 - Search bar
+- Punt 5 Project/Task Details
 
 
 Oriol:
