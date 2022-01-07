@@ -18,3 +18,11 @@ Marc:
 
 
 Oriol:
+- punt 4 Start/Stop task
+- menus i botons de l'app: 
+    - long press menu per als projectes i tasques
+    - botó add project/task
+    - botó play/stop task
+    - botó d'informació (i) 
+- bug fixing de les pàgines d'informació i d'intervals
+	
